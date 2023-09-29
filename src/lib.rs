@@ -90,6 +90,10 @@ mod text_enums;
 
 pub use text_enums::*;
 
+mod sync;
+
+pub use sync::*;
+
 #[cfg(test)]
 mod tests {
     #[test]
