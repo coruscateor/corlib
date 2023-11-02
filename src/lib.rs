@@ -94,6 +94,10 @@ mod sync;
 
 pub use sync::*;
 
+mod refcell_borrowing;
+
+pub use refcell_borrowing::*;
+
 #[cfg(test)]
 mod tests {
     #[test]
