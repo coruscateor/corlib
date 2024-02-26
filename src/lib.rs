@@ -98,9 +98,9 @@ mod refcell_borrowing;
 
 pub use refcell_borrowing::*;
 
-mod get_some;
+pub mod get_some;
 
-
+pub mod inc_dec;
 
 #[cfg(test)]
 mod tests {

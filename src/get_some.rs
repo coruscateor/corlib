@@ -119,6 +119,30 @@ macro_rules! get_some
         }
 
     };
+    ($option_name1:ident, $option_name2:ident, $option_name3:ident, $option_name4:ident, $option_name5:ident, $option_name6:ident, $option_name7:ident) =>
+    {
+
+        {
+
+            let res1 = get_some!($option_name1);
+
+            let res2 = get_some!($option_name2);
+
+            let res3 = get_some!($option_name3);
+
+            let res4 = get_some!($option_name4);
+
+            let res5 = get_some!($option_name5);
+
+            let res6 = get_some!($option_name6);
+
+            let res7 = get_some!($option_name7);
+
+            (res1, res2, res3, res4, res5, res6, res7)
+
+        }
+
+    };
     ($option_name1:ident, $option_name2:ident, $option_name3:ident, $option_name4:ident, $option_name5:ident, $option_name6:ident, $option_name7:ident, $option_name8:ident) =>
     {
 
