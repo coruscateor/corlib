@@ -98,6 +98,10 @@ mod refcell_borrowing;
 
 pub use refcell_borrowing::*;
 
+mod get_some;
+
+
+
 #[cfg(test)]
 mod tests {
     #[test]
