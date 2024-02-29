@@ -62,7 +62,16 @@ impl<T: ?Sized> RcByPtr<T> //: ?Sized
 
     }
 
+    /*
     pub fn get_contents_ref(&self) -> &Rc<T>
+    {
+
+        &self.contents
+
+    }
+    */
+
+    pub fn contents(&self) -> &Rc<T>
     {
 
         &self.contents
@@ -93,7 +102,7 @@ impl<T: ?Sized> PartialEq for RcByPtr<T> //: ?Sized>
 
         //self.contents.ptr_eq(other.get_contents_ref())
 
-        Rc::ptr_eq(&self.contents, other.get_contents_ref())
+        Rc::ptr_eq(&self.contents, other.contents()) //.get_contents_ref())
 
     }
 

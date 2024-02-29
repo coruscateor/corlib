@@ -68,6 +68,8 @@ pub use getters_setters_callers::*;
 
 mod rc_by_ptr;
 
+pub use rc_by_ptr::*;
+
 pub mod rc_default;
 
 mod invalid;

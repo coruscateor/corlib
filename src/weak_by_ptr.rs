@@ -51,7 +51,16 @@ impl<T: ?Sized> WeakByPtr<T> //: ?Sized
 
     }
 
+    /*
     pub fn get_contents_ref(&self) -> &Weak<T>
+    {
+
+        &self.contents
+
+    }
+    */
+
+    pub fn contents(&self) -> &Weak<T>
     {
 
         &self.contents
@@ -105,7 +114,7 @@ impl<T: ?Sized> PartialEq for WeakByPtr<T> //: ?Sized
     fn eq(&self, other: &Self) -> bool
     {
 
-        self.contents.ptr_eq(other.get_contents_ref())
+        self.contents.ptr_eq(other.contents()) //get_contents_ref())
 
     }
 

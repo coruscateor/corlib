@@ -74,7 +74,8 @@ impl<S> ListEvent<S>
         for item in self.ble.iter()
         {
 
-            if !item.get_contents_ref()(sender)
+            //if !item.get_contents_ref()(sender)
+            if !item.contents()(sender)
             {
 
                 items_to_remove.push(index);

@@ -101,7 +101,8 @@ impl<S, A> ListArgsEvent<S, A>
         for item in self.ble.iter()
         {
 
-            if !item.get_contents_ref()(sender, event_args)
+            //if !item.get_contents_ref()(sender, event_args)
+            if !item.contents()(sender, event_args)
             {
 
                 items_to_remove.push(index);
