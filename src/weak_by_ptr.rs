@@ -5,6 +5,7 @@ use crate::rc_by_ptr::RcByPtr;
 use std::hash::{Hash, Hasher};
 
 /// A Container for comparing and hashing weakly-reference counted values by reference.
+//#[derive(Clone)]
 pub struct WeakByPtr<T: ?Sized> //: ?Sized
 {
 
@@ -130,6 +131,25 @@ impl<T: ?Sized> Hash for WeakByPtr<T>
     {
 
         Weak::as_ptr(&self.contents).hash(state);
+
+    }
+
+}
+
+//Must do it this way or Clone mught not get implemented.
+
+impl<T: ?Sized> Clone for WeakByPtr<T>
+{
+
+    fn clone(&self) -> Self
+    {
+
+        Self
+        {
+
+            contents: self.contents.clone()
+        
+        }
 
     }
 

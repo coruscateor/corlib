@@ -5,6 +5,7 @@ use crate::WeakByPtr;
 use std::hash::{Hash, Hasher};
 
 /// A Container for comparing and hashing reference counted values by reference.
+//#[derive(Clone)]
 pub struct RcByPtr<T: ?Sized> //: ?Sized
 {
 
@@ -117,6 +118,25 @@ impl<T: ?Sized> Hash for RcByPtr<T>
     {
 
         Rc::as_ptr(&self.contents).hash(state);
+
+    }
+
+}
+
+//#[derive(Clone)] makes it so every generic pramerter down must implement clone for the clone trait implementation to be part of the compiled object. Weird
+
+impl<T: ?Sized> Clone for RcByPtr<T>
+{
+
+    fn clone(&self) -> Self
+    {
+
+        Self
+        {
+
+            contents: self.contents.clone()
+        
+        }
 
     }
 
