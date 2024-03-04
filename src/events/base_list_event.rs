@@ -63,14 +63,14 @@ impl<F: ?Sized, S> BaseListEvent<F, S>
     pub fn subscribe(&mut self, f: &Rc<F>) -> bool
     {
 
-        self.contents.add(RcByPtr::new(f.clone()))
+        self.contents.add(RcByPtr::new(&f)) //f.clone()))
 
     }
 
     pub fn unsubscribe(&mut self, f: &Rc<F>) -> bool
     {
 
-        self.contents.remove(RcByPtr::new(f.clone()))
+        self.contents.remove(RcByPtr::new(&f)) //f.clone()))
 
     }
 

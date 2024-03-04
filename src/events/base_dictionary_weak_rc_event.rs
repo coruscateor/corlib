@@ -64,14 +64,14 @@ impl<F: ?Sized, S> BaseDictionaryWeakRcEvent<F, S> //K: ?Sized, //K, 'a,
 
         //self.contents.add_or_repace(WeakPtrEq::new(key), f);
 
-        self.contents.add(WeakByPtr::new(key), f.clone())
+        self.contents.add(WeakByPtr::new(&key), f.clone())
 
     }
 
     pub fn unsubscribe(&mut self, key: Weak<dyn Any>) -> bool
     {
 
-        self.contents.remove(WeakByPtr::new(key))
+        self.contents.remove(WeakByPtr::new(&key))
 
     }
 
@@ -80,14 +80,14 @@ impl<F: ?Sized, S> BaseDictionaryWeakRcEvent<F, S> //K: ?Sized, //K, 'a,
 
         //self.contents.add_or_repace(WeakPtrEq::new(Rc::downgrade(key)), f);
 
-        self.contents.add(WeakByPtr::new(Rc::downgrade(key)), f.clone())
+        self.contents.add(WeakByPtr::new(&Rc::downgrade(key)), f.clone())
 
     }
 
     pub fn unsubscribe_rc(&mut self, key: &Rc<dyn Any>) -> bool
     {
 
-        self.contents.remove(WeakByPtr::new(Rc::downgrade(key)))
+        self.contents.remove(WeakByPtr::new(&Rc::downgrade(key)))
 
     }
 

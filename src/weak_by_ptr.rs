@@ -16,13 +16,13 @@ pub struct WeakByPtr<T: ?Sized> //: ?Sized
 impl<T: ?Sized> WeakByPtr<T> //: ?Sized
 {
 
-    pub fn new(contents: Weak<T>) -> Self
+    pub fn new(contents: &Weak<T>) -> Self
     {
 
         Self
         {
 
-            contents
+            contents: contents.clone()
 
         }
 
@@ -81,7 +81,7 @@ impl<T: ?Sized> WeakByPtr<T> //: ?Sized
         if let Some(rc) = self.contents.upgrade()
         {
 
-            Some(RcByPtr::new(rc))
+            Some(RcByPtr::new(&rc))
 
         }
         else
@@ -104,6 +104,13 @@ impl<T: ?Sized> WeakByPtr<T> //: ?Sized
     {
 
         self.contents.weak_count()
+
+    }
+
+    pub fn take(self) -> Weak<T>
+    {
+
+        self.contents
 
     }
 

@@ -16,13 +16,13 @@ pub struct RcByPtr<T: ?Sized> //: ?Sized
 impl<T: ?Sized> RcByPtr<T> //: ?Sized
 {
 
-    pub fn new(contents: Rc<T>) -> Self
+    pub fn new(contents: &Rc<T>) -> Self
     {
 
         Self
         {
 
-            contents
+            contents: contents.clone()
 
         }
 
@@ -89,7 +89,14 @@ impl<T: ?Sized> RcByPtr<T> //: ?Sized
     pub fn downgrade_eq(&self) -> WeakByPtr<T>
     {
 
-        WeakByPtr::new(Rc::downgrade(&self.contents))
+        WeakByPtr::new(&Rc::downgrade(&self.contents))
+
+    }
+
+    pub fn take(self) -> Rc<T>
+    {
+
+        self.contents
 
     }
 
