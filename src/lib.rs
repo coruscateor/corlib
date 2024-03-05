@@ -104,6 +104,10 @@ pub mod get_some;
 
 pub mod inc_dec;
 
+pub mod as_any;
+
+pub use as_any::*;
+
 #[cfg(test)]
 mod tests {
     #[test]
