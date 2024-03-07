@@ -5,15 +5,14 @@ use crate::rc_by_ptr::RcByPtr;
 use std::hash::{Hash, Hasher};
 
 /// A Container for comparing and hashing weakly-reference counted values by reference.
-//#[derive(Clone)]
-pub struct WeakByPtr<T: ?Sized> //: ?Sized
+pub struct WeakByPtr<T: ?Sized>
 {
 
     contents: Weak<T>
 
 }
 
-impl<T: ?Sized> WeakByPtr<T> //: ?Sized
+impl<T: ?Sized> WeakByPtr<T>
 {
 
     pub fn new(contents: &Weak<T>) -> Self
@@ -52,15 +51,6 @@ impl<T: ?Sized> WeakByPtr<T> //: ?Sized
 
     }
 
-    /*
-    pub fn get_contents_ref(&self) -> &Weak<T>
-    {
-
-        &self.contents
-
-    }
-    */
-
     pub fn contents(&self) -> &Weak<T>
     {
 
@@ -68,14 +58,14 @@ impl<T: ?Sized> WeakByPtr<T> //: ?Sized
 
     }
 
-    pub fn upgrade(&self) -> Option<Rc<T>>
+    pub fn upgrade_contents(&self) -> Option<Rc<T>>
     {
 
         self.contents.upgrade()
 
     }
 
-    pub fn upgrade_eq(&self) -> Option<RcByPtr<T>>
+    pub fn upgrade(&self) -> Option<RcByPtr<T>>
     {
 
         if let Some(rc) = self.contents.upgrade()
@@ -116,20 +106,20 @@ impl<T: ?Sized> WeakByPtr<T> //: ?Sized
 
 }
 
-impl<T: ?Sized> PartialEq for WeakByPtr<T> //: ?Sized
+impl<T: ?Sized> PartialEq for WeakByPtr<T>
 {
 
     fn eq(&self, other: &Self) -> bool
     {
 
-        self.contents.ptr_eq(other.contents()) //get_contents_ref())
+        self.contents.ptr_eq(other.contents())
 
     }
 
 
 }
 
-impl<T: ?Sized> Eq for WeakByPtr<T> {} //: ?Sized
+impl<T: ?Sized> Eq for WeakByPtr<T> {}
 
 impl<T: ?Sized> Hash for WeakByPtr<T>
 {
@@ -143,7 +133,7 @@ impl<T: ?Sized> Hash for WeakByPtr<T>
 
 }
 
-//Must do it this way or Clone mught not get implemented.
+//Must do it this way or Clone might not get implemented.
 
 impl<T: ?Sized> Clone for WeakByPtr<T>
 {
@@ -158,6 +148,38 @@ impl<T: ?Sized> Clone for WeakByPtr<T>
         
         }
 
+    }
+
+}
+
+impl<T: ?Sized> PartialOrd for WeakByPtr<T>
+{
+
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering>
+    {
+
+        let left = Weak::as_ptr(&self.contents);
+
+        let right = Weak::as_ptr(other.contents());
+
+        left.partial_cmp(&right)
+
+    }
+
+}
+
+impl<T: ?Sized> Ord for WeakByPtr<T>
+{
+
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering
+    {
+        
+        let left = Weak::as_ptr(&self.contents);
+
+        let right = Weak::as_ptr(other.contents());
+
+        left.cmp(&right)
+        
     }
 
 }

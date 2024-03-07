@@ -5,15 +5,14 @@ use crate::WeakByPtr;
 use std::hash::{Hash, Hasher};
 
 /// A Container for comparing and hashing reference counted values by reference.
-//#[derive(Clone)]
-pub struct RcByPtr<T: ?Sized> //: ?Sized
+pub struct RcByPtr<T: ?Sized>
 {
 
     contents: Rc<T>
 
 }
 
-impl<T: ?Sized> RcByPtr<T> //: ?Sized
+impl<T: ?Sized> RcByPtr<T>
 {
 
     pub fn new(contents: &Rc<T>) -> Self
@@ -63,15 +62,6 @@ impl<T: ?Sized> RcByPtr<T> //: ?Sized
 
     }
 
-    /*
-    pub fn get_contents_ref(&self) -> &Rc<T>
-    {
-
-        &self.contents
-
-    }
-    */
-
     pub fn contents(&self) -> &Rc<T>
     {
 
@@ -79,14 +69,14 @@ impl<T: ?Sized> RcByPtr<T> //: ?Sized
 
     }
 
-    pub fn downgrade(&self) -> Weak<T>
+    pub fn downgrade_contents(&self) -> Weak<T>
     {
 
         Rc::downgrade(&self.contents)
 
     }
 
-    pub fn downgrade_eq(&self) -> WeakByPtr<T>
+    pub fn downgrade(&self) -> WeakByPtr<T>
     {
 
         WeakByPtr::new(&Rc::downgrade(&self.contents))
@@ -102,21 +92,19 @@ impl<T: ?Sized> RcByPtr<T> //: ?Sized
 
 }
 
-impl<T: ?Sized> PartialEq for RcByPtr<T> //: ?Sized>
+impl<T: ?Sized> PartialEq for RcByPtr<T>
 {
 
     fn eq(&self, other: &Self) -> bool
     {
 
-        //self.contents.ptr_eq(other.get_contents_ref())
-
-        Rc::ptr_eq(&self.contents, other.contents()) //.get_contents_ref())
+        Rc::ptr_eq(&self.contents, other.contents())
 
     }
 
 }
 
-impl<T: ?Sized> Eq for RcByPtr<T> {} //: ?Sized
+impl<T: ?Sized> Eq for RcByPtr<T> {}
 
 impl<T: ?Sized> Hash for RcByPtr<T>
 {
@@ -145,6 +133,42 @@ impl<T: ?Sized> Clone for RcByPtr<T>
         
         }
 
+    }
+
+}
+
+impl<T: ?Sized> PartialOrd for RcByPtr<T>
+{
+
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering>
+    {
+
+        //self.contents.partial_cmp(&other.contents)
+    
+        //Rc::partial_cmp(&self, other)
+
+        let left = Rc::as_ptr(&self.contents); //.partial_cmp(other)
+
+        let right = Rc::as_ptr(other.contents());
+
+        left.partial_cmp(&right)
+
+    }
+
+}
+
+impl<T: ?Sized> Ord for RcByPtr<T>
+{
+
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering
+    {
+        
+        let left = Rc::as_ptr(&self.contents);
+
+        let right = Rc::as_ptr(other.contents());
+
+        left.cmp(&right)
+        
     }
 
 }

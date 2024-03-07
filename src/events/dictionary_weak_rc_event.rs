@@ -102,7 +102,7 @@ impl<S> DictionaryWeakRcEvent<S> //F, K,
 
             let kr = item.get_key_ref();
 
-            let handler_object_option = kr.upgrade();
+            let handler_object_option = kr.upgrade_contents();
 
             if let Some(handler_object) = handler_object_option
             {

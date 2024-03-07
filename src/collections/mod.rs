@@ -22,6 +22,6 @@ mod queue;
 
 pub use queue::*;
 
-mod dyn_traits;
+pub mod dyn_hashing_and_cmp;
 
-pub use dyn_traits::*;
+//pub use dyn_hashing_and_cmp::*;
