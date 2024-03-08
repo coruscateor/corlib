@@ -7,7 +7,7 @@ pub trait AsAny
 
 }
 
-/*
+
 #[macro_export]
 macro_rules! impl_as_any
 {
@@ -46,5 +46,5 @@ macro_rules! impl_as_any
     }
 
 }
-*/
+
 
