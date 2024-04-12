@@ -2,6 +2,7 @@
 //! Trait implenenations for getting the value of one for each numeric type.
 //! 
 
+///Can the type have a representation of one?
 pub trait HasOne<T>
 {
 

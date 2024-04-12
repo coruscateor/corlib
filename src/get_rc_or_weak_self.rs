@@ -2,6 +2,7 @@ use std::rc::{Rc, Weak};
 
 use std::cell::RefCell;
 
+#[deprecated(since = "0.2.0")]
 pub trait GetRcOrWeakSelf
 {
 
@@ -11,6 +12,7 @@ pub trait GetRcOrWeakSelf
     
 }
 
+#[deprecated(since = "0.2.0")]
 pub trait GetRcOrWeakRefCellSelf
 {
 
@@ -24,6 +26,7 @@ pub trait GetRcOrWeakRefCellSelf
 
 //Rc<Type>
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! rc_self_setup
 {
@@ -49,6 +52,7 @@ macro_rules! rc_self_setup
 
 //Rc<RefCell<Type>>
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! rc_self_rfc_setup //rc_self_refcell_setup
 {
@@ -72,6 +76,7 @@ macro_rules! rc_self_rfc_setup //rc_self_refcell_setup
 
 //
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! rc_self_setup_named
 {
@@ -95,6 +100,7 @@ macro_rules! rc_self_setup_named
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! rc_self_refcell_setup_named
 {
@@ -118,6 +124,7 @@ macro_rules! rc_self_refcell_setup_named
 
 //
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! rc_self_init_setup_returned
 {
@@ -145,6 +152,7 @@ macro_rules! rc_self_init_setup_returned
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! rc_self_init_refcell_setup_returned
 {
@@ -172,6 +180,7 @@ macro_rules! rc_self_init_refcell_setup_returned
 
 //
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! rc_self_init_setup_returned_named
 {
@@ -199,6 +208,7 @@ macro_rules! rc_self_init_setup_returned_named
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! rc_self_init_refcell_setup_returned_named
 {

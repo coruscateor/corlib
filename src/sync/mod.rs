@@ -1,3 +1,4 @@
+//! Synchronisation etc
 
 mod notifier;
 

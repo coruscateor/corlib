@@ -6,6 +6,7 @@
 
 //traits - declarations
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! trait_get
 {
@@ -42,6 +43,7 @@ macro_rules! trait_set
 
 //
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! trait_get_set
 {
@@ -59,6 +61,7 @@ macro_rules! trait_get_set
 
 //
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! trait_get_ref
 {
@@ -76,6 +79,7 @@ macro_rules! trait_get_ref
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! trait_get_mut
 {
@@ -95,6 +99,7 @@ macro_rules! trait_get_mut
 
 //
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! trait_get_ref_mut
 {
@@ -110,6 +115,7 @@ macro_rules! trait_get_ref_mut
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! trait_get_set_ref_mut
 {
@@ -129,75 +135,7 @@ macro_rules! trait_get_set_ref_mut
 
 }
 
-//traits - impl
-
-/// Get macro to be used in the impl block of a struct. Assumes name impelments Copy.
-/// 
-/*
-#[macro_export]
-macro_rules! trait_impl_get
-{
-
-    ($name:ident, $name_type:ty) =>
-    {
-
-        paste! {
-
-            fn [<get_ $name>](&self) -> $name_type
-            {
-
-                self.$name
-
-            }
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! trait_impl_set
-{
-
-    ($name:ident, $name_type:ty) =>
-    {
-
-        paste! {
-
-            fn [<set_ $name>](&mut self, value: $name_type)
-            {
-
-                self.$name = value;
-
-            }
-
-        }
-
-    }
-
-}
-
-//
-
-#[macro_export]
-macro_rules! trait_impl_get_set
-{
-
-    ($name:ident, $name_type:ty) =>
-    {
-
-        trait_impl_get!($name, $name_type);
-
-        trait_impl_set!($name, $name_type);
-
-    }
-
-}
-*/
-
-//impl
-
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_get
 {
@@ -221,6 +159,7 @@ macro_rules! impl_get
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_set
 {
@@ -246,6 +185,7 @@ macro_rules! impl_set
 
 //
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_get_set
 {
@@ -261,8 +201,7 @@ macro_rules! impl_get_set
 
 }
 
-//
-
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_get_ref
 {
@@ -285,6 +224,7 @@ macro_rules! impl_get_ref
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_get_mut
 {
@@ -309,6 +249,7 @@ macro_rules! impl_get_mut
 
 //
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_get_ref_mut
 {
@@ -324,6 +265,7 @@ macro_rules! impl_get_ref_mut
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_get_set_ref_mut
 {
@@ -345,6 +287,7 @@ macro_rules! impl_get_set_ref_mut
 
 //Alias refs
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_alias_get_ref
 {
@@ -367,6 +310,7 @@ macro_rules! impl_alias_get_ref
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_alias_get_mut
 {
@@ -390,6 +334,7 @@ macro_rules! impl_alias_get_mut
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_alias_get_ref_mut
 {
@@ -404,61 +349,6 @@ macro_rules! impl_alias_get_ref_mut
     }
 
 }
-
-//refcell - traits - declaration
-
-//rfc = refcell
-
-/*
-#[macro_export]
-macro_rules! trait_def_rfc_get_ref
-{
-
-    ($name:ident, $name_type:ty) =>
-    {
-
-        paste! {
-
-            fn [<get_ $name _ref>](&self) -> Ref<'_, $name_type>;
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! trait_def_rfc_get_mut
-{
-
-    ($name:ident, $name_type:ty) =>
-    {
-
-        paste! {
-
-            fn [<get_ $name _mut>](&self) -> Ref<'_, $name_type>;
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! trait_def_rfc_get_ref_mut
-{
-
-    ($name:ident, $name_type:ty) =>
-    {
-
-        trait_def_rfc_get_ref!($name, $name_type);
-
-        trait_def_rfc_get_mut!($name, $name_type);
-
-    }
-
-}
-*/
 
 #[macro_export]
 macro_rules! trait_def_rfc_borrow
@@ -508,71 +398,6 @@ macro_rules! trait_def_rfc_borrow_and_mut
     }
 
 }
-
-//refcell
-
-//macros don't seem to be able to call other macros
-
-/*
-#[macro_export]
-macro_rules! impl_rfc_get_ref
-{
-
-    ($name:ident, $name_type:ty) =>
-    {
-
-        paste! {
-
-            pub fn [<get_ $name _ref>](&self) -> Ref<'_, $name_type>
-            {
-
-                self.$name.borrow()
-
-            }
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! impl_rfc_get_mut
-{
-
-    ($name:ident, $name_type:ty) =>
-    {
-
-        paste! {
-
-            pub fn [<get_ $name _mut>](&self) -> RefMut<'_, $name_type>
-            {
-
-                self.$name.borrow_mut()
-
-            }
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! impl_rfc_get_ref_mut
-{
-
-    ($name:ident, $name_type:ty) =>
-    {
-
-        impl_rfc_get_ref!($name, $name_type);
-
-        impl_rfc_get_mut!($name, $name_type);
-
-    }
-
-}
-*/
 
 #[macro_export]
 macro_rules! impl_rfc_borrow
@@ -633,106 +458,7 @@ macro_rules! impl_rfc_borrow_and_mut
 
 }
 
-//
-
-/*
-#[macro_export]
-macro_rules! impl_rfc_get_rfc_field_delegate
-{
-
-    ($rfc_field:ident, $field:ident, $field_type:ty) =>
-    {
-
-        paste! {
-
-            pub fn [<get_ $field>](&self) -> $field_type
-            {
-
-                &self.$rfc_field.borrow().$field
-
-            }
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! impl_rfc_deref_get_rfc_field_delegate
-{
-
-    ($rfc_field:ident, $field:ident, $field_type:ty) =>
-    {
-
-        paste! {
-
-            pub fn [<get_ $field>](&self) -> $field_type
-            {
-
-                *&self.$rfc_field.borrow().$field
-
-            }
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! impl_rfc_set_rfc_field_delegate
-{
-
-    ($rfc_field:ident, $field:ident, $field_type:ty) =>
-    {
-
-        paste! {
-
-            pub fn [<set_ $field>](&self, value: $field_type)
-            {
-
-                self.$rfc_field.borrow_mut().$field = value;
-
-            }
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! impl_rfc_get_set_rfc_field_delegates
-{
-
-    ($rfc_field:ident, $field:ident, $field_type:ty) =>
-    {
-
-        impl_rfc_get_rfc_field_delegate!($rfc_field, $field, $field_type);
-
-        impl_rfc_set_rfc_field_delegate!($rfc_field, $field, $field_type);
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! impl_rfc_deref_get_set_rfc_field_delegate
-{
-
-    ($rfc_field:ident, $field:ident, $field_type:ty) =>
-    {
-
-        impl_rfc_deref_get_rfc_field_delegate!($rfc_field, $field, $field_type);
-
-        impl_rfc_set_rfc_field_delegate!($rfc_field, $field, $field_type);
-
-    }
-
-}
-*/
-
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_rfc_borrow_get
 {
@@ -745,8 +471,6 @@ macro_rules! impl_rfc_borrow_get
             pub fn [<get_ $field>](&self) -> $field_type
             {
 
-                //*(&self.$rfc_field.borrow().$field)
-
                 self.$rfc_field.borrow().$field
 
             }
@@ -757,30 +481,7 @@ macro_rules! impl_rfc_borrow_get
 
 }
 
-/*
-#[macro_export]
-macro_rules! impl_rfc_borrow_get_deref
-{
-
-    ($rfc_field:ident, $field:ident, $field_type:ty) =>
-    {
-
-        paste! {
-
-            pub fn [<get_ $field>](&self) -> $field_type
-            {
-
-                *&self.$rfc_field.borrow().$field
-
-            }
-
-        }
-
-    }
-
-}
-*/
-
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_rfc_borrow_mut_set
 {
@@ -793,8 +494,6 @@ macro_rules! impl_rfc_borrow_mut_set
             pub fn [<set_ $field>](&self, value: $field_type)
             {
 
-                //*(self.$rfc_field.borrow_mut().$field) = value;
-
                 self.$rfc_field.borrow_mut().$field = value;
 
             }
@@ -805,6 +504,7 @@ macro_rules! impl_rfc_borrow_mut_set
 
 }
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_rfc_borrow_mut_get_set
 {
@@ -822,8 +522,8 @@ macro_rules! impl_rfc_borrow_mut_get_set
 
 //Calling
 
-//Broken the fix seems to involve tts.
-
+/// Calls borrow on a RefCelled field and calls a method on the returned Ref.
+/// Don't try to return a reference though (It wont work).
 #[macro_export]
 macro_rules! impl_rfc_borrow_call
 {
@@ -839,10 +539,10 @@ macro_rules! impl_rfc_borrow_call
         }
 
     };
-    ($field:ident, $method:ident, (&)? $return_type:ty) =>
+    ($field:ident, $method:ident, $return_type:ty) =>
     {
 
-        pub fn $method(&self) -> (&)? $return_type
+        pub fn $method(&self) -> $return_type
         {
 
             self.$field.borrow().$method()
@@ -850,10 +550,10 @@ macro_rules! impl_rfc_borrow_call
         }
 
     };
-    ($field:ident, $method:ident, $($param_name:ident: (&)? param_type:ty,)*) =>
+    ($field:ident, $method:ident, $($param_name:ident: param_type:ty,)*) =>
     {
 
-        pub fn $method(&self, $($param_name: (&)? $param_type,)*)
+        pub fn $method(&self, $($param_name: $param_type,)*)
         {
 
             self.$field.borrow().$method($($param_name,)*);
@@ -861,10 +561,10 @@ macro_rules! impl_rfc_borrow_call
         }
 
     };
-    ($field:ident, $method:ident, (&)? $return_type:ty, $($param_name:ident: (&)? param_type:ty,)*) =>
+    ($field:ident, $method:ident, $return_type:ty, $($param_name:ident: param_type:ty,)*) =>
     {
 
-        pub fn $method(&self, $($param_name: param_type,)*) -> (&)? $return_type
+        pub fn $method(&self, $($param_name: param_type,)*) -> $return_type
         {
 
             self.$field.borrow().$method($($param_name,)*)
@@ -875,6 +575,8 @@ macro_rules! impl_rfc_borrow_call
 
 }
 
+/// Calls borrow_mut on a RefCelled field and calls a method on the returned RefMut.
+/// Don't try to return a reference though (It wont work).
 #[macro_export]
 macro_rules! impl_rfc_borrow_mut_call
 {
@@ -928,6 +630,7 @@ macro_rules! impl_rfc_borrow_mut_call
 
 //Aliased
 
+/// impl_rfc_borrow_call with an an aliased method name.
 #[macro_export]
 macro_rules! impl_rfc_borrow_aliased_call
 {
@@ -979,6 +682,7 @@ macro_rules! impl_rfc_borrow_aliased_call
 
 }
 
+/// impl_rfc_borrow_mut_call with an an aliased method name.
 #[macro_export]
 macro_rules! impl_rfc_borrow_mut_aliased_call
 {
@@ -1032,67 +736,7 @@ macro_rules! impl_rfc_borrow_mut_aliased_call
 
 //rfc subscriptions
 
-/*
-#[macro_export]
-macro_rules! impl_rfc_field_subscribe_delegate
-{
-
-    ($rfc_field:ident, $event:ident, $event_delegate_sig:ty) =>
-    {
-
-        paste! {
-
-            pub fn [<$event _subscribe>](&self, delegate: &Rc<$event_delegate_sig>) -> bool
-            {
-
-                self.$rfc_field.borrow_mut().$event.subscribe(delegate)
-
-            }
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! impl_rfc_field_unsubscribe_delegate
-{
-
-    ($rfc_field:ident, $event:ident, $event_delegate_sig:ty) =>
-    {
-
-        paste! {
-
-            pub fn [<$event _unsubscribe>](&self, delegate: &Rc<$event_delegate_sig>) -> bool
-            {
-
-                self.$rfc_field.borrow_mut().$event.unsubscribe(delegate)
-
-            }
-
-        }
-
-    }
-
-}
-
-#[macro_export]
-macro_rules! impl_rfc_field_subscription_delegate
-{
-
-    ($rfc_field:ident, $event:ident, $event_delegate_sig:ty) =>
-    {
-
-        impl_rfc_field_subscribe_delegate!($rfc_field, $event, $event_delegate_sig);
-
-        impl_rfc_field_unsubscribe_delegate!($rfc_field, $event, $event_delegate_sig);
-
-    }
-
-}
-*/
-
+///Subscribe to an event through a RefCell.
 #[macro_export]
 macro_rules! impl_rfc_borrow_mut_subscribe
 {
@@ -1115,6 +759,7 @@ macro_rules! impl_rfc_borrow_mut_subscribe
 
 }
 
+///Unsubscribe to an event through a RefCell.
 #[macro_export]
 macro_rules! impl_rfc_borrow_mut_unsubscribe
 {
@@ -1137,6 +782,7 @@ macro_rules! impl_rfc_borrow_mut_unsubscribe
 
 }
 
+///Subscribe and unsubscribe to an event through a RefCell.
 #[macro_export]
 macro_rules! impl_rfc_borrow_mut_subscription
 {
@@ -1152,12 +798,9 @@ macro_rules! impl_rfc_borrow_mut_subscription
 
 }
 
-//corlib::
-
-//corlib::
-
 ///Support the weak_self pattern 
 
+#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! impl_rfc_get_weak_self
 {

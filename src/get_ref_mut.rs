@@ -1,4 +1,5 @@
 
+#[deprecated(since = "0.2.0")]
 pub trait GetRef<T>
 {
 
@@ -6,6 +7,7 @@ pub trait GetRef<T>
 
 }
 
+#[deprecated(since = "0.2.0")]
 pub trait MutSelfGetRef<T>
 {
 
@@ -13,6 +15,7 @@ pub trait MutSelfGetRef<T>
 
 }
 
+#[deprecated(since = "0.2.0")]
 pub trait GetMut<T>
 {
 
@@ -20,6 +23,7 @@ pub trait GetMut<T>
 
 }
 
+#[deprecated(since = "0.2.0")]
 pub trait TryGetRef<T>
 {
 
@@ -27,7 +31,7 @@ pub trait TryGetRef<T>
 
 }
 
-
+#[deprecated(since = "0.2.0")]
 pub trait TryGetMut<T>
 {
 

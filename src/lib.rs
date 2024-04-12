@@ -1,8 +1,4 @@
-//!
-//! Corlib, a libaray implementing varous-ideas.
-//! 
-//! 
-//! 
+#![doc = include_str!("../README.md")] 
 
 mod non_option;
 

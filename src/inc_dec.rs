@@ -1,9 +1,10 @@
 //!
 //! This module has ++ and -- like operations in the form of macros.
 //! 
-//! If you miss these convenient unary operators here is the place to look.
+//! If you've missed these convenient unary operators here is the place to look.
 //! 
 
+/// Increments an integer by one.
 #[macro_export]
 macro_rules! pp
 {
@@ -16,6 +17,7 @@ macro_rules! pp
 
 }
 
+/// Increments a floating point number by one.
 #[macro_export]
 macro_rules! ppf
 {
@@ -28,6 +30,7 @@ macro_rules! ppf
 
 }
 
+/// Decrements an integer by one.
 #[macro_export]
 macro_rules! mm
 {
@@ -40,6 +43,7 @@ macro_rules! mm
 
 }
 
+/// Decrements a floating point number by one.
 #[macro_export]
 macro_rules! mmf
 {

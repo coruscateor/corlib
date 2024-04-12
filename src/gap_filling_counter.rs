@@ -7,7 +7,7 @@ use crate::has_one::*;
 use crate::collections::List; //list::List;
 
 ///
-/// Increments a number returning "gap" mumbers, numbers that are reported be no longer "be in use", first.
+/// Increments a number returning "gap" mumbers, numbers that are reported to be no longer "be in use", first.
 /// 
 pub struct GapFillingCounter<T, HO>
     where T: PartialEq, HO: HasOne<T>
@@ -123,9 +123,9 @@ impl<T, HO> GapFillingCounter<T, HO>
 
     }
 
-    //
-    //"return" a value
-    //
+    ///
+    /// "return" a value
+    ///
     pub fn gap_value(&mut self, val: T) -> bool
     {
 
