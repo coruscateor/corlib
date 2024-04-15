@@ -1,3 +1,7 @@
+//! 
+//! Collection related stucts and traits, some of which are inspired by .NET.
+//! 
+
 mod list;
 
 pub use list::*; //crate::collections::

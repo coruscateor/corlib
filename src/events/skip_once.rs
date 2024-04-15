@@ -2,8 +2,8 @@
 
 use paste::paste;
 
-///
-///Should the exection of the current event method be skipped?
+/// 
+/// Should the execution of the current event method be skipped?
 /// 
 pub struct SkipOnce
 {

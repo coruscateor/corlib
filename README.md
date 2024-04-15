@@ -1,6 +1,6 @@
 # Corlib
 
-Corlib is a general purpose library.  
+Corlib is a various ideas library.  
 
 ## Contents at a glance:    
 
@@ -8,11 +8,13 @@ Corlib is a general purpose library.
 ### NonOption
 
 Like an option but not optional.    
-  
+
+
 ### RcByPtr
   
-Compare and hash an Rc by pointer instead of value.  
-  
+Compare and hash an Rc objects by pointer instead of by value.  
+
+
 ### RcDefault and ArcDefault
 
 Default trats for returning reference counted types.
@@ -40,17 +42,17 @@ A counter that can recycle "gaps".
 
 ### Get Rc Or Weak Self
 
-Traits and macros to support the Weak-Self pattern.
+Traits and macros to support the Weak-Self pattern (deprecated).
 
 
 ### Get Ref Mut
 
-Traits for getting references.
+Traits for getting references (deprecated).
 
 
 ### Getters Setters Callers
 
-Macroes for implementing getters, setters and calling stuff.
+Macroes for implementing getters, setters and calling stuff (mostly deprecated).
 
 
 ### HasOne
@@ -60,7 +62,7 @@ Sometimes you just want the value 1 (or 1.0).
 
 ### Invalid
 
-A trait for implenting a method that returns an invalid instance of Self.
+A trait for implenting a method that returns an invalid instance of Self (deprecated).
 
 
 ### Lazy
@@ -75,20 +77,26 @@ Collection and collection related objects.
 
 ### Events
 
-Events and events related objects, inspred by .net events.  
-  
+Events and events related objects, inspred by .net events.
+
+
+### Sync
+
+Objects for synchronising stuff.
+
 
 
 
 ## The Weak-Self Pattern
 
-When a reference counted object holds a weak reference to itself, which can be accessed publicly, this can be called the Weak-Self pattern.  
+When a reference counted object holds a weak reference to itself, which can be accessed publicly, this is what I call the weak-self pattern.  
 
 This is useful when your types need to be used with Rc\<Any\> and you want to get a reference counted instance once the exact type of the Any instance has been established. 
 
-If an object stores a weak (or strong) refernce to its reference counted instance, this makes it a reference type.
+If an object stores a weak (or strong) reference to its reference counted instance, this makes it a reference type.
 
-A referece type is a type that can only be refenced and not directly accessed or manipulated.
+A reference type is a type that can only be referenced and not directly accessed or manipulated on the stack.
+
 
 
 ## Todo:

@@ -6,6 +6,7 @@ use std::cell::RefCell;
 
 //deref/drefmut
 
+#[deprecated(since = "0.2.0")]
 pub struct HashsetItem<T>
 {
 

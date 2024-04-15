@@ -3,6 +3,7 @@
 //pub struct List<T, A = Global>
 
 //use std::result::Result;
+//Re-write
 
 use std::ops::{Index, IndexMut, RangeBounds};
 
@@ -398,6 +399,8 @@ impl<T> List<T>
     pub fn push(&mut self, value: T) //where
         //T: Default + (Copy | Clone)
     {
+
+        //hmmm...
 
         if self.contents.len() < 1
         {

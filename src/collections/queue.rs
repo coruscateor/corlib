@@ -4,7 +4,7 @@ use std::{collections::{VecDeque, TryReserveError, vec_deque::{Iter, IterMut, Dr
 use delegate::delegate;
 
 ///
-/// A double ended queue that's been made to act like a single ended queue.
+/// A double ended queue with the API of a single ended queue.
 /// 
 pub struct Queue<T>
 {
@@ -59,6 +59,9 @@ impl<T> Queue<T>
 
     }
 
+    ///
+    /// Pops the front item of the Queue.
+    /// 
     pub fn pop(&mut self) -> Option<T>
     {
 
@@ -66,6 +69,9 @@ impl<T> Queue<T>
 
     }
 
+    ///
+    /// Pushes the provided item to the back of the Queue.
+    /// 
     pub fn push(&mut self, value: T)
     {
 
@@ -73,8 +79,9 @@ impl<T> Queue<T>
 
     }
 
-    //Peek at the font of the Queue
-
+    ///
+    /// Peek the front item of the Queue
+    ///
     pub fn peek(&self) -> Option<&T>
     {
 
@@ -82,6 +89,9 @@ impl<T> Queue<T>
 
     }
 
+    ///
+    /// Mutably peek the front item of the Queue
+    ///
     pub fn peek_mut(&mut self) -> Option<&mut T>
     {
 
@@ -89,8 +99,9 @@ impl<T> Queue<T>
 
     }
 
-    //"peek" the back of the Queue
-
+    ///
+    /// Peek the back item of the Queue
+    ///
     pub fn last(&self) -> Option<&T>
     {
 
@@ -98,6 +109,9 @@ impl<T> Queue<T>
 
     }
 
+    ///
+    /// Mutably peek the back item of the Queue
+    ///
     pub fn last_mut(&mut self) -> Option<&mut T>
     {
 

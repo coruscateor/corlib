@@ -4,7 +4,9 @@ use crate::{MutSelfGetRef, GetMut, TryGetRef, TryGetMut};
 
 use std::ops::Fn;
 
+///
 /// A lazily constructed object that does not contain an initaising function pointer.
+/// 
 #[derive(Default)]
 pub struct Lazy<T> //ByDefault //: Default
 {

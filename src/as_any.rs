@@ -1,5 +1,6 @@
 use std::any::Any;
 
+/// A trait with a method (as_any) for returning a &dyn Any instance (presumably of &self). 
 pub trait AsAny
 {
 
@@ -7,7 +8,9 @@ pub trait AsAny
 
 }
 
-
+/// A macro for implementing the AsAny trait.
+/// 
+/// Both match cases return &self.
 #[macro_export]
 macro_rules! impl_as_any
 {

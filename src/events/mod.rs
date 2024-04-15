@@ -1,5 +1,5 @@
 //!
-//! Event structs inspred by .net events.
+//! Event structs inspired by .NET events.
 //! 
 //! You basically instantiate a non-base event struct, expose the subscribe and unsubscribe methods and call the raise method when it's time to raise an event.
 //!  

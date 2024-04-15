@@ -3,9 +3,9 @@ use std::{any::Any, hash::{Hash, Hasher}};
 //Hash
 
 ///
-///For all your dynamic hashing needs 
+/// For all your dynamic hashing needs 
 ///
-///Inspired by: https://users.rust-lang.org/t/workaround-for-hash-trait-not-being-object-safe/53332/4
+/// Inspired by: https://users.rust-lang.org/t/workaround-for-hash-trait-not-being-object-safe/53332/4
 ///
 pub trait DynHash
 {
@@ -14,8 +14,9 @@ pub trait DynHash
 
 }
 
-//PartialEq or Eq
-
+///
+/// PartialEq or Eq (May be renamed to DynPartialEq)
+///
 pub trait DynPartialEqOrEq
 {
 
@@ -24,7 +25,7 @@ pub trait DynPartialEqOrEq
 }
 
 ///
-/// 
+/// A Struct for adapting objects that implement DynHash and DynPartialEqOrEq to the standard Hash and PartialEq traits.
 /// 
 pub struct DynHashAdapter<T>
     where T: DynHash + DynPartialEqOrEq
@@ -105,14 +106,19 @@ impl<T> PartialEq for DynHashAdapter<T>
 
 }
 
+/*
 impl<T> Eq for DynHashAdapter<T>
     where T: DynHash + DynPartialEqOrEq + 'static
 {
 
 }
+*/
 
 //impl macro
 
+///
+/// An adapter struct for use where only a PartialEq is needed (may be renamed to DynPartialEqAdapter).
+/// 
 pub struct DynPartialEqOrEqAdapter<T>
     where T: DynPartialEqOrEq
 {

@@ -1,7 +1,7 @@
-
+//Revise API
 
 ///
-/// A key and a value, paried.
+/// A key and a value, paired.
 /// 
 pub struct KeyValuePair<K, V>
     where K: PartialEq
@@ -13,7 +13,7 @@ pub struct KeyValuePair<K, V>
 }
 
 impl<K, V> KeyValuePair<K, V>
-where K: PartialEq
+    where K: PartialEq
 {
 
     pub fn new(key: K, value: V) -> Self

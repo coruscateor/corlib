@@ -24,7 +24,7 @@ use crate::rc_by_ptr::RcByPtr;
 pub type SenderEventFunc<S> = dyn Fn(&S) -> bool; 
 
 ///
-/// A UniqueItemList based event containing event handler functions that takes an event-arguments reference in addition to the sender reference argument,
+/// A UniqueItemList based event containing event handler functions that each takes the sender reference argument.
 /// 
 pub struct ListEvent<S>
 {

@@ -152,7 +152,7 @@ impl<'a, T> NotifierWaitTimeoutResult<'a, T>
     ///
     /// Checks both the returned MutexGuard and WaitTimeoutResult
     /// 
-    /// The retunrd tuple has the following parameters:
+    /// The returned tuple has the following parameters:
     /// 
     /// 0: Is the MutexGuard Ok? 1: Has timed out?
     /// 
