@@ -1,84 +1,89 @@
 # Corlib
 
+[![Crates.io](https://img.shields.io/crates/v/corlib)](https://crates.io/crates/corlib)
+[![License](https://img.shields.io/badge/license-MIT%2FApache-blue)](#license)
+[![Downloads](https://img.shields.io/crates/d/corlib)](https://crates.io/crates/corlib)
+[![Docs](https://docs.rs/corlib/badge.svg)](https://docs.rs/corlib/latest/corlib/)
+
 Corlib is a various ideas library.  
 
-## Contents at a glance:    
-
+## Contents:    
 
 ### NonOption
 
 Like an option but not optional.    
 
-
-### RcByPtr
+### RcByPtr and WeakByPtr
   
-Compare and hash an Rc objects by pointer instead of by value.  
-
+Compare and hash an Rc and Rc::Weak objects by pointer instead of by value.  
 
 ### RcDefault and ArcDefault
 
-Default trats for returning reference counted types.
+Default traits for returning reference counted types.
 
+### MovableText
 
-### Text Enums
+For conveniently moving owned and static strings around.
 
-All String types unified into various enum types.
+### AsStr
 
-
-### WeakByPtr
-
-RcByPtr, but weak.
-
+A trait with an as_str method.
 
 ### Droppers
 
 Structs for caling closures on drop.
 
-
 ### GapFillingCounter
 
 A counter that can recycle "gaps".
-
 
 ### Get Rc Or Weak Self
 
 Traits and macros to support the Weak-Self pattern (deprecated).
 
-
 ### Get Ref Mut
 
 Traits for getting references (deprecated).
-
 
 ### Getters Setters Callers
 
 Macroes for implementing getters, setters and calling stuff (mostly deprecated).
 
-
 ### HasOne
 
 Sometimes you just want the value 1 (or 1.0).
-
 
 ### Invalid
 
 A trait for implenting a method that returns an invalid instance of Self (deprecated).
 
-
 ### Lazy
 
-A struct for lazily initalising objects. Dos not contain its own initalising closure.
+A struct for lazily initalising objects.
 
+Does not contain its own initalising closure.
+
+### As Any
+
+A trait with a method (as_any) for returning a &dyn Any instance of &self (comes with a handy implementation macro).
+
+### Get Some
+
+Convert Options into certainty.
+
+### Inc Dec
+
+Miss the ++ and -- operators?
+
+This module can help sort you out.
 
 ### Collections
 
-Collection and collection related objects.
-
+Collections and collection related objects.
 
 ### Events
 
-Events and events related objects, inspred by .net events.
-
+Events and event related objects. Inspred by .net events.
 
 ### Sync
 

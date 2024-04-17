@@ -522,8 +522,10 @@ macro_rules! impl_rfc_borrow_mut_get_set
 
 //Calling
 
+///
 /// Calls borrow on a RefCelled field and calls a method on the returned Ref.
 /// Don't try to return a reference though (It wont work).
+/// 
 #[macro_export]
 macro_rules! impl_rfc_borrow_call
 {

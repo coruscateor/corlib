@@ -10,7 +10,7 @@ pub trait AsAny
 
 /// A macro for implementing the AsAny trait.
 /// 
-/// Both match cases return &self.
+/// Both AsAny implementations in both match cases return &self.
 #[macro_export]
 macro_rules! impl_as_any
 {

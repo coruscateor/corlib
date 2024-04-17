@@ -1,7 +1,7 @@
 //!
 //! This module has ++ and -- like operations in the form of macros.
 //! 
-//! If you've missed these convenient unary operators here is the place to look.
+//! If you miss these convenient unary operators here is the place to look.
 //! 
 
 /// Increments an integer by one.
