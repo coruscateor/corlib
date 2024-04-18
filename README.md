@@ -1,13 +1,25 @@
+<center>
+
 # Corlib
 
 [![Crates.io](https://img.shields.io/crates/v/corlib)](https://crates.io/crates/corlib)
 [![License](https://img.shields.io/badge/license-MIT%2FApache-blue)](#license)
 [![Downloads](https://img.shields.io/crates/d/corlib)](https://crates.io/crates/corlib)
 [![Docs](https://docs.rs/corlib/badge.svg)](https://docs.rs/corlib/latest/corlib/)
+[![Twitch Status](https://img.shields.io/twitch/status/coruscateor)](https://www.twitch.tv/coruscateor)
+
+[X](https://twitter.com/Coruscateor) | 
+[Twitch](https://www.twitch.tv/coruscateor) | 
+[Youtube](https://www.youtube.com/@coruscateor) | 
+[Mastodon](https://mastodon.social/@Coruscateor) | 
+[GitHub](https://github.com/coruscateor) | 
+[GitHub Sponsors](https://github.com/sponsors/coruscateor)
 
 Corlib is a various ideas library.  
 
-## Contents:    
+</center>
+
+## Library Contents:    
 
 ### NonOption
 
@@ -47,7 +59,7 @@ Traits for getting references (deprecated).
 
 ### Getters Setters Callers
 
-Macroes for implementing getters, setters and calling stuff (mostly deprecated).
+Macros for implementing getters, setters and calling stuff (mostly deprecated).
 
 ### HasOne
 
@@ -88,19 +100,6 @@ Events and event related objects. Inspred by .net events.
 ### Sync
 
 Objects for synchronising stuff.
-
-
-
-
-## The Weak-Self Pattern
-
-When a reference counted object holds a weak reference to itself, which can be accessed publicly, this is what I call the weak-self pattern.  
-
-This is useful when your types need to be used with Rc\<Any\> and you want to get a reference counted instance once the exact type of the Any instance has been established. 
-
-If an object stores a weak (or strong) reference to its reference counted instance, this makes it a reference type.
-
-A reference type is a type that can only be referenced and not directly accessed or manipulated on the stack.
 
 
 
