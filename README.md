@@ -1,4 +1,4 @@
-<center>
+<div align="center">
 
 # Corlib
 
@@ -17,7 +17,7 @@
 
 Corlib is a various ideas library.  
 
-</center>
+</div>
 
 ## Library Contents:    
 
