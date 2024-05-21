@@ -17,6 +17,9 @@ pub struct NonOption<T>
 impl<T> NonOption<T>
 {
 
+    ///
+    /// Constructs a new NonOption object with a value.
+    /// 
     pub fn new(value: T) -> Self
     {
 
@@ -29,6 +32,9 @@ impl<T> NonOption<T>
 
     }
 
+    ///
+    /// Constructs a new NonOption object with no value.
+    /// 
     pub const fn invalid() -> Self
     {
 
@@ -40,22 +46,6 @@ impl<T> NonOption<T>
         }
 
     }
-
-    /*
-    pub fn new_refcell(value: T) -> RefCell<Self>
-    {
-
-        RefCell::new(Self::new(value))
-
-    }
-
-    pub fn invalid_refcell() -> RefCell<Self>
-    {
-
-        RefCell::new(Self::invalid())
-
-    }
-    */
 
     pub fn new_rfc(value: T) -> RefCell<Self>
     {
@@ -119,6 +109,13 @@ impl<T> NonOption<T>
         self.value.unwrap_or(default)
 
     }
+
+    pub fn expect(self) -> T
+    {
+
+        self.value.expect(NOT_INSTANTIATED_ERROR_MSG)
+
+    }
     
     /*
     pub fn set(&mut self, value: T) -> bool
@@ -145,6 +142,7 @@ impl<T> NonOption<T>
 
     }
 
+    /*
     pub fn take(&mut self) -> T
     {
 
@@ -160,52 +158,21 @@ impl<T> NonOption<T>
         self.value.take()
 
     }
+    */
     
 }
 
-/*
 impl<T> Default for NonOption<T>
-    where T: Default
 {
 
     fn default() -> Self
     {
 
-        NonOption::new(Default::default())
+        NonOption::invalid()
 
     }
 
 }
-*/
-
-/*
-impl<T> Default for NonOption<T>
-    where T: Default
-{
-
-    fn default() -> Self
-    {
-
-        NonOption
-        {
-
-            value: Some(Default::default())
-
-        }
-
-    }
-
-    /*
-    pub fn unwrap_or_default(self) -> T
-    {
-
-        self.value.unwrap_or_default
-
-    }
-    */
-
-}
-*/
 
 impl<T> Clone for NonOption<T>
     where T: Clone

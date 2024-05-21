@@ -68,10 +68,6 @@ pub use rc_by_ptr::*;
 
 pub mod rc_default;
 
-mod invalid;
-
-pub use invalid::*;
-
 mod lazy;
 
 pub use lazy::*;
@@ -88,10 +84,6 @@ mod text_enums;
 
 pub use text_enums::*;
 
-mod sync;
-
-pub use sync::*;
-
 //mod refcell_borrowing;
 
 //pub use refcell_borrowing::*;
@@ -103,6 +95,8 @@ pub mod inc_dec;
 pub mod as_any;
 
 pub use as_any::*;
+
+pub mod rfc;
 
 #[cfg(test)]
 mod tests {
