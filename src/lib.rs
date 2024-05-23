@@ -54,10 +54,6 @@ mod dropper;
 
 pub use dropper::*;
 
-//pub mod macros;
-
-//pub use has_one::*;
-
 mod getters_setters_callers;
 
 pub use getters_setters_callers::*;
@@ -72,21 +68,9 @@ mod lazy;
 
 pub use lazy::*;
 
-mod get_ref_mut;
-
-pub use get_ref_mut::*;
-
-//mod default_abuser;
-
-//pub use default_abuser::*;
-
 mod text_enums;
 
 pub use text_enums::*;
-
-//mod refcell_borrowing;
-
-//pub use refcell_borrowing::*;
 
 pub mod get_some;
 

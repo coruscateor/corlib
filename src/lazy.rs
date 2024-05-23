@@ -1,6 +1,6 @@
 //use std::borrow::{Borrow, BorrowMut};
 
-use crate::{MutSelfGetRef, GetMut, TryGetRef, TryGetMut};
+//use crate::{MutSelfGetRef, GetMut, TryGetRef, TryGetMut};
 
 use std::ops::Fn;
 
@@ -105,14 +105,6 @@ impl<T> Lazy<T>  //: Default
         self.value.as_mut().unwrap()
 
     }
-
-    /*
-    fn get_ref_call(&mut self) -> &T
-    {
-
-
-    }
-    */
     
 }
 
@@ -171,11 +163,6 @@ impl<T: Default> Lazy<T>
 
     }
 
-}
-
-impl<T: Default> MutSelfGetRef<T> for Lazy<T> //ByDefault
-{
-
     fn get_ref(&mut self) -> &T
     {
         
@@ -184,11 +171,6 @@ impl<T: Default> MutSelfGetRef<T> for Lazy<T> //ByDefault
         self.value.as_ref().unwrap()
 
     }
-
-}
-
-impl<T: Default> GetMut<T> for Lazy<T> //ByDefault
-{
 
     fn get_mut(&mut self) -> &mut T
     {
@@ -199,22 +181,12 @@ impl<T: Default> GetMut<T> for Lazy<T> //ByDefault
 
     }
 
-}
-
-impl<T: Default> TryGetRef<T> for Lazy<T> //ByDefault
-{
-
     fn try_get_ref(&self) -> Option<&T>
     {
     
         self.value.as_ref()
 
     }
-
-}
-
-impl<T: Default> TryGetMut<T> for Lazy<T> //ByDefault
-{
 
     fn try_get_mut(&mut self) -> Option<&mut T>
     {

@@ -36,8 +36,6 @@ impl<T> List<T>
     where T: PartialEq
 {
 
-    //const
-
     pub const fn new() -> Self
     {
 
@@ -67,28 +65,9 @@ impl<T> List<T>
 
         self.contents.push(value);
 
-        //let index = self.contents.len();
-
-        //self.contents.insert(index, value);
-
-        /*
-        if self.contents.len() < 1
-        {
-
-            self.contents.push(value);
-
-        }
-        else {
-            
-            let index = self.contents.len();
-
-            self.contents.insert(index, value);
-
-        }
-        */
-
     }
 
+    /*
     pub fn add_copy(&mut self, value: &T)
         where T: Copy
     {
@@ -96,6 +75,7 @@ impl<T> List<T>
         self.contents.push(*value);
 
     }
+    */
 
     pub fn add_clone(&mut self, value: &T)
         where T: Clone
@@ -175,10 +155,8 @@ impl<T> List<T>
     }
     */
 
-    pub fn remove(&mut self, value: T) ->  bool//Result<T, String>
+    pub fn remove(&mut self, value: T) -> bool
     {
-
-        //let removal_index: Option<usize> = None;
 
         let mut removal_index: usize = 0;
 
@@ -187,100 +165,7 @@ impl<T> List<T>
         for item in self.contents.iter()
         {
 
-            if value.eq(item)
-            {
-
-                has_found_item = true;
-
-                break;
-
-            }
-
-            removal_index += 1;
-
-        }
-
-        has_found_item
-
-        /*
-        if has_found_item
-        {
-
-            let removed = self.contents.remove(removal_index);
-
-            Ok(removed)
-
-        }
-        else
-        {
-        
-            Err("Item not found".to_string())
-
-        }
-        */
-
-    }
-
-    pub fn remove_ref(&mut self, value: &T) -> bool //Result<T, String>
-    {
-
-        //let removal_index: Option<usize> = None;
-
-        let mut removal_index: usize = 0;
-
-        let mut has_found_item = false;
-
-        for item in self.contents.iter()
-        {
-
-            if value == item
-            {
-
-                has_found_item = true;
-
-                break;
-
-            }
-
-            removal_index += 1;
-
-        }
-
-        has_found_item
-
-        /*
-        if has_found_item
-        {
-
-            let removed = self.contents.remove(removal_index);
-
-            Ok(removed)
-
-        }
-        else
-        {
-        
-            Err("Item not found".to_string())
-
-        }
-        */
-
-    }
-
-    /*
-    pub fn remove_and_drop(&mut self, value: T) -> Result<(), String>
-    {
-
-        //let removal_index: Option<usize> = None;
-
-        let mut removal_index: usize = 0;
-
-        let mut has_found_item = false;
-
-        for item in self.contents.iter()
-        {
-
-            if value.eq(item)
+            if value == *item
             {
 
                 has_found_item = true;
@@ -298,22 +183,14 @@ impl<T> List<T>
 
             self.contents.remove(removal_index);
 
-            Ok(())
-
         }
-        else
-        {
-        
-            Err("Item not found".to_string())
 
-        }
+        has_found_item
 
     }
 
-    pub fn remove_and_drop_ref(&mut self, value: &T) -> Result<(), String>
+    pub fn remove_ref(&mut self, value: &T) -> bool
     {
-
-        //let removal_index: Option<usize> = None;
 
         let mut removal_index: usize = 0;
 
@@ -340,22 +217,11 @@ impl<T> List<T>
 
             self.contents.remove(removal_index);
 
-            Ok(())
-
         }
-        else
-        {
-        
-            Err("Item not found".to_string())
 
-        }
+        has_found_item
 
     }
-    */
-
-    //remove_last
-
-    //remove_last_and_drop
 
     pub fn contains(&self, x: &T) -> bool
     {
@@ -386,9 +252,6 @@ impl<T> List<T>
 
     }
 
-    //move to vec
-    //
-
     pub fn clear(&mut self)
     {
 
@@ -396,8 +259,7 @@ impl<T> List<T>
 
     }
 
-    pub fn push(&mut self, value: T) //where
-        //T: Default + (Copy | Clone)
+    pub fn push(&mut self, value: T)
     {
 
         //hmmm...
@@ -415,51 +277,10 @@ impl<T> List<T>
             
         }
 
-        /*
-        let len = self.contents.len();
-
-        if(len < 1)
-        {
-
-            self.contents.push(value);
-
-        }
-        else
-        {
-            
-            let last_item_index = len -1;
-
-            self.contents.push(Default::default());
-
-
-            
-        }
-        */
-
-    }
-
-    pub fn push_copy(&mut self, value: &T) where
-        T: Copy
-    {
-
-        if self.contents.len() < 1
-        {
-
-            self.contents.push(*value);
-
-        }
-        else
-        {
-
-            self.contents.insert(0, *value);
-            
-        }
-
-
     }
 
     pub fn push_clone(&mut self, value: &T) where
-        T: Clone //+ Copy
+        T: Clone
     {
 
         if self.contents.len() < 1
@@ -479,15 +300,6 @@ impl<T> List<T>
 
 
     }
-
-    /*
-    pub fn end_push(&mut self, value: T)
-    {
-
-        self.contents.push(value);
-
-    }
-    */
 
     pub fn pop(&mut self) -> Option<T>
     {
@@ -658,32 +470,7 @@ impl<T> List<T>
 
     }
 
-    /*
-    pub fn index_of_value(&self, value: T) -> Option<usize>
-    {
-
-        let mut index: usize = 0;
-
-        for item in self.contents.iter()
-        {
-
-            if item.eq(value)
-            {
-
-                return Some(index);
-
-            }
-
-            index += 1;
-
-        }
-
-        None
-
-    }
-    */
-
-    pub fn drain<R>(&mut self, range: R) -> Drain<'_, T> //, A>
+    pub fn drain<R>(&mut self, range: R) -> Drain<'_, T>
         where R: RangeBounds<usize>
     {
 

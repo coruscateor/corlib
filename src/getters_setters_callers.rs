@@ -594,10 +594,10 @@ macro_rules! impl_rfc_borrow_mut_call
         }
 
     };
-    ($field:ident, $method:ident, (&)? $return_type:ty) =>
+    ($field:ident, $method:ident, $return_type:ty) =>
     {
 
-        pub fn $method(&self) -> (&)? $return_type
+        pub fn $method(&self) -> $return_type
         {
 
             self.$field.borrow_mut().$method()
@@ -605,10 +605,10 @@ macro_rules! impl_rfc_borrow_mut_call
         }
 
     };
-    ($field:ident, $method:ident, $($param_name:ident: (&)? param_type:ty,)*) =>
+    ($field:ident, $method:ident, $($param_name:ident: param_type:ty,)*) =>
     {
 
-        pub fn $method(&self, $($param_name: (&)? param_type,)*)
+        pub fn $method(&self, $($param_name: param_type,)*)
         {
 
             self.$field.borrow_mut().$method($($param_name,)*);
@@ -616,10 +616,10 @@ macro_rules! impl_rfc_borrow_mut_call
         }
 
     };
-    ($field:ident, $method:ident, (&)? $return_type:ty, $($param_name:ident: (&)? param_type:ty,)*) =>
+    ($field:ident, $method:ident, $return_type:ty, $($param_name:ident: param_type:ty,)*) =>
     {
 
-        pub fn $method(&self, $($param_name:ident: (&)? param_type:ty,)*) -> (&)? $return_type
+        pub fn $method(&self, $($param_name:ident: param_type:ty,)*) -> $return_type
         {
 
             self.$field.borrow_mut().$method($($param_name,)*)

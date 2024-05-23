@@ -1,4 +1,10 @@
-
+///
+/// Intended to be used with a std::cell:RefCell that is a field of $this.
+///
+/// Calls “borrow” on the RefCell field and passes the result and a reference to $this to the provided $func expression.
+///
+/// If no $rfc_field is provided (first case) then the name “mut_state” is used for the $rfc_field.
+/// 
 #[macro_export]
 macro_rules! rfc_borrow
 {
@@ -24,6 +30,13 @@ macro_rules! rfc_borrow
 
 }
 
+///
+/// Intended to be used with a std::cell:RefCell that is a field of $this.
+///
+/// Calls “borrow_mut” on the RefCell field and passes the result and a reference to $this to the provided $func expression.
+///
+/// If no $rfc_field is provided (first case) then the name “mut_state” is used for the $rfc_field.
+/// 
 #[macro_export]
 macro_rules! rfc_borrow_mut
 {
@@ -51,6 +64,9 @@ macro_rules! rfc_borrow_mut
 
 //Pass this not by ref
 
+///
+/// Like rfc_borrow but for situations where it is intended that $this be copied i.e. where $this is already a reference.
+/// 
 #[macro_export]
 macro_rules! rfc_borrow_2
 {
@@ -76,6 +92,9 @@ macro_rules! rfc_borrow_2
 
 }
 
+///
+/// Like rfc_borrow_mut but for situations where it is intended that $this be copied i.e. where $this is already a reference.
+/// 
 #[macro_export]
 macro_rules! rfc_borrow_mut_2
 {
