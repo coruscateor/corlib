@@ -4,7 +4,7 @@ use std::slice::{Iter, IterMut};
 use super::{list::List, key_value_pair::KeyValuePair};
 
 ///
-/// A .net style Dictionary
+/// A .NET style Dictionary
 /// 
 pub struct Dictionary<K, V>
     where K: PartialEq

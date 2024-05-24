@@ -11,6 +11,7 @@ use std::slice::{Iter, IterMut, SliceIndex};
 
 use std::vec::Drain;
 
+use delegate::delegate;
 
 //More Result results to avoid panicking
 
@@ -21,7 +22,7 @@ use std::vec::Drain;
 //https://doc.rust-lang.org/std/panic/fn.catch_unwind.html
 
 ///
-/// A .net style list.
+/// A .NET style list.
 /// 
 #[derive(Default)]
 pub struct List<T>
@@ -48,6 +49,48 @@ impl<T> List<T>
 
     }
 
+    delegate! {
+        to self.contents {
+
+            #[call(push)]
+            pub fn add(&mut self, value: T);
+
+            pub fn contains(&self, x: &T) -> bool;
+
+            pub fn len(&self) -> usize;
+
+            pub fn is_empty(&self) -> bool;
+
+            pub fn to_vec(&self) -> Vec<T> where T: Clone;
+
+            pub fn clear(&mut self);
+
+            //pub fn push(&mut self, value: T);
+
+            pub fn pop(&mut self) -> Option<T>;
+
+            pub fn insert(&mut self, index: usize, element: T);
+
+            #[call(remove)]
+            pub fn remove_at(&mut self, index: usize) -> T;
+
+            pub fn first(&self) -> Option<&T>;
+        
+            pub fn first_mut(&mut self) -> Option<&mut T>;
+            
+            pub fn last(&self) -> Option<&T>;
+        
+            pub fn last_mut(&mut self) -> Option<&mut T>;
+        
+            pub fn iter(&self) -> Iter<'_, T>;
+        
+            pub fn iter_mut(&mut self) -> IterMut<'_, T>;
+
+            pub fn reverse(&mut self);
+
+        }
+    }
+
     pub fn with_capacity(capacity: usize) -> Self
     {
 
@@ -60,12 +103,14 @@ impl<T> List<T>
 
     }
 
+    /*
     pub fn add(&mut self, value: T)
     {
 
         self.contents.push(value);
 
     }
+    */
 
     /*
     pub fn add_copy(&mut self, value: &T)
@@ -85,7 +130,7 @@ impl<T> List<T>
 
     }
 
-    pub fn add_or_repace(&mut self, value: T) //-> Option<T>
+    pub fn add_or_repace(&mut self, value: T)
     {
 
         let mut index = 0;
@@ -223,6 +268,7 @@ impl<T> List<T>
 
     }
 
+    /*
     pub fn contains(&self, x: &T) -> bool
     {
 
@@ -300,7 +346,17 @@ impl<T> List<T>
 
 
     }
+    */
 
+    pub fn push_clone(&mut self, value: &T) where
+        T: Clone
+    {
+
+        self.contents.push(value.clone());
+
+    }
+
+    /*
     pub fn pop(&mut self) -> Option<T>
     {
 
@@ -363,6 +419,7 @@ impl<T> List<T>
         self.contents.iter_mut()
 
     }
+    */
 
     pub fn get_last_index(&self) -> Option<usize>
     {
@@ -401,12 +458,14 @@ impl<T> List<T>
 
     }
 
+    /*
     pub fn reverse(&mut self)
     {
 
         self.contents.reverse()
 
     }
+    */
 
     pub fn get_item(&self, index: usize) -> Option<&T>
     {
@@ -540,19 +599,20 @@ impl<T> List<T> where
 impl<T> List<T> where
     T: Clone + PartialEq
 {
+    
+    delegate! {
+        to self.contents {
 
+            pub fn resize(&mut self, new_len: usize, value: T);
+
+        }
+    }
+
+    /*
     pub fn resize(&mut self, new_len: usize, value: T)
     {
 
         self.contents.resize(new_len, value)
-
-    }
-
-    /*
-    pub fn reverse(&mut self)
-    {
-
-        self.contents.reverse()
 
     }
     */

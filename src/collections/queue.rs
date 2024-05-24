@@ -1,10 +1,10 @@
 
-use std::{collections::{VecDeque, TryReserveError, vec_deque::{Iter, IterMut, Drain}}, ops::RangeBounds, cmp::Ordering}; //, alloc::Allocator};
+use std::{collections::{VecDeque, TryReserveError, vec_deque::{Iter, IterMut, Drain}}, ops::RangeBounds, cmp::Ordering};
 
 use delegate::delegate;
 
 ///
-/// A double ended queue with the API of a single ended queue.
+/// The standard double ended VecDeque, with the API of a single ended queue.
 /// 
 pub struct Queue<T>
 {
