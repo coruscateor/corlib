@@ -82,6 +82,8 @@ pub use as_any::*;
 
 pub mod rfc;
 
+pub mod upgrading;
+
 #[cfg(test)]
 mod tests {
     #[test]
