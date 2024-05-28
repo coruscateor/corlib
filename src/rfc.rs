@@ -122,7 +122,53 @@ macro_rules! rfc_borrow_mut_2
 
 }
 
+//Param by ref
+
 pub fn borrow<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
+    where F: FnMut(Ref<T>, &P) -> R
+{
+
+   let rfc_ref = rfc.borrow();
+
+   func(rfc_ref, param)
+
+}
+
+pub fn borrow_mut<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
+    where F: FnMut(RefMut<T>, &P) -> R
+{
+
+   let rfc_ref = rfc.borrow_mut();
+
+   func(rfc_ref, param)
+
+}
+
+//Param by mut ref
+
+pub fn borrow_2<T, P, F, R>(rfc: &RefCell<T>, param: &mut P, mut func: F) -> R
+    where F: FnMut(Ref<T>, &P) -> R
+{
+
+   let rfc_ref = rfc.borrow();
+
+   func(rfc_ref, param)
+
+}
+
+pub fn borrow_mut_2<T, P, F, R>(rfc: &RefCell<T>, param: &mut P, mut func: F) -> R
+    where F: FnMut(RefMut<T>, &P) -> R
+{
+
+   let rfc_ref = rfc.borrow_mut();
+
+   func(rfc_ref, param)
+
+}
+
+//Clone param
+
+pub fn borrow_3<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
     where F: FnMut(Ref<T>, P) -> R,
           P: Clone
 {
@@ -133,7 +179,7 @@ pub fn borrow<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
 
 }
 
-pub fn borrow_mut<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
+pub fn borrow_mut_3<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
     where F: FnMut(RefMut<T>, P) -> R,
           P: Clone
 {
@@ -144,45 +190,7 @@ pub fn borrow_mut<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
 
 }
 
-pub fn borrow_2<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
-    where F: FnMut(Ref<T>, &P) -> R
-{
-
-   let rfc_ref = rfc.borrow();
-
-   func(rfc_ref, param)
-
-}
-
-pub fn borrow_mut_2<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
-    where F: FnMut(RefMut<T>, &P) -> R
-{
-
-   let rfc_ref = rfc.borrow_mut();
-
-   func(rfc_ref, param)
-
-}
-
-pub fn borrow_3<T, P, F, R>(rfc: &RefCell<T>, param: &mut P, mut func: F) -> R
-    where F: FnMut(Ref<T>, &P) -> R
-{
-
-   let rfc_ref = rfc.borrow();
-
-   func(rfc_ref, param)
-
-}
-
-pub fn borrow_mut_3<T, P, F, R>(rfc: &RefCell<T>, param: &mut P, mut func: F) -> R
-    where F: FnMut(RefMut<T>, &P) -> R
-{
-
-   let rfc_ref = rfc.borrow_mut();
-
-   func(rfc_ref, param)
-
-}
+//Copy or move param
 
 pub fn borrow_4<T, P, F, R>(rfc: &RefCell<T>, param: P, mut func: F) -> R
     where F: FnMut(Ref<T>, P) -> R
@@ -203,6 +211,8 @@ pub fn borrow_mut_4<T, P, F, R>(rfc: &RefCell<T>, param: P, mut func: F) -> R
    func(rfc_ref, param)
 
 }
+
+//Borrow from the provided RefCell ref only.
 
 pub fn borrow_only<T, F, R>(rfc: &RefCell<T>, mut func: F) -> R
     where F: FnMut(Ref<T>) -> R
