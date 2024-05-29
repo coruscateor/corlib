@@ -124,6 +124,9 @@ macro_rules! rfc_borrow_mut_2
 
 //Param by ref
 
+///
+/// Calls “borrow” on the provided RefCell, passing the resultant Ref object and the provided param reference to the provided func object, returning the result.
+/// 
 pub fn borrow<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
     where F: FnMut(Ref<T>, &P) -> R
 {
@@ -134,6 +137,9 @@ pub fn borrow<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
 
 }
 
+///
+/// Calls “borrow_mut” on the provided RefCell, passing the resultant RefMut object and the provided param reference to the provided func object, returning the result.
+/// 
 pub fn borrow_mut<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) -> R
     where F: FnMut(RefMut<T>, &P) -> R
 {

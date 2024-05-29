@@ -4,6 +4,9 @@
 
 use std::{future::Future, rc::{Rc, Weak}, sync::Arc};
 
+///
+/// Attempts to upgrade the provided weak Rc reference, calling the provided func object if successful.
+/// 
 pub fn up_rc<T, F>(weak: &Weak<T>, mut func: F) -> bool
     where F: FnMut(Rc<T>)
 {
@@ -21,6 +24,9 @@ pub fn up_rc<T, F>(weak: &Weak<T>, mut func: F) -> bool
 
 }
 
+///
+/// Attempts to upgrade the provided weak Arc reference, calling the provided func object if successful.  
+/// 
 pub fn up_arc<T, F>(weak: &std::sync::Weak<T>, mut func: F) -> bool
     where F: FnMut(Arc<T>)
 {
