@@ -6,72 +6,85 @@
 
 - Added some module level documentation to as_any.
 - Removed the Invalid trait.
-
 - Added documentation to NonOption, added an “expect” method, removed the take and try_take methods, implemented Default with the default value being an invalid NonOption and cleaned it up a bit.
-
-- Added an rfc module containing macros like rfc_borrow and rfc_borrow_mut which are intended to make it a bit easier to work with RefCells.
-
+- Added a module called rfc which contains macros like rfc_borrow and rfc_borrow_mut which are intended to make it a bit easier to work with RefCells.
 - Removed the sync module as well as the Notifier object contained within it (moved to LibSync).
-
-
 
 f69c890dd415fc2455c516addc27f03b15ca1dfa
 
+-- Prepared List for a re-write.
 
-
-- Prepared List for a re-write.
 - Removed the get_ref_mut module.
-
-- Fixed impl_rfc_borrow_mut_call
-
+- Fixed the impl_rfc_borrow_mut_call macro.
 - Moved the methods that were implementing traits from the get_ref_mut module into the impl<T: Default> Lazy<T> block.
 
-- Cleaned up lib.rs
+-- Cleaned up lib.rs
 
-- Added documentation to the the macros in the rfc module.
-
-
+-- Added documentation to the the macros in the rfc module.
 
 7fefea78af264c3baf7493251e48bddbdd890d7a
 
-
-
 - Updated Dictionary documentation
 - Updated List documentation and reimplemented a bunch of methods using the delegate macro.
-
 - Updated Queue documentation
 
-- Removed a bunch of old code.
+- Removed a bunch of old code files.
 
 - Added and reimplemented a bunch of macros in getters_setters_callers.
 
-
-
 c6b0eba1a2c740d376860e74ccde403be26ecb95
 
+-- Added functions that handle RefCell borrowing to the rfc module.
 
-
-- Added functions that handle RefCell borrowing to the rfc module.
 - Added an “upgrading” module with functions that deal with upgrading reference counted objects.
-
-
 
 c0470282bff813ebf97e251b703a6e5c7d59160f
 
+-- Updated the rfc borrow and borrow_mut functions so that the “param” parameter now gets passed to the provided func by reference.
 
-- Updated the rfc borrow and borrow_mut functions so that the “param” parameter now gets passed to the provided func by reference.
-
-- Added async variants of the up_arc functions in the “upgrading” module as well as more up_rc and up_arc function variants that deal with Optional return values.
-
-
+-- Added async variants of the up_arc functions in the “upgrading” module as well as more up_rc and up_arc function variants that deal with Optional return values.
 
 8276848a969eef60241c6b53143a0b179d38a813
 
+-- Added documentation to the rfc borrow and borrow_mut functions as well as the “upgrading” up_rc and up_arc functions.
+
+29f432c95bb27a3ba2a54ee48132fcf056e285d1
+
+-- Started compiling the changelog.
+
+- Updated the readme.
+
+- Updated the module level documentation of the getters_setters_callers module.
+
+-- Updated the module level documentation of the upgrading module.
+
+-- Updated the module level documentation of the rfc module.
+
+- Updated dropper objects documentation.
+
+- Removed the get_rc_or_weak_self module and its associated traits and macros.
+
+- Cleaned up the lib file and made the getters_setters_callers and inc_dec modules private.
+
+- Updated the NonOption struct level documentation.
+
+- Updated the RcByPtr struct level documentation.
+
+- Added documentation to the rc_default module.
+
+-- Added documentation to the rfc module.
+
+-- Updated the documentation of the upgrading module.
+
+- Updated the WeakByPtr struct level documentation.
 
 
-Added documentation to the rfc borrow and borrow_mut functions as well as the “upgrading” up_rc and up_arc functions.
+
+3ab5934a051071621cf19d87871324da24786821
 
 
+
+- Removed the paste dependency.
 
 
 
