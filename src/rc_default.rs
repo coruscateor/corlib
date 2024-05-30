@@ -1,3 +1,7 @@
+//!
+//! Traits for getting reference counted default objects.
+//! 
+
 use std::rc::Rc;
 
 use std::sync::Arc;

@@ -1,5 +1,5 @@
 //!
-//! Functions that deal with upgrading reference counted objects.
+//! Functions that help you deal with upgrading reference counted objects.
 //! 
 
 use std::{future::Future, rc::{Rc, Weak}, sync::Arc};

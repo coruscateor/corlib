@@ -27,7 +27,7 @@ Like an option but not optional.
 
 ### RcByPtr and WeakByPtr
   
-Compare and hash an Rc and Rc::Weak objects by pointer instead of by value.  
+Compare and hash Rc and Rc::Weak objects by pointer instead of by value.  
 
 ### RcDefault and ArcDefault
 
@@ -35,7 +35,7 @@ Default traits for returning reference counted types.
 
 ### MovableText
 
-For conveniently moving owned and static strings around.
+For conveniently moving owned and static strings and string slices around.
 
 ### AsStr
 
@@ -43,37 +43,25 @@ A trait with an as_str method.
 
 ### Droppers
 
-Structs for caling closures on drop.
+Structs for calling closures on drop.
 
 ### GapFillingCounter
 
 A counter that can recycle "gaps".
 
-### Get Rc Or Weak Self
-
-Traits and macros to support the Weak-Self pattern (deprecated).
-
-### Get Ref Mut
-
-Traits for getting references (deprecated).
-
 ### Getters Setters Callers
 
-Macros for implementing getters, setters and calling stuff (mostly deprecated).
+Macros for implementing getters, setters and calling methods on regular structs and RefCells.
 
 ### HasOne
 
 Sometimes you just want the value 1 (or 1.0).
 
-### Invalid
-
-A trait for implenting a method that returns an invalid instance of Self (deprecated).
-
 ### Lazy
 
-A struct for lazily initalising objects.
+A struct for lazily initialising objects.
 
-Does not contain its own initalising closure.
+Does not contain its own initialising closure.
 
 ### As Any
 
@@ -83,7 +71,7 @@ A trait with a method (as_any) for returning a &dyn Any instance of &self (comes
 
 Convert Options into certainty.
 
-### Inc Dec
+### Inc Dec Macros
 
 Miss the ++ and -- operators?
 
@@ -95,21 +83,23 @@ Collections and collection related objects.
 
 ### Events
 
-Events and event related objects. Inspred by .net events.
+Events and event related objects. Inspred by .NET events.
 
-### Sync
+### Rfc
 
-Objects for synchronising stuff.
+Macros and functions that help you work with RefCells.
 
+### Upgrading
 
+Functions that help you deal with upgrading reference counted objects.
 
 ## Todo:
 
 - Add more documentation
 - Add code examples
-- Add some tests
+- Add more tests
 - Add Hashmap and Hashset based event implementations
-- Code cleanup
+- Clean-up the code
 - Solidify the API for 1.0
 
 ## Coding Style

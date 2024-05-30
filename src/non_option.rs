@@ -3,10 +3,10 @@ use std::cell::RefCell;
 static NOT_INSTANTIATED_ERROR_MSG: &str = "NonOption<T>: Not instantiated with a value";
 
 /// An Option that is not really optional (but is still kinda).
-/// Start by creating the object by calling invalid (probably as a field in a struct constructor) and setting a value by calling "Set" with a parameter as soon as possible.
+/// Start by creating the object by calling invalid (probably as a field in a struct constructor) and setting a value by calling "set" with a parameter as soon as possible.
 /// Attempting to use an invalid NonOption will cause a panic, so make absolutely sure you've set it with a value before calling "get_ref", "get_mut" etc.
 /// 
-/// NonOptions are usefull when you have objects that refernce each other but cannot have these references set during initalisation (becuse one of the objects does not yet exist).
+/// NonOptions are useful when you have objects that refernce each other but cannot have these references set during initalisation (becuse one of the objects does not yet exist).
 pub struct NonOption<T>
 {
 

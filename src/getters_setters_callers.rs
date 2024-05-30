@@ -1,8 +1,6 @@
 //!
-//! Convenience macroes for implementing getters, setters and calling stuff.
+//! Macros for implementing getters, setters and calling methods on regular structs and RefCells.
 //! 
-
-//use paste::paste;
 
 //traits - declarations
 
@@ -168,7 +166,6 @@ macro_rules! trait_get_ref_2_mut_2
 
 }
 
-#[deprecated(since = "0.2.0")]
 #[macro_export]
 macro_rules! trait_get_set_2_ref_mut_2
 {

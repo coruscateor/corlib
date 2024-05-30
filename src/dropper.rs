@@ -46,7 +46,7 @@ impl<T> Drop for Dropper<T>
 //Parameterised Dropper
 
 ///
-/// Contains a closure and a paramter. The closure is called with parameter being passed to it when dropped.
+/// Contains a closure and a parameter. The closure is called with the parameter being passed to it when dropped.
 /// 
 pub struct ParamDropper<T, P>
     where T: FnMut(&P)
@@ -106,7 +106,7 @@ impl<T, P> Drop for ParamDropper<T, P>
 
 ///
 /// Contains a closure and a container reference parameter. The closure is called with the container parameter being passed to it when dropped.
-/// The container parameter would probably be referening to a containing object.
+/// The container parameter may refer to a containing object.
 /// 
 pub struct ContainerDropper<'a, C, T>
     where T: FnMut(&C)
@@ -138,7 +138,7 @@ impl<'a, C, T> ContainerDropper<'a, C, T>
 
 ///
 /// Contains a closure, a value parameter and a container reference parameter. The closure is called with the container and value parameters being passed to it when dropped.
-/// The container parameter would probably be referening to a containing object.
+/// The container parameter may refer to a containing object.
 /// 
 impl<'a, C, T> Drop for ContainerDropper<'a, C, T>
     where T: FnMut(&C)

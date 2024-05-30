@@ -4,7 +4,7 @@ use crate::rc_by_ptr::RcByPtr;
 
 use std::hash::{Hash, Hasher};
 
-/// A Container for comparing and hashing weakly-reference counted values by reference.
+/// A Container for comparing and hashing weak reference counted values using their pointers.
 pub struct WeakByPtr<T: ?Sized>
 {
 

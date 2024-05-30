@@ -1,3 +1,7 @@
+//!
+//! Macros and functions that help you work with RefCells.
+//!
+
 use std::cell::{RefCell, Ref, RefMut};
 
 ///
