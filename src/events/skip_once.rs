@@ -1,6 +1,3 @@
-//crate::impl_get!();
-
-use paste::paste;
 
 /// 
 /// Should the execution of the current event method be skipped?
