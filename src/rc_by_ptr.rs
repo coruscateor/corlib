@@ -147,9 +147,9 @@ impl<T: ?Sized> PartialOrd for RcByPtr<T>
     
         //Rc::partial_cmp(&self, other)
 
-        let left = Rc::as_ptr(&self.contents); //.partial_cmp(other)
+        let left = Rc::as_ptr(&self.contents).cast::<()>(); //.partial_cmp(other)
 
-        let right = Rc::as_ptr(other.contents());
+        let right = Rc::as_ptr(other.contents()).cast::<()>();
 
         left.partial_cmp(&right)
 
@@ -163,9 +163,9 @@ impl<T: ?Sized> Ord for RcByPtr<T>
     fn cmp(&self, other: &Self) -> std::cmp::Ordering
     {
         
-        let left = Rc::as_ptr(&self.contents);
+        let left = Rc::as_ptr(&self.contents).cast::<()>();
 
-        let right = Rc::as_ptr(other.contents());
+        let right = Rc::as_ptr(other.contents()).cast::<()>();
 
         left.cmp(&right)
         

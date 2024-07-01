@@ -36,9 +36,9 @@ mod lazy;
 
 pub use lazy::*;
 
-mod text_enums;
+pub mod text;
 
-pub use text_enums::*;
+//pub use text::*;
 
 pub mod get_some;
 
@@ -51,3 +51,15 @@ pub use as_any::*;
 pub mod rfc;
 
 pub mod upgrading;
+
+pub mod box_or_ref;
+
+mod arc_by_ptr;
+
+pub use arc_by_ptr::*;
+
+mod sync_weak_by_ptr;
+
+pub use sync_weak_by_ptr::*;
+
+

@@ -1,18 +1,18 @@
-use std::rc::{Rc, Weak};
+use std::sync::{Arc, Weak};
 
-use crate::rc_by_ptr::RcByPtr;
+use crate::ArcByPtr;
 
 use std::hash::{Hash, Hasher};
 
 /// A Container for comparing and hashing weak reference counted values using their pointers.
-pub struct WeakByPtr<T: ?Sized>
+pub struct SyncWeakByPtr<T: ?Sized>
 {
 
     contents: Weak<T>
 
 }
 
-impl<T: ?Sized> WeakByPtr<T>
+impl<T: ?Sized> SyncWeakByPtr<T>
 {
 
     pub fn new(contents: &Weak<T>) -> Self
@@ -27,13 +27,13 @@ impl<T: ?Sized> WeakByPtr<T>
 
     }
 
-    pub fn from_rc(rc_contents: &Rc<T>) -> Self
+    pub fn from_arc(rc_contents: &Arc<T>) -> Self
     {
 
         Self
         {
 
-            contents: Rc::downgrade(rc_contents)
+            contents: Arc::downgrade(rc_contents)
 
         }
 
@@ -58,20 +58,20 @@ impl<T: ?Sized> WeakByPtr<T>
 
     }
 
-    pub fn upgrade_contents(&self) -> Option<Rc<T>>
+    pub fn upgrade_contents(&self) -> Option<Arc<T>>
     {
 
         self.contents.upgrade()
 
     }
 
-    pub fn upgrade(&self) -> Option<RcByPtr<T>>
+    pub fn upgrade(&self) -> Option<ArcByPtr<T>>
     {
 
         if let Some(rc) = self.contents.upgrade()
         {
 
-            Some(RcByPtr::new(&rc))
+            Some(ArcByPtr::new(&rc))
 
         }
         else
@@ -106,7 +106,7 @@ impl<T: ?Sized> WeakByPtr<T>
 
 }
 
-impl<T: ?Sized> PartialEq for WeakByPtr<T>
+impl<T: ?Sized> PartialEq for SyncWeakByPtr<T>
 {
 
     fn eq(&self, other: &Self) -> bool
@@ -118,9 +118,9 @@ impl<T: ?Sized> PartialEq for WeakByPtr<T>
 
 }
 
-impl<T: ?Sized> Eq for WeakByPtr<T> {}
+impl<T: ?Sized> Eq for SyncWeakByPtr<T> {}
 
-impl<T: ?Sized> Hash for WeakByPtr<T>
+impl<T: ?Sized> Hash for SyncWeakByPtr<T>
 {
 
     fn hash<H: Hasher>(&self, state: &mut H)
@@ -134,7 +134,7 @@ impl<T: ?Sized> Hash for WeakByPtr<T>
 
 //Must do it this way or Clone might not get implemented.
 
-impl<T: ?Sized> Clone for WeakByPtr<T>
+impl<T: ?Sized> Clone for SyncWeakByPtr<T>
 {
 
     fn clone(&self) -> Self
@@ -151,7 +151,7 @@ impl<T: ?Sized> Clone for WeakByPtr<T>
 
 }
 
-impl<T: ?Sized> PartialOrd for WeakByPtr<T>
+impl<T: ?Sized> PartialOrd for SyncWeakByPtr<T>
 {
 
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering>
@@ -167,7 +167,7 @@ impl<T: ?Sized> PartialOrd for WeakByPtr<T>
 
 }
 
-impl<T: ?Sized> Ord for WeakByPtr<T>
+impl<T: ?Sized> Ord for SyncWeakByPtr<T>
 {
 
     fn cmp(&self, other: &Self) -> std::cmp::Ordering
