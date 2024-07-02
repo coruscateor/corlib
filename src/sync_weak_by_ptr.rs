@@ -4,6 +4,8 @@ use crate::ArcByPtr;
 
 use std::hash::{Hash, Hasher};
 
+use std::fmt::Debug;
+
 /// A Container for comparing and hashing weak reference counted values using their pointers.
 pub struct SyncWeakByPtr<T: ?Sized>
 {
@@ -181,4 +183,14 @@ impl<T: ?Sized> Ord for SyncWeakByPtr<T>
         
     }
 
+}
+
+impl<T> Debug for SyncWeakByPtr<T>
+    where T: ?Sized + Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("SyncWeakByPtr").field("contents", &self.contents).finish()
+    }
+    
 }

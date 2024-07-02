@@ -3,6 +3,8 @@ use std::slice::{Iter, IterMut};
 
 use super::{list::List, key_value_pair::KeyValuePair};
 
+use std::fmt::Debug;
+
 ///
 /// A .NET style Dictionary
 /// 
@@ -479,6 +481,16 @@ impl<K, V> Dictionary<K, V>
     }
 
 
+}
+
+impl<K, V> Debug for Dictionary<K, V>
+    where K: PartialEq + Debug, V: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Dictionary").field("contents", &self.contents).finish()
+    }
+    
 }
 
 

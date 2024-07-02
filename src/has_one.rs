@@ -12,7 +12,7 @@ pub trait HasOne<T>
 
 //f32
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct F32HasOne();
 
 impl HasOne<f32> for F32HasOne {
@@ -28,7 +28,7 @@ impl HasOne<f32> for F32HasOne {
 
 //f64
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct F64HasOne();
 
 impl HasOne<f64> for F64HasOne {
@@ -44,7 +44,7 @@ impl HasOne<f64> for F64HasOne {
 
 //i8
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct I8HasOne();
 
 impl HasOne<i8> for I8HasOne {
@@ -60,7 +60,7 @@ impl HasOne<i8> for I8HasOne {
 
 //i16
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct I16HasOne();
 
 impl HasOne<i16> for I16HasOne {
@@ -76,7 +76,7 @@ impl HasOne<i16> for I16HasOne {
 
 //i32
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct I32HasOne();
 
 impl HasOne<i32> for I32HasOne {
@@ -93,7 +93,7 @@ impl HasOne<i32> for I32HasOne {
 
 //i64
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct I64HasOne();
 
 impl HasOne<i64> for I64HasOne {
@@ -109,7 +109,7 @@ impl HasOne<i64> for I64HasOne {
 
 //i128
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct I128HasOne();
 
 impl HasOne<i128> for I128HasOne {
@@ -125,7 +125,7 @@ impl HasOne<i128> for I128HasOne {
 
 //isize
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct ISizeHasOne();
 
 impl HasOne<isize> for ISizeHasOne {
@@ -141,7 +141,7 @@ impl HasOne<isize> for ISizeHasOne {
 
 //u8
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct U8HasOne();
 
 impl HasOne<u8> for U8HasOne {
@@ -157,7 +157,7 @@ impl HasOne<u8> for U8HasOne {
 
 //u16
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct U16HasOne();
 
 impl HasOne<u16> for U16HasOne {
@@ -173,7 +173,7 @@ impl HasOne<u16> for U16HasOne {
 
 //u32
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct U32HasOne();
 
 impl HasOne<u32> for U32HasOne {
@@ -189,7 +189,7 @@ impl HasOne<u32> for U32HasOne {
 
 //u64
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct U64HasOne();
 
 impl HasOne<u64> for U64HasOne {
@@ -205,7 +205,7 @@ impl HasOne<u64> for U64HasOne {
 
 //u128
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct U128HasOne();
 
 impl HasOne<u128> for U128HasOne {
@@ -221,7 +221,7 @@ impl HasOne<u128> for U128HasOne {
 
 //usize
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct USizeHasOne();
 
 impl HasOne<usize> for USizeHasOne {

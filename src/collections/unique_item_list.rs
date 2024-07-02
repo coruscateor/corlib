@@ -8,6 +8,8 @@ use std::vec::Drain;
 
 use delegate::delegate;
 
+use std::fmt::Debug;
+
 use super::List;
 
 ///
@@ -280,5 +282,15 @@ impl<T> Clone for UniqueItemList<T> where
 
     }
 
+}
+
+impl<T> Debug for UniqueItemList<T>
+    where T: PartialEq + Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("UniqueItemList").field("contents", &self.contents).finish()
+    }
+    
 }
 

@@ -1,4 +1,4 @@
-use std::rc::{Rc, Weak};
+use std::{fmt::Debug, rc::{Rc, Weak}};
 
 use crate::rc_by_ptr::RcByPtr;
 
@@ -181,4 +181,14 @@ impl<T: ?Sized> Ord for WeakByPtr<T>
         
     }
 
+}
+
+impl<T> Debug for WeakByPtr<T>
+    where T: ?Sized + Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("WeakByPtr").field("contents", &self.contents).finish()
+    }
+    
 }

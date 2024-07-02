@@ -3,6 +3,8 @@ use std::{collections::{VecDeque, TryReserveError, vec_deque::{Iter, IterMut, Dr
 
 use delegate::delegate;
 
+use std::fmt::Debug;
+
 ///
 /// The standard double ended VecDeque, with the API of a single ended queue.
 /// 
@@ -294,5 +296,14 @@ impl<T> Default for Queue<T>
 
 }
 
+impl<T> Debug for Queue<T>
+    where T: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Queue").field("contents", &self.contents).finish()
+    }
+    
+}
 
 

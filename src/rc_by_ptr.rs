@@ -4,6 +4,8 @@ use crate::WeakByPtr;
 
 use std::hash::{Hash, Hasher};
 
+use std::fmt::Debug;
+
 /// A Container for comparing and hashing reference counted values using their pointers.
 pub struct RcByPtr<T: ?Sized>
 {
@@ -171,4 +173,12 @@ impl<T: ?Sized> Ord for RcByPtr<T>
         
     }
 
+}
+
+impl<T> Debug for RcByPtr<T>
+    where T: ?Sized + Debug
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("RcByPtr").field("contents", &self.contents).finish()
+    }
 }

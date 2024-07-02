@@ -2,6 +2,8 @@ use std::{ops::{AddAssign, Add, Index, SubAssign}, result};
 
 use crate::has_one::*;
 
+use std::fmt::Debug;
+
 //ptr::Pointee
 
 use crate::collections::List; //list::List;
@@ -562,4 +564,14 @@ impl<T> AddAssign for GapFillingCounter<T>
 
 }
 */
+
+impl<T, HO> Debug for GapFillingCounter<T, HO>
+    where T: PartialEq + Debug, HO: Debug + HasOne<T>
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("GapFillingCounter").field("value", &self.value).field("gaps", &self.gaps).field("has_one", &self.has_one).finish()
+    }
+    
+}
 

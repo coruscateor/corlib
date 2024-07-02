@@ -1,5 +1,7 @@
 use std::cell::RefCell;
 
+use std::fmt::Debug;
+
 static NOT_INSTANTIATED_ERROR_MSG: &str = "NonOption<T>: Not instantiated with a value";
 
 /// An Option that is not really optional (but is still kinda).
@@ -190,5 +192,15 @@ impl<T> Clone for NonOption<T>
         
     }
 
+}
+
+impl<T> Debug for NonOption<T>
+    where T: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("NonOption").field("value", &self.value).finish()
+    }
+    
 }
 

@@ -1,5 +1,7 @@
 //Revise API
 
+use std::fmt::Debug;
+
 ///
 /// A key and a value, paired.
 /// 
@@ -63,5 +65,15 @@ impl<K, V> PartialEq for KeyValuePair<K, V>
 
     }
 
+}
+
+impl<K, V> Debug for KeyValuePair<K, V>
+    where K: PartialEq + Debug, V: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("KeyValuePair").field("key", &self.key).field("value", &self.value).finish()
+    }
+    
 }
 

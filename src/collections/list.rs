@@ -13,6 +13,8 @@ use std::vec::Drain;
 
 use delegate::delegate;
 
+use std::fmt::Debug;
+
 //More Result results to avoid panicking
 
 //https://doc.rust-lang.org/std/primitive.isize.html
@@ -710,6 +712,16 @@ impl<T> Clone for List<T> where
 
     }
 
+}
+
+impl<T> Debug for List<T>
+    where T: PartialEq + Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("List").field("contents", &self.contents).finish()
+    }
+    
 }
 
 

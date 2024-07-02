@@ -1,5 +1,7 @@
 
+///
 ///Provides as_str as a trait method.
+/// 
 pub trait AsStr
 {
 
@@ -7,7 +9,10 @@ pub trait AsStr
 
 }
 
+///
 ///MovableText: Ideal for when you want to be able to move text around that could either be a String ot a static String slice.
+/// 
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum MovableText
 {
 
