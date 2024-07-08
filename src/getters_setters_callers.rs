@@ -4,6 +4,7 @@
 
 //traits - declarations
 
+#[deprecated(since="0.4.0")]
 #[macro_export]
 macro_rules! trait_get
 {
@@ -11,12 +12,13 @@ macro_rules! trait_get
     ($name:ident, $name_type:ty) =>
     {
 
-        fn $name>(&self) -> $name_type;
+        fn $name(&self) -> $name_type;
 
     }
 
 }
 
+#[deprecated(since="0.4.0")]
 #[macro_export]
 macro_rules! trait_get_2
 {
@@ -53,6 +55,7 @@ macro_rules! trait_set
 
 //
 
+#[deprecated(since="0.4.0")]
 #[macro_export]
 macro_rules! trait_get_set
 {
@@ -68,6 +71,7 @@ macro_rules! trait_get_set
 
 }
 
+#[deprecated(since="0.4.0")]
 #[macro_export]
 macro_rules! trait_get_2_set
 {
@@ -122,11 +126,7 @@ macro_rules! trait_get_mut
     ($name:ident, $name_type:ty) =>
     {
 
-        paste! {
-
-            fn $name(&mut self) -> &mut $name_type;
-
-        }
+        fn $name(&mut self) -> &mut $name_type;
 
     }
 
@@ -187,6 +187,7 @@ macro_rules! trait_get_set_2_ref_mut_2
 
 //impls
 
+#[deprecated(since="0.4.0")]
 #[macro_export]
 macro_rules! impl_get
 {
@@ -205,6 +206,7 @@ macro_rules! impl_get
 
 }
 
+#[deprecated(since="0.4.0")]
 #[macro_export]
 macro_rules! impl_get_2
 {
@@ -271,6 +273,7 @@ macro_rules! impl_set_2
 
 //
 
+#[deprecated(since="0.4.0")]
 #[macro_export]
 macro_rules! impl_get_set
 {
@@ -286,6 +289,7 @@ macro_rules! impl_get_set
 
 }
 
+#[deprecated(since="0.4.0")]
 #[macro_export]
 macro_rules! impl_get_2_set
 {
