@@ -1,3 +1,4 @@
+use std::{result, sync::Arc};
 
 ///
 ///Provides as_str as a trait method.
@@ -10,24 +11,25 @@ pub trait AsStr
 }
 
 ///
-///MovableText: Ideal for when you want to be able to move text around that could either be a String ot a static String slice.
+///SendableText: Ideal for when you want to be able to move text around that could either be a String ot a static String slice.
 /// 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub enum MovableText
+pub enum SendableText
 {
 
     String(String),
-    Str(&'static str)
+    Str(&'static str),
+    ArcStr(Arc<str>)
 
 }
 
-impl MovableText
+impl SendableText
 {
 
     pub fn is_string(&self) -> bool
     {
 
-        if let MovableText::String(_) = self
+        if let SendableText::String(_) = self
         {
 
             return true;
@@ -41,7 +43,7 @@ impl MovableText
     pub fn is_str(&self) -> bool
     {
 
-        if let MovableText::Str(_) = self
+        if let SendableText::Str(_) = self
         {
 
             return true;
@@ -52,9 +54,37 @@ impl MovableText
 
     }
 
+    pub fn is_arc_str(&self) -> bool
+    {
+
+        if let SendableText::ArcStr(_) = self
+        {
+
+            return true;
+
+        }
+
+        false
+
+    }
+
+    pub fn extract_string(self) -> Result<String, Self>
+    {
+
+        match self
+        {
+
+            SendableText::String(val) => Ok(val),
+            SendableText::Str(val) => Err(Self::Str(val)),
+            SendableText::ArcStr(val) => Err(Self::ArcStr(val))
+
+        }
+
+    }
+
 }
 
-impl Into<String> for MovableText
+impl Into<String> for SendableText
 {
 
     fn into(self) -> String
@@ -63,8 +93,9 @@ impl Into<String> for MovableText
         match self
         {
 
-            MovableText::String(val) => val,
-            MovableText::Str(val) => val.to_string()
+            SendableText::String(val) => val,
+            SendableText::Str(val) => val.to_string(),
+            SendableText::ArcStr(val) => val.to_string()
 
         }
         
@@ -72,7 +103,7 @@ impl Into<String> for MovableText
 
 }
 
-impl AsStr for MovableText
+impl AsStr for SendableText
 {
 
     fn as_str(&self) -> &str
@@ -81,8 +112,9 @@ impl AsStr for MovableText
         match self
         {
 
-            MovableText::String(val) => val.as_str(),
-            MovableText::Str(val) => val
+            SendableText::String(val) => val.as_str(),
+            SendableText::Str(val) => val,
+            SendableText::ArcStr(val) => &val
             
         }
 
@@ -91,7 +123,7 @@ impl AsStr for MovableText
     
 }
 
-impl ToString for MovableText
+impl ToString for SendableText
 {
 
     fn to_string(&self) -> String
@@ -100,11 +132,12 @@ impl ToString for MovableText
         match self
         {
 
-            MovableText::String(val) => val.clone(),
-            MovableText::Str(val) => val.to_string()
+            SendableText::String(val) => val.clone(),
+            SendableText::Str(val) => val.to_string(),
+            SendableText::ArcStr(val) => val.to_string()
             
         }
-        
+
     }
 
 }
