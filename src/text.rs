@@ -1,4 +1,4 @@
-use std::{result, sync::Arc};
+use std::{fmt::Display, ops::Deref, sync::Arc};
 
 ///
 ///Provides as_str as a trait method.
@@ -112,7 +112,7 @@ impl AsStr for SendableText
         match self
         {
 
-            SendableText::String(val) => val.as_str(),
+            SendableText::String(val) => val,
             SendableText::Str(val) => val,
             SendableText::ArcStr(val) => &val
             
@@ -123,22 +123,95 @@ impl AsStr for SendableText
     
 }
 
-impl ToString for SendableText
+impl Display for SendableText
 {
 
-    fn to_string(&self) -> String
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result
     {
 
         match self
         {
 
-            SendableText::String(val) => val.clone(),
-            SendableText::Str(val) => val.to_string(),
-            SendableText::ArcStr(val) => val.to_string()
-            
+            SendableText::String(val) => write!(f, "{}", val),
+            SendableText::Str(val) => write!(f, "{}", val),
+            SendableText::ArcStr(val) => write!(f, "{}", val)
+
         }
+        
+    }
+
+}
+
+impl Deref for SendableText
+{
+
+    type Target = str;
+
+    fn deref(&self) -> &Self::Target
+    {
+
+        self.as_str()
+        
+    }
+
+}
+
+impl From<String> for SendableText
+{
+
+    fn from(value: String) -> Self
+    {
+
+        SendableText::String(value)
 
     }
 
 }
 
+impl From<&String> for SendableText
+{
+
+    fn from(value: &String) -> Self
+    {
+
+        SendableText::String(value.clone())
+        
+    }
+
+}
+
+impl From<&'static str> for SendableText
+{
+
+    fn from(value: &'static str) -> Self
+    {
+
+        SendableText::Str(value)
+        
+    }
+
+}
+
+impl From<Arc<str>> for SendableText
+{
+
+    fn from(value: Arc<str>) -> Self
+    {
+
+        SendableText::ArcStr(value)
+        
+    }
+
+}
+
+impl From<&Arc<str>> for SendableText
+{
+
+    fn from(value: &Arc<str>) -> Self
+    {
+
+        SendableText::ArcStr(value.clone())
+        
+    }
+
+}
