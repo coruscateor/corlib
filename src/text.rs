@@ -314,24 +314,24 @@ impl SendableTextLog
 
     //https://doc.rust-lang.org/std/collections/vec_deque/struct.Iter.html
 
-    pub fn append_to(&self, the_string: &mut String)
+    pub fn append_to(&self, output: &mut String)
     {
 
         for item in self.st_queue.iter()
         {
 
-            the_string.push_str(item);
+            output.push_str(item);
 
         }
 
     }
 
-    pub fn overwrite(&self, the_string: &mut String)
+    pub fn overwrite(&self, output: &mut String)
     {
 
-        the_string.clear();
+        output.clear();
 
-        self.append_to(the_string);
+        self.append_to(output);
 
     }
 
@@ -441,15 +441,16 @@ impl SendableTextLogWithBuffer
 
             pub fn is_empty(&self) -> bool;
 
-            pub fn clear(&mut self); 
-
             pub fn limit(&self) -> usize;
 
             pub fn set_limit(&mut self, new_limit: usize);
 
-            pub fn append_to(&self, the_string: &mut String);
+            pub fn append_to(&self, output: &mut String);
 
-            pub fn overwrite(&self, the_string: &mut String);
+            pub fn overwrite(&self, output: &mut String);
+
+            #[call(push)]
+            pub fn push_only(&mut self, st: SendableText);
 
         }
     }
@@ -465,6 +466,24 @@ impl SendableTextLogWithBuffer
     {
 
         self.stl.push(st);
+
+        self.overwite_buffer();
+
+    }
+
+    pub fn clear(&mut self)
+    {
+
+        self.stl.clear();
+
+        let mut_buffer = self.buffer.as_mut().expect(NO_STRING_ERROR_MESSAGE);
+        
+        mut_buffer.clear();
+
+    }
+
+    pub fn overwite_buffer(&mut self)
+    {
 
         let mut res = self.buffer.take().expect(NO_STRING_ERROR_MESSAGE);
 

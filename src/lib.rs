@@ -52,8 +52,6 @@ pub mod rfc;
 
 pub mod upgrading;
 
-pub mod box_or_ref;
-
 mod arc_by_ptr;
 
 pub use arc_by_ptr::*;
