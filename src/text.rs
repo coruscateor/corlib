@@ -317,7 +317,7 @@ impl SendableTextLog
     pub fn append_to(&self, output: &mut String)
     {
 
-        for item in self.st_queue.iter()
+        for item in self.st_queue.iter().rev()
         {
 
             output.push_str(item);
