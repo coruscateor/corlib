@@ -60,4 +60,11 @@ mod sync_weak_by_ptr;
 
 pub use sync_weak_by_ptr::*;
 
+#[cfg(feature="drop_panic")]
+mod drop_panic;
+
+#[cfg(feature="drop_panic")]
+pub use drop_panic::*;
+
+
 

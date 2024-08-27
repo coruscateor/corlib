@@ -13,4 +13,9 @@ keywords = ["general", "purpose", "collections", "events", "non-option"]
 [dependencies]
 delegate = "0.*"
 
+[features]
+drop_panic = []
+
+#Setup the docs.rs configuration.
+
 
