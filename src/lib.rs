@@ -42,7 +42,7 @@ pub mod text;
 
 pub mod get_some;
 
-mod inc_dec;
+pub mod inc_dec;
 
 pub mod as_any;
 

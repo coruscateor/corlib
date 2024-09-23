@@ -242,7 +242,6 @@ impl IncrementsSelf for f32
             
         }
 
-
     }
 
 }
