@@ -27,7 +27,13 @@ macro_rules! pp_mut
     ($integer:ident) =>
     {
 
-        *$integer += 1;
+        {
+
+            *$integer += 1;
+
+            *$integer
+
+        }
 
     }
 
@@ -80,7 +86,13 @@ macro_rules! ppf_mut
     ($float:ident) =>
     {
 
-        *$float += 1.0;
+        {
+
+            *$float += 1.0;
+
+            *$float
+
+        }
 
     }
 
@@ -117,9 +129,13 @@ macro_rules! mm_mut
     ($integer:ident) =>
     {
 
-        *$integer -= 1;
+        {
 
-        //*$integer
+            *$integer -= 1;
+
+            *$integer
+
+        }
 
     }
 
@@ -146,7 +162,13 @@ macro_rules! mmf_mut
     ($float:ident) =>
     {
 
-        $float -= 1.0;
+        {
+
+            *$float -= 1.0;
+
+            *$float
+
+        }
 
     }
 
@@ -178,7 +200,7 @@ macro_rules! checked_mm_mut
 
 }
 
-pub trait IncrementsSelf
+pub trait IncDecSelf
     where Self: Sized + Copy
 {
 
@@ -186,31 +208,25 @@ pub trait IncrementsSelf
 
     fn try_pp(&mut self) -> Option<Self>;
 
-}
-
-pub trait DecrementsSelf
-    where Self: Sized + Copy
-{
-
     fn mm(&mut self) -> Self;
 
     fn try_mm(&mut self) -> Option<Self>;
 
 }
 
-//Incrementation
+//Integers and floating-point intergers.
 
 //f32
 
-impl IncrementsSelf for f32
+impl IncDecSelf for f32
 {
 
     fn pp(&mut self) -> Self
     {
 
-        ppf_mut!(self);
+        ppf_mut!(self) //;
 
-        *self
+        //*self
 
         /*
         let mut val = *self;
@@ -230,9 +246,38 @@ impl IncrementsSelf for f32
         if *self < (f32::MAX - 0.9)
         {
 
-            ppf_mut!(self);
+            Some(ppf_mut!(self)) //;
 
-            Some(*self)
+            //Some(*self)
+
+        }
+        else
+        {
+
+            None
+            
+        }
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mmf_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        if *self > (f32::MIN + 0.9)
+        {
+
+            Some(mmf_mut!(self)) //;
+
+            //Some(*self)
 
         }
         else
@@ -248,15 +293,15 @@ impl IncrementsSelf for f32
 
 //f64
 
-impl IncrementsSelf for f64
+impl IncDecSelf for f64
 {
 
     fn pp(&mut self) -> Self
     {
 
-        ppf_mut!(self);
+        ppf_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -266,9 +311,9 @@ impl IncrementsSelf for f64
         if *self < (f64::MAX - 0.9)
         {
 
-            ppf_mut!(self);
+            Some(ppf_mut!(self)) //;
 
-            Some(*self)
+            //Some(*self)
 
         }
         else
@@ -280,19 +325,48 @@ impl IncrementsSelf for f64
 
     }
 
+    fn mm(&mut self) -> Self
+    {
+
+        mmf_mut!(self)  //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        if *self > (f64::MIN + 0.9)
+        {
+
+            Some(mmf_mut!(self)) //;
+
+            //Some(*self)
+
+        }
+        else
+        {
+
+            None
+            
+        }
+        
+    }
+
 }
 
 //i8
 
-impl IncrementsSelf for i8
+impl IncDecSelf for i8
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -320,19 +394,35 @@ impl IncrementsSelf for i8
 
     }
 
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
+
+    }
+
 }
 
 //i16
 
-impl IncrementsSelf for i16
+impl IncDecSelf for i16
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -342,20 +432,37 @@ impl IncrementsSelf for i16
         checked_pp_mut!(self)
 
     }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
+
+    }
+
 
 }
 
 //i32
 
-impl IncrementsSelf for i32
+impl IncDecSelf for i32
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -363,6 +470,22 @@ impl IncrementsSelf for i32
     {
         
         checked_pp_mut!(self)
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
 
     }
 
@@ -370,15 +493,15 @@ impl IncrementsSelf for i32
 
 //i64
 
-impl IncrementsSelf for i64
+impl IncDecSelf for i64
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -386,6 +509,22 @@ impl IncrementsSelf for i64
     {
         
         checked_pp_mut!(self)
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
 
     }
 
@@ -393,15 +532,15 @@ impl IncrementsSelf for i64
 
 //i128
 
-impl IncrementsSelf for i128
+impl IncDecSelf for i128
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -409,6 +548,22 @@ impl IncrementsSelf for i128
     {
         
         checked_pp_mut!(self)
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
 
     }
 
@@ -416,15 +571,15 @@ impl IncrementsSelf for i128
 
 //isize
 
-impl IncrementsSelf for isize
+impl IncDecSelf for isize
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -432,6 +587,22 @@ impl IncrementsSelf for isize
     {
         
         checked_pp_mut!(self)
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
 
     }
 
@@ -439,15 +610,15 @@ impl IncrementsSelf for isize
 
 //u8
 
-impl IncrementsSelf for u8
+impl IncDecSelf for u8
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -455,6 +626,22 @@ impl IncrementsSelf for u8
     {
         
         checked_pp_mut!(self)
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
 
     }
 
@@ -462,15 +649,15 @@ impl IncrementsSelf for u8
 
 //u16
 
-impl IncrementsSelf for u16
+impl IncDecSelf for u16
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -478,6 +665,22 @@ impl IncrementsSelf for u16
     {
         
         checked_pp_mut!(self)
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
 
     }
 
@@ -485,15 +688,15 @@ impl IncrementsSelf for u16
 
 //u32
 
-impl IncrementsSelf for u32
+impl IncDecSelf for u32
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -501,6 +704,22 @@ impl IncrementsSelf for u32
     {
         
         checked_pp_mut!(self)
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
 
     }
 
@@ -508,15 +727,15 @@ impl IncrementsSelf for u32
 
 //u64
 
-impl IncrementsSelf for u64
+impl IncDecSelf for u64
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -524,6 +743,22 @@ impl IncrementsSelf for u64
     {
         
         checked_pp_mut!(self)
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
 
     }
 
@@ -531,15 +766,15 @@ impl IncrementsSelf for u64
 
 //u128
 
-impl IncrementsSelf for u128
+impl IncDecSelf for u128
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -547,6 +782,22 @@ impl IncrementsSelf for u128
     {
         
         checked_pp_mut!(self)
+
+    }
+
+    fn mm(&mut self) -> Self
+    {
+
+        mm_mut!(self) //;
+
+        //*self
+
+    }
+
+    fn try_mm(&mut self) -> Option<Self>
+    {
+        
+        checked_mm_mut!(self)
 
     }
 
@@ -554,15 +805,15 @@ impl IncrementsSelf for u128
 
 //usize
 
-impl IncrementsSelf for usize
+impl IncDecSelf for usize
 {
 
     fn pp(&mut self) -> Self
     {
 
-        pp_mut!(self);
+        pp_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
@@ -573,100 +824,111 @@ impl IncrementsSelf for usize
 
     }
 
-}
-
-//Decrementation
-
-//f32
-
-impl DecrementsSelf for f32
-{
-
     fn mm(&mut self) -> Self
     {
 
-        ppf_mut!(self);
+        mm_mut!(self) //;
 
-        *self
+        //*self
 
     }
 
     fn try_mm(&mut self) -> Option<Self>
     {
         
-        if *self > (f32::MIN + 0.9)
-        {
-
-            ppf_mut!(self);
-
-            Some(*self)
-
-        }
-        else
-        {
-
-            None
-            
-        }
+        checked_mm_mut!(self)
 
     }
 
 }
 
-//f64
+//Integers Only
 
-impl DecrementsSelf for f64
+pub trait IntIncDecSelf
+    where Self: Sized + Copy
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool);
+
+    fn overflowing_mm(&mut self) -> (Self, bool);
+
+}
+
+#[macro_export]
+macro_rules! overflowing_pp_mut
+{
+
+    ($integer:ident) =>
     {
 
-        ppf_mut!(self);
-
-        *self
-
-    }
-
-    fn try_mm(&mut self) -> Option<Self>
-    {
-        
-        if *self > (f64::MIN + 0.9)
         {
 
-            ppf_mut!(self);
+            let res = $integer.overflowing_add(1);
 
-            Some(*self)
+            *$integer = res.0;
+
+            res
 
         }
-        else
-        {
 
-            None
-            
-        }
-        
     }
 
 }
+
+#[macro_export]
+macro_rules! overflowing_mm_mut
+{
+
+    ($integer:ident) =>
+    {
+
+        {
+
+            let res = $integer.overflowing_sub(1);
+
+            *$integer = res.0;
+
+            res
+
+        }
+
+    }
+
+}
+
 
 //i8
 
-impl DecrementsSelf for i8
+impl IntIncDecSelf for i8
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
+        overflowing_pp_mut!(self)
 
-        *self
+        /*
+        let res = self.overflowing_add(1);
 
+        *self = res.0;
+
+        res
+        */
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
+
+        /*
+        let res =self.overflowing_sub(1);
+
+        *self = res.0;
+
+        res
+        */
 
     }
 
@@ -674,22 +936,20 @@ impl DecrementsSelf for i8
 
 //i16
 
-impl DecrementsSelf for i16
+impl IntIncDecSelf for i16
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -697,22 +957,20 @@ impl DecrementsSelf for i16
 
 //i32
 
-impl DecrementsSelf for i32
+impl IntIncDecSelf for i32
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -720,22 +978,20 @@ impl DecrementsSelf for i32
 
 //i64
 
-impl DecrementsSelf for i64
+impl IntIncDecSelf for i64
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -743,22 +999,20 @@ impl DecrementsSelf for i64
 
 //i128
 
-impl DecrementsSelf for i128
+impl IntIncDecSelf for i128
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -766,22 +1020,20 @@ impl DecrementsSelf for i128
 
 //isize
 
-impl DecrementsSelf for isize
+impl IntIncDecSelf for isize
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -789,22 +1041,20 @@ impl DecrementsSelf for isize
 
 //u8
 
-impl DecrementsSelf for u8
+impl IntIncDecSelf for u8
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -812,22 +1062,20 @@ impl DecrementsSelf for u8
 
 //u16
 
-impl DecrementsSelf for u16
+impl IntIncDecSelf for u16
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -835,22 +1083,20 @@ impl DecrementsSelf for u16
 
 //u32
 
-impl DecrementsSelf for u32
+impl IntIncDecSelf for u32
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -858,22 +1104,20 @@ impl DecrementsSelf for u32
 
 //u64
 
-impl DecrementsSelf for u64
+impl IntIncDecSelf for u64
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -881,22 +1125,20 @@ impl DecrementsSelf for u64
 
 //u128
 
-impl DecrementsSelf for u128
+impl IntIncDecSelf for u128
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
@@ -904,22 +1146,20 @@ impl DecrementsSelf for u128
 
 //usize
 
-impl DecrementsSelf for usize
+impl IntIncDecSelf for usize
 {
 
-    fn mm(&mut self) -> Self
+    fn overflowing_pp(&mut self) -> (Self, bool)
     {
 
-        mm_mut!(self);
-
-        *self
-
+        overflowing_pp_mut!(self)
+        
     }
 
-    fn try_mm(&mut self) -> Option<Self>
+    fn overflowing_mm(&mut self) -> (Self, bool)
     {
-        
-        checked_mm_mut!(self)
+
+        overflowing_mm_mut!(self)
 
     }
 
