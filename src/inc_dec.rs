@@ -848,14 +848,18 @@ pub trait IntIncDecSelf
     where Self: Sized + Copy
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool);
+    fn opp(&mut self) -> (Self, bool);
 
-    fn overflowing_mm(&mut self) -> (Self, bool);
+    fn omm(&mut self) -> (Self, bool);
+
+    fn wpp(&mut self) -> Self;
+
+    fn wmm(&mut self) -> Self;
 
 }
 
 #[macro_export]
-macro_rules! overflowing_pp_mut
+macro_rules! opp_mut
 {
 
     ($integer:ident) =>
@@ -876,7 +880,7 @@ macro_rules! overflowing_pp_mut
 }
 
 #[macro_export]
-macro_rules! overflowing_mm_mut
+macro_rules! omm_mut
 {
 
     ($integer:ident) =>
@@ -896,16 +900,53 @@ macro_rules! overflowing_mm_mut
 
 }
 
+#[macro_export]
+macro_rules! wpp_mut
+{
+
+    ($integer:ident) =>
+    {
+
+        {
+
+            *$integer = $integer.wrapping_add(1);
+
+            *$integer
+
+        }
+
+    }
+
+}
+
+#[macro_export]
+macro_rules! wmm_mut
+{
+
+    ($integer:ident) =>
+    {
+
+        {
+
+            *$integer = $integer.wrapping_sub(1);
+
+            *$integer
+
+        }
+
+    }
+
+}
 
 //i8
 
 impl IntIncDecSelf for i8
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
 
         /*
         let res = self.overflowing_add(1);
@@ -917,10 +958,10 @@ impl IntIncDecSelf for i8
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
 
         /*
         let res =self.overflowing_sub(1);
@@ -928,6 +969,32 @@ impl IntIncDecSelf for i8
         *self = res.0;
 
         res
+        */
+
+    }
+    
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+        /*
+        *self = self.wrapping_add(1);
+
+        *self
+        */
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
+
+        /*
+        *self = self.wrapping_sub(1);
+
+        *self
         */
 
     }
@@ -939,17 +1006,31 @@ impl IntIncDecSelf for i8
 impl IntIncDecSelf for i16
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -960,17 +1041,31 @@ impl IntIncDecSelf for i16
 impl IntIncDecSelf for i32
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -981,17 +1076,31 @@ impl IntIncDecSelf for i32
 impl IntIncDecSelf for i64
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -1002,17 +1111,31 @@ impl IntIncDecSelf for i64
 impl IntIncDecSelf for i128
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -1023,17 +1146,31 @@ impl IntIncDecSelf for i128
 impl IntIncDecSelf for isize
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -1044,17 +1181,31 @@ impl IntIncDecSelf for isize
 impl IntIncDecSelf for u8
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -1065,17 +1216,31 @@ impl IntIncDecSelf for u8
 impl IntIncDecSelf for u16
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -1086,17 +1251,31 @@ impl IntIncDecSelf for u16
 impl IntIncDecSelf for u32
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -1107,17 +1286,31 @@ impl IntIncDecSelf for u32
 impl IntIncDecSelf for u64
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -1128,17 +1321,31 @@ impl IntIncDecSelf for u64
 impl IntIncDecSelf for u128
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
@@ -1149,17 +1356,31 @@ impl IntIncDecSelf for u128
 impl IntIncDecSelf for usize
 {
 
-    fn overflowing_pp(&mut self) -> (Self, bool)
+    fn opp(&mut self) -> (Self, bool)
     {
 
-        overflowing_pp_mut!(self)
+        opp_mut!(self)
         
     }
 
-    fn overflowing_mm(&mut self) -> (Self, bool)
+    fn omm(&mut self) -> (Self, bool)
     {
 
-        overflowing_mm_mut!(self)
+        omm_mut!(self)
+
+    }
+
+    fn wpp(&mut self) -> Self
+    {
+
+        wpp_mut!(self)
+
+    }
+
+    fn wmm(&mut self) -> Self
+    {
+
+        wmm_mut!(self)
 
     }
 
