@@ -29,3 +29,9 @@ pub use queue::*;
 pub mod dyn_hashing_and_cmp;
 
 //pub use dyn_hashing_and_cmp::*;
+
+mod stacked_vec;
+
+pub use stacked_vec::*;
+
+
