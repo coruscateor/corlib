@@ -1,6 +1,6 @@
 use core::panic;
 
-use std::{fmt::Display, ops::{Index, IndexMut}, slice::{Iter, IterMut}};
+use std::{ascii::escape_default, fmt::Display, ops::{Index, IndexMut}, slice::{Iter, IterMut}};
 
 use crate::inc_dec::*;
 
@@ -10,7 +10,8 @@ pub struct StackedVec<T, const N: usize>
 {
 
     array: [Option<T>; N],
-    last_index: usize //Index for pushing and poping.
+    //last_index: usize //Index for pushing and poping.
+    len: usize
 
 }
 
@@ -24,7 +25,8 @@ impl<T, const N: usize> StackedVec<T, N>
         {
 
             array: [const { None }; N],
-            last_index: 0
+            //last_index: 0
+            len: 0
 
         }
 
@@ -48,9 +50,9 @@ impl<T, const N: usize> StackedVec<T, N>
     pub fn push(&mut self, value: T) -> Option<T>
     {
 
-        let next_last_index = self.len();
+        let next_last_index = self.len;
 
-        if next_last_index >= self.array.len()
+        if next_last_index >= self.capacity()
         {
 
             //Can't fit
@@ -61,7 +63,9 @@ impl<T, const N: usize> StackedVec<T, N>
 
         self.array[next_last_index] = Some(value);
 
-        self.last_index = next_last_index;
+        //self.last_index = next_last_index;
+
+        self.len.pp();
 
         None
 
@@ -70,21 +74,27 @@ impl<T, const N: usize> StackedVec<T, N>
     pub fn pop(&mut self) -> Option<T>
     {
 
-        if self.array.len() == 0
+        if self.len == 0
         {
 
             return None;
 
         }
 
-        let poped = self.array[self.last_index].take();
+        let last_index = self.len - 1;
 
-        if self.last_index > 0
+        let poped = self.array[last_index].take(); //self.
+
+        self.len = last_index;
+
+        /*
+        if last_index > 0 //self.
         {
 
             self.last_index.mm();
 
         }
+        */
 
         poped
 
@@ -93,7 +103,9 @@ impl<T, const N: usize> StackedVec<T, N>
     pub fn len(&self) -> usize
     {
 
-        self.last_index + 1
+        self.len
+
+        //self.last_index + 1
 
     }
 
@@ -104,10 +116,25 @@ impl<T, const N: usize> StackedVec<T, N>
 
     }
 
-    pub fn last_index(&self) -> usize
+    pub fn last_index(&self) -> Option<usize>
     {
 
-        self.last_index
+        let len = self.len;
+
+        if len == 0
+        {
+
+            None
+
+        }
+        else
+        {
+
+            Some(len - 1)
+            
+        }
+
+        //self.last_index
 
     }
 
@@ -154,14 +181,14 @@ impl<T, const N: usize> StackedVec<T, N>
     pub fn try_mut_index(&mut self, index: usize) -> Option<&mut T>
     {
 
-        if self.capacity() == 0
+        if self.len == 0
         {
 
             return None;
 
         }
 
-        let last_index = self.last_index;
+        let last_index = self.len - 1; //.last_index;
 
         /*
         if self.last_index == 0
@@ -228,7 +255,9 @@ impl<T, const N: usize> StackedVec<T, N>
         if self.capacity() == 0
         {
 
-            return true;
+            //An array with no capacity can never be full.
+
+            return false;
 
         }
 
@@ -248,23 +277,23 @@ impl<T, const N: usize> StackedVec<T, N>
 
         let last_index;
 
-        if self.last_index > 1
+        if self.len > 1 //.last_index > 1
         {
 
-            last_index = self.last_index;
+            last_index = self.len - 1; //.last_index;
 
         }
         else
         {
 
-            if self.array.len() == 0
-            {
+            //if self.array.len() == 0
+            //{
 
-                return StackedVecIterator::new(self.array[..].iter());
+            return StackedVecIterator::new(self.array[..].iter());
 
-            }
+            //}
 
-            last_index = 0;
+            //last_index = 0;
             
         }
 
@@ -277,27 +306,262 @@ impl<T, const N: usize> StackedVec<T, N>
 
         let last_index;
 
-        if self.last_index > 1
+        if self.len > 1 //.last_index > 1
         {
 
-            last_index = self.last_index - 1;
+            last_index = self.len - 1; //.last_index - 1;
 
         }
         else
         {
 
-            if self.array.len() == 0
-            {
+            //if self.array.len() == 0
+            //{
 
-                return StackedVecIteratorMut::new(self.array[..].iter_mut());
+            return StackedVecIteratorMut::new(self.array[..].iter_mut());
 
-            }
+            //}
 
-            last_index = 0;
+            //last_index = 0;
             
         }
 
         StackedVecIteratorMut::new(self.array[..last_index].iter_mut())
+
+    }
+
+    pub fn insert(&mut self, index: usize, item: T) -> Option<T>
+    {
+
+        if self.len == 0
+        {
+
+            //No room
+
+            Some(item)
+
+        }
+        else if index <= self.len && !self.is_full()
+        {
+
+            let mut current_index = self.len - 1;
+
+            //Move all items including that at the specified index to the right.
+
+            while current_index >= index
+            {
+
+                let current_item = self.array[current_index].take();
+
+                self.array[current_index + 1] = current_item;
+
+                current_index.mm();
+
+            }
+
+            //Finally insert the item at the specified index and increment the length. 
+
+            self.array[index] = Some(item);
+
+            self.len.pp();
+
+            None
+
+        }
+        else
+        {
+
+            Some(item)
+
+        }
+
+    }
+
+    pub fn remove(&mut self, index: usize) -> Option<T>
+    {
+
+        if self.len == 0
+        {
+
+            None
+
+        }
+        else if index < self.len
+        {
+
+            let removed_item = self.array[index].take();
+
+            //Move all items to the left to close the gap.
+
+            let mut current_index = index + 1;
+
+            while current_index < self.len
+            {
+
+                let current_item = self.array[current_index].take();
+
+                self.array[current_index - 1] = current_item;
+
+                current_index.pp();
+
+            }
+
+            self.len.mm();
+
+            removed_item
+
+        }
+        else
+        {
+
+            None
+            
+        }
+
+    }
+
+    pub fn clear(&mut self)
+    {
+
+        if self.len > 0
+        {
+
+            let last_index = self.len - 1;
+
+            for item in self.array[..last_index].iter_mut()
+            {
+    
+                *item = None;
+    
+            }
+
+            self.len = 0;
+
+        }
+
+    }
+
+    pub fn first(&self) -> Option<&T>
+    {
+
+        if self.len == 0
+        {
+
+            None
+
+        }
+        else
+        {
+
+            self.array[0].as_ref()
+            
+        }
+
+    }
+
+    pub fn first_mut(&mut self) -> Option<&mut T>
+    {
+
+        if self.len == 0
+        {
+
+            None
+
+        }
+        else
+        {
+
+            self.array[0].as_mut()
+            
+        }
+
+    }
+
+    pub fn last(&self) -> Option<&T>
+    {
+
+        if self.len == 0
+        {
+
+            None
+
+        }
+        else
+        {
+
+            self.array[self.len - 1].as_ref()
+            
+        }
+
+    }
+
+    pub fn last_mut(&mut self) -> Option<&mut T>
+    {
+
+        if self.len == 0
+        {
+
+            None
+
+        }
+        else
+        {
+
+            self.array[self.len - 1].as_mut()
+            
+        }
+
+    }
+
+    /*
+    pub fn as_slice(&self) -> &[&T]
+    {
+
+        let array = [&T; self.len];
+
+
+
+    }
+    */
+
+    pub fn as_slice(&self) -> &[Option<T>]
+    {
+
+        if self.len == 0
+        {
+
+            &self.array[..]
+
+        }
+        else
+        {
+            let last_index = self.len - 1;
+
+            &self.array[..last_index]
+            
+        }
+        
+    }
+
+    //No mut slices
+
+    pub fn contains(&self, val_ref: &T) -> bool
+        where T: PartialEq
+    {
+
+        for item in self.iter()
+        {
+
+            if item == val_ref
+            {
+
+                return true;
+
+            }
+
+        }
+
+        false
 
     }
 
@@ -310,17 +574,30 @@ impl<T, const N: usize> Index<usize> for StackedVec<T, N>
 
     fn index(&self, index: usize) -> &Self::Output
     {
-        
-        if index <= self.last_index
+
+        let len = self.len;
+
+        if len == 0
         {
 
-            &self.array[index]
+            &None
 
         }
         else
         {
-            
-            &None
+
+            if index < len //self.last_index
+            {
+    
+                &self.array[index]
+    
+            }
+            else
+            {
+                
+                &None
+    
+            }
 
         }
 
@@ -335,19 +612,38 @@ impl<T, const N: usize> IndexMut<usize> for StackedVec<T, N>
 
     fn index_mut(&mut self, index: usize) -> &mut Self::Output
     {
-        
-        if index <= self.last_index
+
+        let panic_message: &'static str = "Error: Invalid index";
+
+        let len = self.len;
+
+        if len == 0
         {
 
-            &mut self.array[index]
+            panic!("{}", panic_message)
+
+            //&None
 
         }
         else
         {
-            
-            panic!("Error: Invalid index")
+        
+            if index < len //self.last_index
+            {
 
-            //&mut None
+                &mut self.array[index]
+
+            }
+            else
+            {
+
+                panic!("{}", panic_message)
+                
+                //panic!("Error: Invalid index")
+
+                //&mut None
+
+            }
 
         }
 
@@ -416,7 +712,7 @@ impl<T, const N: usize> Debug for StackedVec<T, N>
 {
 
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("StackedVec").field("array", &self.array).field("last_index", &self.last_index).finish()
+        f.debug_struct("StackedVec").field("array", &self.array).field("len", &self.len).finish()
     }
 
 }
@@ -426,7 +722,7 @@ impl<T, const N: usize> Clone for StackedVec<T, N>
 {
 
     fn clone(&self) -> Self {
-        Self { array: self.array.clone(), last_index: self.last_index.clone() }
+        Self { array: self.array.clone(), len: self.len.clone() }
     }
     
 }
