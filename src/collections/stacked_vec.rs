@@ -727,6 +727,13 @@ impl<T, const N: usize> Clone for StackedVec<T, N>
     
 }
 
+
+impl<T, const N: usize> Copy for StackedVec<T, N>
+    where T: Copy
+{
+
+}
+
 /*
 impl<'a, T, const N: usize> IntoIterator for &'a StackedVec<T, N>
 {
