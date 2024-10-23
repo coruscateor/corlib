@@ -6,49 +6,29 @@ use crate::inc_dec::*;
 
 use std::fmt::Debug;
 
-use std::mem::take;
-
-pub struct StackedVec<T, const N: usize>
-    where T: Default + Copy
+pub struct NonDefaultStackedVec<T, const N: usize>
 {
 
-    array: [T; N],
-    //last_index: usize //Index for pushing and poping.
+    array: [Option<T>; N],
     len: usize
 
 }
 
-impl<T, const N: usize> StackedVec<T, N>
-    where T: Default + Copy
+impl<T, const N: usize> NonDefaultStackedVec<T, N>
 {
 
-    pub fn new() -> Self
-    {
-
-        Self
-        {
-
-            array: [T::default(); N],
-            len: 0
-
-        }
-
-    }
-
-    /*
-    pub const fn with_capacity() -> Self //<N> //(capacity: N)
+    pub const fn new() -> Self
     {
 
         Self
         {
 
             array: [const { None }; N],
-            current_index: 0
+            len: 0
 
         }
 
     }
-    */
 
     pub fn push(&mut self, value: T) -> Option<T>
     {
@@ -64,7 +44,9 @@ impl<T, const N: usize> StackedVec<T, N>
 
         }
 
-        self.array[next_last_index] = value;
+        self.array[next_last_index] = Some(value);
+
+        //self.last_index = next_last_index;
 
         self.len.pp();
 
@@ -84,15 +66,20 @@ impl<T, const N: usize> StackedVec<T, N>
 
         let last_index = self.len - 1;
 
-        let poped = take(&mut self.array[last_index]);
-
-        //let poped = self.array[last_index];
-
-        //self.array[last_index] = T::default();
+        let poped = self.array[last_index].take(); //self.
 
         self.len = last_index;
 
-        Some(poped)
+        /*
+        if last_index > 0 //self.
+        {
+
+            self.last_index.mm();
+
+        }
+        */
+
+        poped
 
     }
 
@@ -100,6 +87,8 @@ impl<T, const N: usize> StackedVec<T, N>
     {
 
         self.len
+
+        //self.last_index + 1
 
     }
 
@@ -128,6 +117,8 @@ impl<T, const N: usize> StackedVec<T, N>
             
         }
 
+        //self.last_index
+
     }
 
     //Should array elements by mutable by reference? No.
@@ -136,6 +127,25 @@ impl<T, const N: usize> StackedVec<T, N>
     {
 
         if index < self.capacity()
+        {
+
+            self.array[index].as_ref()
+
+        }
+        else
+        {
+
+            None
+            
+        }
+
+    }
+
+    /*
+    pub fn try_index(&mut self, index: usize) -> Option<&Option<T>>
+    {
+
+        if index <= self.current_index
         {
 
             Some(&self.array[index])
@@ -149,6 +159,7 @@ impl<T, const N: usize> StackedVec<T, N>
         }
 
     }
+    */
 
     pub fn try_mut_index(&mut self, index: usize) -> Option<&mut T>
     {
@@ -160,9 +171,52 @@ impl<T, const N: usize> StackedVec<T, N>
 
         }
 
-        let last_index = self.len - 1;
+        let last_index = self.len - 1; //.last_index;
 
-        if index <= last_index
+        /*
+        if self.last_index == 0
+        {
+
+            last_index = 0;
+
+        }
+        else
+        {
+
+            last_index = self.last_index;
+            
+        }
+        */
+
+        /*
+        if self.is_full()
+        {
+
+            last_index = self.capacity() - 1;
+
+        }
+        */
+
+        if index <= last_index //last_index
+        {
+
+            self.array[index].as_mut()
+
+        }
+        else
+        {
+
+            None
+            
+        }
+
+    }
+
+    /*
+    pub fn try_mut_index(&mut self, index: usize) -> Option<&mut Option<T>>
+    {
+
+        if index <= self.current_index
         {
 
             Some(&mut self.array[index])
@@ -176,6 +230,7 @@ impl<T, const N: usize> StackedVec<T, N>
         }
 
     }
+    */
 
     pub fn is_full(&self) -> bool
     {
@@ -200,29 +255,36 @@ impl<T, const N: usize> StackedVec<T, N>
 
     }
 
-    pub fn iter<'a>(&'a self) -> StackedVecIterator<'a, T>
+    pub fn iter<'a>(&'a self) -> NonDefaultStackedVecIterator<'a, T> //Iter<'a, Option<T>>
     {
 
         let last_index;
 
-        if self.len > 1
+        if self.len > 1 //.last_index > 1
         {
 
-            last_index = self.len - 1;
+            last_index = self.len - 1; //.last_index;
 
         }
         else
         {
 
-            return StackedVecIterator::new(self.array[..].iter());
+            //if self.array.len() == 0
+            //{
+
+            return NonDefaultStackedVecIterator::new(self.array[..].iter());
+
+            //}
+
+            //last_index = 0;
             
         }
 
-        StackedVecIterator::new(self.array[..last_index].iter())
+        NonDefaultStackedVecIterator::new(self.array[..last_index].iter())
 
     }
 
-    pub fn iter_mut<'a>(&'a mut self) -> StackedVecIteratorMut<'a, T>
+    pub fn iter_mut<'a>(&'a mut self) -> NonDefaultStackedVecIteratorMut<'a, T>
     {
 
         let last_index;
@@ -239,7 +301,7 @@ impl<T, const N: usize> StackedVec<T, N>
             //if self.array.len() == 0
             //{
 
-            return StackedVecIteratorMut::new(self.array[..].iter_mut());
+            return NonDefaultStackedVecIteratorMut::new(self.array[..].iter_mut());
 
             //}
 
@@ -247,7 +309,7 @@ impl<T, const N: usize> StackedVec<T, N>
             
         }
 
-        StackedVecIteratorMut::new(self.array[..last_index].iter_mut())
+        NonDefaultStackedVecIteratorMut::new(self.array[..last_index].iter_mut())
 
     }
 
@@ -272,7 +334,7 @@ impl<T, const N: usize> StackedVec<T, N>
             while current_index >= index
             {
 
-                let current_item = self.array[current_index];
+                let current_item = self.array[current_index].take();
 
                 self.array[current_index + 1] = current_item;
 
@@ -282,7 +344,7 @@ impl<T, const N: usize> StackedVec<T, N>
 
             //Finally insert the item at the specified index and increment the length. 
 
-            self.array[index] = item;
+            self.array[index] = Some(item);
 
             self.len.pp();
 
@@ -310,7 +372,7 @@ impl<T, const N: usize> StackedVec<T, N>
         else if index < self.len
         {
 
-            let removed_item = self.array[index];
+            let removed_item = self.array[index].take();
 
             //Move all items to the left to close the gap.
 
@@ -319,7 +381,7 @@ impl<T, const N: usize> StackedVec<T, N>
             while current_index < self.len
             {
 
-                let current_item = self.array[current_index];
+                let current_item = self.array[current_index].take();
 
                 self.array[current_index - 1] = current_item;
 
@@ -329,7 +391,7 @@ impl<T, const N: usize> StackedVec<T, N>
 
             self.len.mm();
 
-            Some(removed_item)
+            removed_item
 
         }
         else
@@ -352,7 +414,7 @@ impl<T, const N: usize> StackedVec<T, N>
             for item in self.array[..last_index].iter_mut()
             {
     
-                *item = T::default();
+                *item = None;
     
             }
 
@@ -374,7 +436,7 @@ impl<T, const N: usize> StackedVec<T, N>
         else
         {
 
-            Some(&self.array[0])
+            self.array[0].as_ref()
             
         }
 
@@ -392,7 +454,7 @@ impl<T, const N: usize> StackedVec<T, N>
         else
         {
 
-            Some(&mut self.array[0])
+            self.array[0].as_mut()
             
         }
 
@@ -410,7 +472,7 @@ impl<T, const N: usize> StackedVec<T, N>
         else
         {
 
-            Some(&self.array[self.len - 1])
+            self.array[self.len - 1].as_ref()
             
         }
 
@@ -428,7 +490,7 @@ impl<T, const N: usize> StackedVec<T, N>
         else
         {
 
-            Some(&mut self.array[self.len - 1])
+            self.array[self.len - 1].as_mut()
             
         }
 
@@ -445,7 +507,8 @@ impl<T, const N: usize> StackedVec<T, N>
     }
     */
 
-    pub fn as_slice(&self) -> &[T]
+    /*
+    pub fn as_slice(&self) -> &[Option<T>]
     {
 
         if self.len == 0
@@ -463,6 +526,7 @@ impl<T, const N: usize> StackedVec<T, N>
         }
         
     }
+    */
 
     //No mut slices
 
@@ -488,27 +552,14 @@ impl<T, const N: usize> StackedVec<T, N>
 
 }
 
-impl<T, const N: usize> Index<usize> for StackedVec<T, N>
-    where T: Default + Copy
+impl<T, const N: usize> Index<usize> for NonDefaultStackedVec<T, N>
 {
 
-    //type Output = Option<&T>;
-
-    type Output = T;
+    type Output = Option<T>;
 
     fn index(&self, index: usize) -> &Self::Output
     {
 
-        if index >= self.len
-        {
-
-            panic!("Error: The provided index is out of bounds")
-
-        }
-
-        &self.array[index]
-
-        /*
         let len = self.len;
 
         if len == 0
@@ -520,10 +571,10 @@ impl<T, const N: usize> Index<usize> for StackedVec<T, N>
         else
         {
 
-            if index < len
+            if index < len //self.last_index
             {
     
-                &Some(&self.array[index])
+                &self.array[index]
     
             }
             else
@@ -534,30 +585,19 @@ impl<T, const N: usize> Index<usize> for StackedVec<T, N>
             }
 
         }
-        */
 
     }
 
 }
 
-impl<T, const N: usize> IndexMut<usize> for StackedVec<T, N>
-    where T: Default + Copy
+impl<T, const N: usize> IndexMut<usize> for NonDefaultStackedVec<T, N>
 {
+    
+    //type Output = Option<T>;
 
     fn index_mut(&mut self, index: usize) -> &mut Self::Output
     {
 
-
-        if index >= self.len
-        {
-
-            panic!("Error: The provided index is out of bounds")
-
-        }
-
-        &mut self.array[index]
-
-        /*
         let panic_message: &'static str = "Error: Invalid index";
 
         let len = self.len;
@@ -591,14 +631,13 @@ impl<T, const N: usize> IndexMut<usize> for StackedVec<T, N>
             }
 
         }
-        */
 
     }
 
 }
 
-impl<T, const N: usize> Display for StackedVec<T, N>
-    where T: Display + Default + Copy
+impl<T, const N: usize> Display for NonDefaultStackedVec<T, N>
+    where T: Display
 {
 
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result
@@ -653,18 +692,18 @@ impl<T, const N: usize> Display for StackedVec<T, N>
 
 }
 
-impl<T, const N: usize> Debug for StackedVec<T, N>
-    where T: Debug + Default + Copy
+impl<T, const N: usize> Debug for NonDefaultStackedVec<T, N>
+    where T: Debug //?Sized +
 {
 
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("StackedVec").field("array", &self.array).field("len", &self.len).finish()
+        f.debug_struct("NonDefaultStackedVec").field("array", &self.array).field("len", &self.len).finish()
     }
 
 }
 
-impl<T, const N: usize> Clone for StackedVec<T, N>
-    where T: Clone + Default + Copy
+impl<T, const N: usize> Clone for NonDefaultStackedVec<T, N>
+    where T: Clone 
 {
 
     fn clone(&self) -> Self {
@@ -674,23 +713,23 @@ impl<T, const N: usize> Clone for StackedVec<T, N>
 }
 
 
-impl<T, const N: usize> Copy for StackedVec<T, N>
-    where T: Default + Copy
+impl<T, const N: usize> Copy for NonDefaultStackedVec<T, N>
+    where T: Copy
 {
 
 }
 
-pub struct StackedVecIterator<'a, T>
+pub struct NonDefaultStackedVecIterator<'a, T>
 {
 
-    opt_iter: Iter<'a, T>
+    opt_iter: Iter<'a, Option<T>>
 
 }
 
-impl<'a, T> StackedVecIterator<'a, T>
+impl<'a, T> NonDefaultStackedVecIterator<'a, T>
 {
 
-    pub fn new(opt_iter: Iter<'a, T>) -> Self
+    pub fn new(opt_iter: Iter<'a, Option<T>>) -> Self
     {
 
         Self
@@ -704,7 +743,7 @@ impl<'a, T> StackedVecIterator<'a, T>
 
 }
 
-impl<'a, T> Iterator for StackedVecIterator<'a, T>
+impl<'a, T> Iterator for NonDefaultStackedVecIterator<'a, T>
 {
 
     type Item = &'a T;
@@ -718,7 +757,7 @@ impl<'a, T> Iterator for StackedVecIterator<'a, T>
             Some(val) =>
             {
 
-                Some(val)
+                val.as_ref()
 
             }
             None => None
@@ -729,17 +768,17 @@ impl<'a, T> Iterator for StackedVecIterator<'a, T>
 
 }
 
-pub struct StackedVecIteratorMut<'a, T>
+pub struct NonDefaultStackedVecIteratorMut<'a, T>
 {
 
-    opt_iter_mut: IterMut<'a, T>
+    opt_iter_mut: IterMut<'a, Option<T>>
 
 }
 
-impl<'a, T> StackedVecIteratorMut<'a, T>
+impl<'a, T> NonDefaultStackedVecIteratorMut<'a, T>
 {
 
-    pub fn new(opt_iter_mut: IterMut<'a, T>) -> Self
+    pub fn new(opt_iter_mut: IterMut<'a, Option<T>>) -> Self
     {
 
         Self
@@ -753,7 +792,7 @@ impl<'a, T> StackedVecIteratorMut<'a, T>
 
 }
 
-impl<'a, T> Iterator for StackedVecIteratorMut<'a, T>
+impl<'a, T> Iterator for NonDefaultStackedVecIteratorMut<'a, T>
 {
 
     type Item = &'a mut T;
@@ -767,7 +806,7 @@ impl<'a, T> Iterator for StackedVecIteratorMut<'a, T>
             Some(val) =>
             {
 
-                Some(val)
+                val.as_mut()
 
             }
             None => None

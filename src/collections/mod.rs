@@ -34,4 +34,8 @@ mod stacked_vec;
 
 pub use stacked_vec::*;
 
+mod non_default_stacked_vec;
+
+pub use non_default_stacked_vec::*;
+
 
