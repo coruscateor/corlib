@@ -32,10 +32,6 @@ pub use rc_by_ptr::*;
 
 pub mod rc_default;
 
-mod lazy;
-
-pub use lazy::*;
-
 pub mod text;
 
 //pub use text::*;
@@ -59,6 +55,10 @@ pub use arc_by_ptr::*;
 mod sync_weak_by_ptr;
 
 pub use sync_weak_by_ptr::*;
+
+mod immut;
+
+pub use immut::*;
 
 #[cfg(feature="drop_panic")]
 mod drop_panic;

@@ -712,12 +712,13 @@ impl<T, const N: usize> Clone for NonDefaultStackedVec<T, N>
     
 }
 
-
 impl<T, const N: usize> Copy for NonDefaultStackedVec<T, N>
     where T: Copy
 {
 
 }
+
+//NonDefaultStackedVecIterator
 
 pub struct NonDefaultStackedVecIterator<'a, T>
 {

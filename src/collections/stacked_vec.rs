@@ -8,6 +8,12 @@ use std::fmt::Debug;
 
 use std::mem::take;
 
+#[cfg(feature = "serde")]
+use serde::ser::SerializeSeq;
+
+#[cfg(feature = "serde")]
+use serde::{Serialize, Serializer};
+
 pub struct StackedVec<T, const N: usize>
     where T: Default + Copy
 {
@@ -547,7 +553,6 @@ impl<T, const N: usize> IndexMut<usize> for StackedVec<T, N>
     fn index_mut(&mut self, index: usize) -> &mut Self::Output
     {
 
-
         if index >= self.len
         {
 
@@ -680,6 +685,37 @@ impl<T, const N: usize> Copy for StackedVec<T, N>
 
 }
 
+#[cfg(feature = "serde")]
+impl<T, const N: usize> Serialize for StackedVec<T, N>
+    where T: Default + Copy + Serialize
+{
+
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+        where
+            S: Serializer
+    {
+
+        let mut seq = serializer.serialize_seq(Some(self.len))?;
+
+        let valid_range = self.as_slice();
+
+        for item in valid_range
+        {
+
+            seq.serialize_element(item)?;
+
+        }
+
+        seq.end()
+
+        //serializer.serialize_str(self.as_str())
+
+    }
+
+}
+
+//StackedVecIterator
+
 pub struct StackedVecIterator<'a, T>
 {
 
@@ -777,5 +813,4 @@ impl<'a, T> Iterator for StackedVecIteratorMut<'a, T>
     }
 
 }
-
 
