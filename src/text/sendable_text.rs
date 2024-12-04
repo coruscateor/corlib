@@ -1,9 +1,12 @@
-use std::{fmt::Display, ops::Deref, sync::Arc};
+use std::{fmt::{Display, Formatter}, ops::Deref, sync::Arc};
 
 use super::AsStr;
 
+use serde::{de::{Error, Visitor}, Deserialize, Deserializer};
 #[cfg(feature = "serde")]
 use serde::{Serialize, Serializer};
+
+use cfg_if::cfg_if;
 
 ///
 ///SendableText: Ideal for when you want to be able to move text around that could either be a String ot a static String slice.
@@ -211,17 +214,75 @@ impl From<&Arc<str>> for SendableText
 
 }
 
-#[cfg(feature = "serde")]
-impl Serialize for SendableText
+cfg_if!
 {
 
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-        where
-            S: Serializer
+    if #[cfg(feature = "serde")]
     {
+    
+        //#[cfg(feature = "serde")]
+        impl Serialize for SendableText
+        {
 
-        serializer.serialize_str(self.as_str())
+            fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+                where
+                    S: Serializer
+            {
 
+                serializer.serialize_str(self.as_str())
+
+            }
+
+        }
+
+        struct SendableTextVisitor;
+
+        impl<'de> Visitor<'de> for SendableTextVisitor
+        {
+
+            type Value = SendableText;
+
+            fn expecting(&self, formatter: &mut Formatter<'_>) -> Result<(), std::fmt::Error>
+            {
+                
+                formatter.write_str("a String")
+                
+            }
+
+            fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+                where E: Error
+            {
+
+                Ok(value.to_string().into())
+
+            }
+
+            fn visit_string<E>(self, value: String) -> Result<Self::Value, E>
+                where E: Error
+            {
+
+                Ok(value.into())
+
+            }
+
+        }
+        
+        impl<'de> Deserialize<'de> for SendableText
+        {
+
+            fn deserialize<D>(deserialiser: D) -> Result<Self, D::Error>
+                where D: Deserializer<'de>
+            {
+
+                let visitor = SendableTextVisitor{};
+
+                deserialiser.deserialize_string(visitor)
+            
+            }
+
+        }
+    
     }
 
 }
+
