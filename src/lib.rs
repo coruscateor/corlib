@@ -1,5 +1,7 @@
 #![doc = include_str!("../README.md")] 
 
+use cfg_if::cfg_if;
+
 mod non_option;
 
 pub use non_option::*;
@@ -60,11 +62,18 @@ mod immut;
 
 pub use immut::*;
 
-#[cfg(feature="drop_panic")]
-mod drop_panic;
+cfg_if!
+{
 
-#[cfg(feature="drop_panic")]
-pub use drop_panic::*;
+    if #[cfg(feature = "drop_panic")]
+    {
+        
+        mod drop_panic;
 
+        pub use drop_panic::*;
+
+    }
+
+}
 
 

@@ -2,11 +2,10 @@ use std::{fmt::{Display, Formatter}, ops::Deref, sync::Arc};
 
 use super::AsStr;
 
-use serde::{de::{Error, Visitor}, Deserialize, Deserializer};
-#[cfg(feature = "serde")]
-use serde::{Serialize, Serializer};
-
 use cfg_if::cfg_if;
+
+#[cfg(feature = "serde")]
+use serde::{de::{Error, Visitor}, Deserialize, Deserializer, Serialize, Serializer};
 
 ///
 ///SendableText: Ideal for when you want to be able to move text around that could either be a String ot a static String slice.
