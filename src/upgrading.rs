@@ -4,10 +4,12 @@
 
 use std::{future::Future, rc::{Rc, Weak}, sync::Arc};
 
+static ERROR_MESSAGE: &str = "Error: Upgrade Failed";
+
 ///
 /// Attempts to upgrade the provided weak Rc reference, calling the provided func object if successful.
 /// 
-pub fn up_rc<T, F>(weak: &Weak<T>, mut func: F) -> bool
+pub fn try_up_rc<T, F>(weak: &Weak<T>, mut func: F) -> bool
     where F: FnMut(Rc<T>)
 {
 
@@ -24,11 +26,23 @@ pub fn up_rc<T, F>(weak: &Weak<T>, mut func: F) -> bool
 
 }
 
+pub fn up_rc<T, F>(weak: &Weak<T>, func: F)
+    where F: FnMut(Rc<T>)
+{
+
+    if !try_up_rc(weak, func)
+    {
+
+        panic!("{}", ERROR_MESSAGE)
+
+    }
+
+}
 
 ///
 /// Attempts to upgrade the provided weak Rc reference, calling the provided func object and returning its bool result if successful.
 /// 
-pub fn up_rc_pt<T, F>(weak: &Weak<T>, mut func: F) -> bool
+pub fn try_up_rc_pt<T, F>(weak: &Weak<T>, mut func: F) -> bool
     where F: FnMut(Rc<T>) -> bool
 {
 
@@ -43,10 +57,23 @@ pub fn up_rc_pt<T, F>(weak: &Weak<T>, mut func: F) -> bool
 
 }
 
+pub fn up_rc_pt<T, F>(weak: &Weak<T>, func: F)
+    where F: FnMut(Rc<T>) -> bool
+{
+
+    if !try_up_rc_pt(weak, func)
+    {
+
+        panic!("{}", ERROR_MESSAGE)
+
+    }
+
+}
+
 ///
 /// Attempts to upgrade the provided weak Arc reference, calling the provided func object if successful.  
 /// 
-pub fn up_arc<T, F>(weak: &std::sync::Weak<T>, mut func: F) -> bool
+pub fn try_up_arc<T, F>(weak: &std::sync::Weak<T>, mut func: F) -> bool
     where F: FnMut(Arc<T>)
 {
 
@@ -63,10 +90,23 @@ pub fn up_arc<T, F>(weak: &std::sync::Weak<T>, mut func: F) -> bool
 
 }
 
+pub fn up_arc<T, F>(weak: &std::sync::Weak<T>, func: F)
+    where F: FnMut(Arc<T>)
+{
+
+    if !try_up_arc(weak, func)
+    {
+
+        panic!("{}", ERROR_MESSAGE)
+
+    }
+
+}
+
 ///
 /// Attempts to upgrade the provided weak Arc reference, calling the provided func object if successful.  
 /// 
-pub fn up_arc_pt<T, F>(weak: &std::sync::Weak<T>, mut func: F) -> bool
+pub fn try_up_arc_pt<T, F>(weak: &std::sync::Weak<T>, mut func: F) -> bool
     where F: FnMut(Arc<T>) -> bool
 {
 
@@ -81,9 +121,22 @@ pub fn up_arc_pt<T, F>(weak: &std::sync::Weak<T>, mut func: F) -> bool
 
 }
 
+pub fn up_arc_pt<T, F>(weak: &std::sync::Weak<T>, func: F)
+    where F: FnMut(Arc<T>) -> bool
+{
+
+    if !try_up_arc_pt(weak, func)
+    {
+
+        panic!("{}", ERROR_MESSAGE)
+
+    }
+
+}
+
 //Async
 
-pub async fn up_arc_async<T, F, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> bool
+pub async fn try_up_arc_async<T, F, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> bool
     where F: FnMut(Arc<T>) -> FUT,
           FUT: Future<Output = ()>
 {
@@ -101,7 +154,7 @@ pub async fn up_arc_async<T, F, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> 
 
 }
 
-pub async fn up_arc_pt_async<T, F, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> bool
+pub async fn try_up_arc_pt_async<T, F, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> bool
     where F: FnMut(Arc<T>) -> FUT,
           FUT: Future<Output = bool>
 {
@@ -119,7 +172,7 @@ pub async fn up_arc_pt_async<T, F, FUT>(weak: &std::sync::Weak<T>, mut func: F) 
 
 //Returning Values
 
-pub fn up_rc_r<T, F, R>(weak: &Weak<T>, mut func: F) -> (bool, R)
+pub fn try_up_rc_r<T, F, R>(weak: &Weak<T>, mut func: F) -> (bool, R)
     where F: FnMut(Rc<T>) -> R,
           R: Default
 {
@@ -135,7 +188,7 @@ pub fn up_rc_r<T, F, R>(weak: &Weak<T>, mut func: F) -> (bool, R)
 
 }
 
-pub fn up_arc_r<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, R)
+pub fn try_up_arc_r<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, R)
     where F: FnMut(Arc<T>) -> R,
           R: Default
 {
@@ -153,7 +206,7 @@ pub fn up_arc_r<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, R)
 
 //Async
 
-pub async fn up_arc_r_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, R)
+pub async fn try_up_arc_r_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, R)
     where F: FnMut(Arc<T>) -> FUT,
           R: Default,
           FUT: Future<Output = R>
@@ -172,7 +225,7 @@ pub async fn up_arc_r_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func: F
 
 //Options
 
-pub fn up_rc_opt<T, F, R>(weak: &Weak<T>, mut func: F) -> (bool, Option<R>)
+pub fn try_up_rc_opt<T, F, R>(weak: &Weak<T>, mut func: F) -> (bool, Option<R>)
     where F: FnMut(Rc<T>) -> Option<R>
 {
 
@@ -187,7 +240,7 @@ pub fn up_rc_opt<T, F, R>(weak: &Weak<T>, mut func: F) -> (bool, Option<R>)
 
 }
 
-pub fn up_arc_opt<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, Option<R>)
+pub fn try_up_arc_opt<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, Option<R>)
     where F: FnMut(Arc<T>) -> Option<R>
 {
 
@@ -204,7 +257,7 @@ pub fn up_arc_opt<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, Opt
 
 //Async
 
-pub async fn up_arc_opt_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, Option<R>)
+pub async fn try_up_arc_opt_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> (bool, Option<R>)
     where F: FnMut(Arc<T>) -> FUT,
           FUT: Future<Output = Option<R>>
 {
@@ -222,7 +275,7 @@ pub async fn up_arc_opt_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func:
 
 //Only Options
 
-pub fn up_rc_opt_only<T, F, R>(weak: &Weak<T>, mut func: F) -> Option<R>
+pub fn try_up_rc_opt_only<T, F, R>(weak: &Weak<T>, mut func: F) -> Option<R>
     where F: FnMut(Rc<T>) -> Option<R>
 {
 
@@ -237,7 +290,7 @@ pub fn up_rc_opt_only<T, F, R>(weak: &Weak<T>, mut func: F) -> Option<R>
 
 }
 
-pub fn up_arc_opt_only<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> Option<R>
+pub fn try_up_arc_opt_only<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> Option<R>
     where F: FnMut(Arc<T>) -> Option<R>
 {
 
@@ -254,7 +307,7 @@ pub fn up_arc_opt_only<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> Optio
 
 //Async
 
-pub async fn up_arc_opt_only_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> Option<R>
+pub async fn try_up_arc_opt_only_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> Option<R>
     where F: FnMut(Arc<T>) -> FUT,
           FUT: Future<Output = Option<R>>
 {
@@ -272,7 +325,7 @@ pub async fn up_arc_opt_only_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut 
 
 //Success Options
 
-pub fn up_rc_opt_success<T, F, R>(weak: &Weak<T>, mut func: F) -> Option<R>
+pub fn try_up_rc_opt_success<T, F, R>(weak: &Weak<T>, mut func: F) -> Option<R>
     where F: FnMut(Rc<T>) -> R
 {
 
@@ -287,7 +340,7 @@ pub fn up_rc_opt_success<T, F, R>(weak: &Weak<T>, mut func: F) -> Option<R>
 
 }
 
-pub fn up_arc_opt_success<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> Option<R>
+pub fn try_up_arc_opt_success<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> Option<R>
     where F: FnMut(Arc<T>) -> R
 {
 
@@ -304,7 +357,7 @@ pub fn up_arc_opt_success<T, F, R>(weak: &std::sync::Weak<T>, mut func: F) -> Op
 
 //Async
 
-pub async fn up_arc_opt_success_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> Option<R>
+pub async fn try_up_arc_opt_success_async<T, F, R, FUT>(weak: &std::sync::Weak<T>, mut func: F) -> Option<R>
     where F: FnMut(Arc<T>) -> FUT,
           FUT: Future<Output = R>
 {

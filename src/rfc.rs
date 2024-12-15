@@ -161,9 +161,9 @@ pub fn borrow_mut<T, F, R>(rfc: &RefCell<T>, mut func: F) -> R
     where F: FnMut(RefMut<T>) -> R
 {
 
-   let rfc_ref = rfc.borrow_mut();
+   let rfc_mut = rfc.borrow_mut();
 
-   func(rfc_ref)
+   func(rfc_mut)
 
 }
 
@@ -174,9 +174,9 @@ pub fn borrow_mut_param<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) ->
     where F: FnMut(RefMut<T>, &P) -> R
 {
 
-   let rfc_ref = rfc.borrow_mut();
+   let rfc_mut = rfc.borrow_mut();
 
-   func(rfc_ref, param)
+   func(rfc_mut, param)
 
 }
 
@@ -196,9 +196,9 @@ pub fn borrow_mut_param_2<T, P, F, R>(rfc: &RefCell<T>, param: &mut P, mut func:
     where F: FnMut(RefMut<T>, &mut P) -> R
 {
 
-   let rfc_ref = rfc.borrow_mut();
+   let rfc_mut = rfc.borrow_mut();
 
-   func(rfc_ref, param)
+   func(rfc_mut, param)
 
 }
 
@@ -220,9 +220,9 @@ pub fn borrow_mut_param_3<T, P, F, R>(rfc: &RefCell<T>, param: &P, mut func: F) 
           P: Clone
 {
 
-   let rfc_ref = rfc.borrow_mut();
+   let rfc_mut = rfc.borrow_mut();
 
-   func(rfc_ref, param.clone())
+   func(rfc_mut, param.clone())
 
 }
 
@@ -242,8 +242,8 @@ pub fn borrow_mut_param_4<T, P, F, R>(rfc: &RefCell<T>, param: P, mut func: F) -
     where F: FnMut(RefMut<T>, P) -> R
 {
 
-   let rfc_ref = rfc.borrow_mut();
+   let rfc_mut = rfc.borrow_mut();
 
-   func(rfc_ref, param)
+   func(rfc_mut, param)
 
 }
