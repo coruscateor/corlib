@@ -62,9 +62,9 @@ mod immut;
 
 pub use immut::*;
 
-mod result_frame;
+mod work_in_progress_result;
 
-pub use result_frame::*;
+pub use work_in_progress_result::*;
 
 cfg_if!
 {

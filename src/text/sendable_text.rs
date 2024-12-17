@@ -81,6 +81,18 @@ impl SendableText
 
 }
 
+impl Default for SendableText
+{
+
+    fn default() -> Self
+    {
+
+        Self::Str("")
+       
+    }
+
+}
+
 impl Into<String> for SendableText
 {
 
