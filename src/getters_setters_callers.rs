@@ -1104,31 +1104,4 @@ macro_rules! trait_get_weak_self_ref
 
 }
 
-#[macro_export]
-macro_rules! impl_get_weak_self_ref
-{
 
-    () =>
-    {
-
-        pub fn weak_self(&self) -> &Weak<Self>
-        {
-    
-            &self.weak_self
-    
-        }    
-
-    };
-    ($weak_self_field:ident) =>
-    {
-
-        pub fn $weak_self_field(&self) -> &Weak<Self>
-        {
-    
-            self.$weak_self_field
-    
-        }
-
-    }
-
-}
