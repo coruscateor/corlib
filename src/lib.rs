@@ -42,12 +42,6 @@ pub mod get_some;
 
 pub mod inc_dec;
 
-pub mod as_any;
-
-pub use as_any::*;
-
-pub mod rfc;
-
 pub mod upgrading;
 
 mod arc_by_ptr;
@@ -66,9 +60,9 @@ mod work_in_progress_result;
 
 pub use work_in_progress_result::*;
 
-mod mut_state;
+pub mod convert;
 
-pub use mut_state::*;
+pub mod cell;
 
 cfg_if!
 {
@@ -76,9 +70,9 @@ cfg_if!
     if #[cfg(feature = "drop_panic")]
     {
         
-        mod drop_panic;
+        pub mod drop_panic;
 
-        pub use drop_panic::*;
+        //pub use drop_panic::*;
 
     }
 

@@ -1,6 +1,9 @@
+//!
+//! A fun way to crash your programme.
+//! 
 
 ///
-/// A fun way to simulate an unexpected programme termination.
+/// Use this to simulate an unexpected programme termination.
 /// 
 pub struct DropPanic();
 
