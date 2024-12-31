@@ -1,4 +1,8 @@
+use std::{fmt::{write, Display}};
+
 use delegate::delegate;
+
+use std::fmt::Debug;
 
 ///
 /// For indicating when some work has been done or is in the process of being done, potentially being accompanied by a result value of some kind.
@@ -91,6 +95,46 @@ impl<T> WorkInProgressResult<T>
     }
 
 }
+
+impl<T> Display for WorkInProgressResult<T>
+    where T: Display
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result
+    {
+
+        match &self.result
+        {
+
+            Some(val) =>
+            {
+
+                write!(f, "{{ result: {0}, done: {1} }}", val, self.done)
+
+            }
+            None =>
+            {
+
+                write!(f, "{{ done: {0} }}", self.done)
+
+            }
+
+        } 
+        
+    }
+
+}
+
+impl<T> Debug for WorkInProgressResult<T>
+    where T: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("WorkInProgressResult").field("result", &self.result).field("done", &self.done).finish()
+    }
+
+}
+
 
 ///
 /// The same as WorkInProgressResult, but with an id.
@@ -189,6 +233,47 @@ impl<ID, T> IdedWorkInProgressResult<ID, T>
 
         }
 
+    }
+
+}
+
+impl<ID, T> Display for IdedWorkInProgressResult<ID, T>
+    where ID: Display,
+          T: Display
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result
+    {
+
+        match &self.work_in_progress_result.result
+        {
+
+            Some(val) =>
+            {
+
+                write!(f, "{{ Id: {0}, result: {1}, done: {2} }}", self.id, val, self.work_in_progress_result.done)
+
+            }
+            None =>
+            {
+
+                write!(f, "{{ Id: {0}, done: {1} }}", self.id, self.work_in_progress_result.done)
+
+            }
+
+        } 
+        
+    }
+
+}
+
+impl<ID, T> Debug for IdedWorkInProgressResult<ID, T>
+    where ID: Debug,
+          T: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("IdedWorkInProgressResult").field("id", &self.id).field("work_in_progress_result", &self.work_in_progress_result).finish()
     }
 
 }
