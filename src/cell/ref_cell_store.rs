@@ -6,7 +6,7 @@ use std::cell::{BorrowError, BorrowMutError, Ref, RefCell, RefMut};
 pub struct RefCellStore<T>
 {
 
-    ref_cell: RefCell<T>
+    refcell: RefCell<T>
 
 }
 
@@ -19,16 +19,28 @@ impl<T> RefCellStore<T>
         Self
         {
 
-            ref_cell: RefCell::new(state)
+            refcell: RefCell::new(state)
 
         }
 
     }
 
-    pub fn ref_cell_ref(&self) -> &RefCell<T>
+    pub fn from_refcell(refcell: RefCell<T>) -> Self
     {
 
-        &self.ref_cell
+        Self
+        {
+
+            refcell
+
+        }
+
+    }
+
+    pub fn refcell_ref(&self) -> &RefCell<T>
+    {
+
+        &self.refcell
 
     }
 
@@ -38,7 +50,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(Ref<T>) -> R
     {
 
-        let rfc_ref = self.ref_cell.borrow();
+        let rfc_ref = self.refcell.borrow();
 
         func(rfc_ref)
 
@@ -48,7 +60,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(Ref<T>, P) -> R
     {
 
-        let rfc_ref = self.ref_cell.borrow();
+        let rfc_ref = self.refcell.borrow();
 
         func(rfc_ref, param)
 
@@ -58,7 +70,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(Ref<T>, &P) -> R
     {
 
-        let rfc_ref = self.ref_cell.borrow();
+        let rfc_ref = self.refcell.borrow();
 
         func(rfc_ref, param)
 
@@ -68,7 +80,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(Ref<T>, &mut P) -> R
     {
 
-        let rfc_ref = self.ref_cell.borrow();
+        let rfc_ref = self.refcell.borrow();
 
         func(rfc_ref, param)
 
@@ -80,7 +92,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>) -> R
     {
 
-        let rfc_mut = self.ref_cell.borrow_mut();
+        let rfc_mut = self.refcell.borrow_mut();
 
         func(rfc_mut)
 
@@ -90,7 +102,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>, P) -> R
     {
 
-        let rfc_mut = self.ref_cell.borrow_mut();
+        let rfc_mut = self.refcell.borrow_mut();
 
         func(rfc_mut, param)
 
@@ -100,7 +112,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>, &P) -> R
     {
 
-        let rfc_mut = self.ref_cell.borrow_mut();
+        let rfc_mut = self.refcell.borrow_mut();
 
         func(rfc_mut, param)
 
@@ -110,7 +122,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>, &mut P) -> R
     {
 
-        let rfc_mut = self.ref_cell.borrow_mut();
+        let rfc_mut = self.refcell.borrow_mut();
 
         func(rfc_mut, param)
 
@@ -122,7 +134,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(Ref<T>) -> R
     {
 
-        let ref_res = self.ref_cell.try_borrow();
+        let ref_res = self.refcell.try_borrow();
 
         match ref_res
         {
@@ -148,7 +160,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(Ref<T>, P) -> R
     {
 
-        let ref_res = self.ref_cell.try_borrow();
+        let ref_res = self.refcell.try_borrow();
 
         match ref_res
         {
@@ -173,7 +185,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(Ref<T>, &P) -> R
     {
 
-        let ref_res = self.ref_cell.try_borrow();
+        let ref_res = self.refcell.try_borrow();
 
         match ref_res
         {
@@ -199,7 +211,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(Ref<T>, &mut P) -> R
     {
 
-        let ref_res = self.ref_cell.try_borrow();
+        let ref_res = self.refcell.try_borrow();
 
         match ref_res
         {
@@ -227,7 +239,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>) -> R
     {
 
-        let ref_res = self.ref_cell.try_borrow_mut();
+        let ref_res = self.refcell.try_borrow_mut();
 
         match ref_res
         {
@@ -253,7 +265,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>, P) -> R
     {
 
-        let ref_res = self.ref_cell.try_borrow_mut();
+        let ref_res = self.refcell.try_borrow_mut();
 
         match ref_res
         {
@@ -278,7 +290,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>, &P) -> R
     {
 
-        let ref_res = self.ref_cell.try_borrow_mut();
+        let ref_res = self.refcell.try_borrow_mut();
 
         match ref_res
         {
@@ -304,7 +316,7 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>, &mut P) -> R
     {
 
-        let ref_res = self.ref_cell.try_borrow_mut();
+        let ref_res = self.refcell.try_borrow_mut();
 
         match ref_res
         {
