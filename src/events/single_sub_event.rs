@@ -8,9 +8,9 @@ struct MutState<S, T> //, F>
     //where F: FnMut(&S, Rc<T>) //-> bool
 {
 
-    parent: Weak<T>,
+    sender_parent: Weak<T>,
     //func: F,
-    func: Box<dyn FnMut(&S, Rc<T>)>,
+    func: Box<dyn FnMut(Rc<S>, Rc<T>)>,
     phantom_s: PhantomData<S>
 
 }
@@ -19,14 +19,14 @@ impl<S, T> MutState<S, T> //, F>
     //where F: FnMut(&S, Rc<T>) //-> bool
 {
 
-    fn new<F>(parent: &Weak<T>, func: F) -> Self
-        where F: FnMut(&S, Rc<T>) + 'static
+    fn new<F>(sender_parent: &Weak<T>, func: F) -> Self
+        where F: FnMut(Rc<S>, Rc<T>) + 'static
     {
 
         Self
         {
 
-            parent: parent.clone(),
+            sender_parent: sender_parent.clone(),
             func: Box::new(func),
             phantom_s: PhantomData::default()
 
@@ -40,7 +40,8 @@ pub struct SingleSubEvent<S, T> //, F>
     //where F: FnMut(&S, Rc<T>) //-> bool
 {
 
-    mut_state: RefCellStore<Option<MutState<S, T>>>
+    mut_state: RefCellStore<Option<MutState<S, T>>>,
+    weak_sender: Weak<S>
 
 }
 
@@ -48,27 +49,28 @@ impl<S, T> SingleSubEvent<S, T> //, F>
     //where F: FnMut(&S, Rc<T>) //-> bool
 {
 
-    pub fn new() -> Self
+    pub fn new(weak_sender: &Weak<S>) -> Self
     {
 
         Self
         {
 
-            mut_state: RefCellStore::new(None)
+            mut_state: RefCellStore::new(None),
+            weak_sender: weak_sender.clone()
 
         }
 
     }
 
-    pub fn subscribe<F>(&self, parent: &Weak<T>, func: F)
-        where F: FnMut(&S, Rc<T>) + 'static
+    pub fn subscribe<F>(&self, sender_parent: &Weak<T>, func: F)
+        where F: FnMut(Rc<S>, Rc<T>) + 'static
     {
 
         //let moved_parent = parent;
         
         //let moved_func = func;
 
-        self.mut_state.borrow_mut_with_param((parent, func),|mut ref_mut, (parent, func)|
+        self.mut_state.borrow_mut_with_param((sender_parent, func),|mut ref_mut, (parent, func)|
         {
 
             *ref_mut = Some(MutState::new(parent, func));
@@ -101,7 +103,7 @@ impl<S, T> SingleSubEvent<S, T> //, F>
 
     }
 
-    pub fn raise(&self, sender: &S) -> bool
+    pub fn raise(&self) -> bool
     {
 
         self.mut_state.borrow_mut(|mut ref_mut|
@@ -110,59 +112,45 @@ impl<S, T> SingleSubEvent<S, T> //, F>
             if let Some(val) = ref_mut.as_mut()
             {
 
-                if let Some(parent) = val.parent.upgrade()
+                if let Some(sender) = self.weak_sender.upgrade()
                 {
 
-                    (val.func)(sender, parent);
-
-                    /*
-                    if !(val.func)(parent)
+                    if let Some(sender_parent) = val.sender_parent.upgrade()
                     {
-
-                        *ref_mut = None;
-
+    
+                        (val.func)(sender, sender_parent);
+    
+                        return true;
+    
                     }
-                    */
-
-                    true
-
-                }
-                else
-                {
-                    
-                    false
 
                 }
 
             }
-            else
-            {
                 
-                false
-
-            }
+            false
 
         })
 
     }
 
-    pub fn get_sub_un_sub<'a>(&'a self) -> SubUnSub<'a, S, T>
+    pub fn pub_this<'a>(&'a self) -> PubSingleSubEvent<'a, S, T>
     {
 
-        SubUnSub::new(self)
+        PubSingleSubEvent::new(self)
 
     }
 
 }
 
-pub struct SubUnSub<'a, S, T>
+pub struct PubSingleSubEvent<'a, S, T>
 {
 
     sse: &'a SingleSubEvent<S, T>
 
 }
 
-impl<'a, S, T> SubUnSub<'a, S, T>
+impl<'a, S, T> PubSingleSubEvent<'a, S, T>
 {
 
     pub fn new(sse: &'a SingleSubEvent<S, T>) -> Self
@@ -183,8 +171,8 @@ impl<'a, S, T> SubUnSub<'a, S, T>
         to self.sse
         {
 
-            pub fn subscribe<F>(&self, parent: &Weak<T>, func: F)
-                where F: FnMut(&S, Rc<T>) + 'static;
+            pub fn subscribe<F>(&self, sender_parent: &Weak<T>, func: F)
+                where F: FnMut(Rc<S>, Rc<T>) + 'static;
 
             pub fn unsubscribe(&self);
 
@@ -195,3 +183,25 @@ impl<'a, S, T> SubUnSub<'a, S, T>
     } 
 
 }
+
+//Use in the sender impl block.
+
+#[macro_export]
+macro_rules! impl_pub_single_sub_event_method
+{
+
+    ($field:ident, $sender_parent_type:ty) =>
+    {
+
+        pub fn $field<'a>(&'a self) -> PubSingleSubEvent<'a, Self, $sender_parent_type>
+        {
+    
+            self.$field.pub_this()
+    
+        }
+
+    }
+
+}
+
+

@@ -10,7 +10,7 @@ struct MutState<S, A, T> //, F>
 
     parent: Weak<T>,
     //func: F,
-    func: Box<dyn FnMut(&S, &A, Rc<T>)>,
+    func: Box<dyn FnMut(Rc<S>, &A, Rc<T>)>,
     phantom_s: PhantomData<S>,
     phantom_a: PhantomData<A>
 
@@ -21,7 +21,7 @@ impl<S, A, T> MutState<S, A, T> //, F>
 {
 
     fn new<F>(parent: &Weak<T>, func: F) -> Self
-        where F: FnMut(&S, &A, Rc<T>) + 'static
+        where F: FnMut(Rc<S>, &A, Rc<T>) + 'static
     {
 
         Self
@@ -42,7 +42,8 @@ pub struct SingleSubArgsEvent<S, A, T> //, F>
     //where F: FnMut(&S, &A, Rc<T>) //-> bool
 {
 
-    mut_state: RefCellStore<Option<MutState<S, A, T>>>
+    mut_state: RefCellStore<Option<MutState<S, A, T>>>,
+    weak_sender: Weak<S>
 
 }
 
@@ -50,20 +51,21 @@ impl<S, A, T> SingleSubArgsEvent<S, A, T> //, F>
     //where F: FnMut(&S, &A, Rc<T>) //-> bool
 {
 
-    pub fn new() -> Self
+    pub fn new(weak_sender: &Weak<S>) -> Self
     {
 
         Self
         {
 
-            mut_state: RefCellStore::new(None)
+            mut_state: RefCellStore::new(None),
+            weak_sender: weak_sender.clone()
 
         }
 
     }
 
     pub fn subscribe<F>(&self, parent: &Weak<T>, func: F)
-        where F: FnMut(&S, &A, Rc<T>) + 'static
+        where F: FnMut(Rc<S>, &A, Rc<T>) + 'static
     {
 
         self.mut_state.borrow_mut_with_param((parent, func),|mut ref_mut, (parent, func)|
@@ -99,7 +101,7 @@ impl<S, A, T> SingleSubArgsEvent<S, A, T> //, F>
         
     }
 
-    pub fn raise(&self, sender: &S, event_args: &A) -> bool
+    pub fn raise(&self, event_args: &A) -> bool
     {
 
         self.mut_state.borrow_mut(|mut ref_mut|
@@ -108,50 +110,45 @@ impl<S, A, T> SingleSubArgsEvent<S, A, T> //, F>
             if let Some(val) = ref_mut.as_mut()
             {
 
-                if let Some(parent) = val.parent.upgrade()
+                if let Some(sender) = self.weak_sender.upgrade()
                 {
 
-                    (val.func)(sender, event_args, parent);
+                    if let Some(parent) = val.parent.upgrade()
+                    {
 
-                    true
+                        (val.func)(sender, event_args, parent);
 
-                }
-                else
-                {
-                    
-                    false
+                        return true;
+
+                    }
 
                 }
 
             }
-            else
-            {
-                
-                false
-
-            }
+               
+            false
 
         })
 
     }
 
-    pub fn get_sub_un_sub_args<'a>(&'a self) -> SubUnSubArgs<'a, S, A, T>
+    pub fn pub_this<'a>(&'a self) -> PubSingleSubArgsEvent<'a, S, A, T>
     {
 
-        SubUnSubArgs::new(self)
+        PubSingleSubArgsEvent::new(self)
 
     }
 
 }
 
-pub struct SubUnSubArgs<'a, S, A, T>
+pub struct PubSingleSubArgsEvent<'a, S, A, T>
 {
 
     ssae: &'a SingleSubArgsEvent<S, A, T>
 
 }
 
-impl<'a, S, A, T> SubUnSubArgs<'a, S, A, T>
+impl<'a, S, A, T> PubSingleSubArgsEvent<'a, S, A, T>
 {
 
     pub fn new(ssae: &'a SingleSubArgsEvent<S, A, T>) -> Self
@@ -172,8 +169,8 @@ impl<'a, S, A, T> SubUnSubArgs<'a, S, A, T>
         to self.ssae
         {
 
-            pub fn subscribe<F>(&self, parent: &Weak<T>, func: F)
-                where F: FnMut(&S, &A, Rc<T>) + 'static;
+            pub fn subscribe<F>(&self, sender_parent: &Weak<T>, func: F)
+                where F: FnMut(Rc<S>, &A, Rc<T>) + 'static;
 
             pub fn unsubscribe(&self);
 
@@ -182,5 +179,25 @@ impl<'a, S, A, T> SubUnSubArgs<'a, S, A, T>
         }
 
     } 
+
+}
+
+//Use in the sender impl block.
+
+#[macro_export]
+macro_rules! impl_pub_single_sub_args_event_method
+{
+
+    ($field:ident, $event_args_type:ty, $sender_parent_type:ty) =>
+    {
+
+        pub fn $field<'a>(&'a self) -> PubSingleSubArgsEvent<'a, Self, $event_args_type, $sender_parent_type>
+        {
+    
+            self.$field.pub_this()
+    
+        }
+
+    }
 
 }
