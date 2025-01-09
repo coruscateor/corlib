@@ -86,6 +86,16 @@ impl<T> RefCellStore<T>
 
     }
 
+    pub fn get(&self) -> T
+        where T: Clone
+    {
+
+        let rfc_ref = self.refcell.borrow();
+
+        rfc_ref.clone()
+
+    }
+
     //borrow_mut
 
     pub fn borrow_mut<F, R>(&self, mut func: F) -> R
@@ -125,6 +135,25 @@ impl<T> RefCellStore<T>
         let rfc_mut = self.refcell.borrow_mut();
 
         func(rfc_mut, param)
+
+    }
+
+    pub fn set(&self, item: T)
+    {
+
+        let mut rfc_mut = self.refcell.borrow_mut();
+
+        *rfc_mut = item;
+
+    }
+
+    pub fn clone_set(&self, item: &T)
+        where T: Clone
+    {
+
+        let mut rfc_mut = self.refcell.borrow_mut();
+
+        *rfc_mut = item.clone();
 
     }
 
@@ -233,15 +262,41 @@ impl<T> RefCellStore<T>
 
     }
 
+    pub fn try_get(&self) -> Result<T, BorrowError>
+        where T: Clone
+    {
+
+        let ref_res = self.refcell.try_borrow();
+
+        match ref_res
+        {
+
+            Ok(res) =>
+            {
+
+                Ok(res.clone())
+
+            }
+            Err(err) =>
+            {
+
+                Err(err)
+
+            }
+
+        }
+
+    }
+
     //try_borrow_mut
 
     pub fn try_borrow_mut<F, R>(&self, mut func: F) -> Result<R, BorrowMutError>
         where F: FnMut(RefMut<T>) -> R
     {
 
-        let ref_res = self.refcell.try_borrow_mut();
+        let mut_res = self.refcell.try_borrow_mut();
 
-        match ref_res
+        match mut_res
         {
 
             Ok(res) =>
@@ -265,9 +320,9 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>, P) -> R
     {
 
-        let ref_res = self.refcell.try_borrow_mut();
+        let mut_res = self.refcell.try_borrow_mut();
 
-        match ref_res
+        match mut_res
         {
 
             Ok(res) =>
@@ -290,9 +345,9 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>, &P) -> R
     {
 
-        let ref_res = self.refcell.try_borrow_mut();
+        let mut_res = self.refcell.try_borrow_mut();
 
-        match ref_res
+        match mut_res
         {
 
             Ok(res) =>
@@ -316,9 +371,9 @@ impl<T> RefCellStore<T>
         where F: FnMut(RefMut<T>, &mut P) -> R
     {
 
-        let ref_res = self.refcell.try_borrow_mut();
+        let mut_res = self.refcell.try_borrow_mut();
 
-        match ref_res
+        match mut_res
         {
 
             Ok(res) =>
@@ -335,6 +390,76 @@ impl<T> RefCellStore<T>
             }
 
         }
+
+    }
+
+    pub fn try_set(&self, item: T) -> Result<(), BorrowMutError>
+    {
+
+        let mut_res = self.refcell.try_borrow_mut();
+
+        match mut_res
+        {
+
+            Ok(mut res) =>
+            {
+
+                *res = item;
+
+                Ok(())
+
+            }
+            Err(err) =>
+            {
+
+                Err(err)
+
+            }
+
+        }
+
+    }
+
+    pub fn try_clone_set(&self, item: &T) -> Result<(), BorrowMutError>
+        where T: Clone
+    {
+
+        let mut_res = self.refcell.try_borrow_mut();
+
+        match mut_res
+        {
+
+            Ok(mut res) =>
+            {
+
+                *res = item.clone();
+
+                Ok(())
+
+            }
+            Err(err) =>
+            {
+
+                Err(err)
+
+            }
+
+        }
+
+    }
+
+    pub fn take(&self) -> T
+        where T: Default
+    {
+
+        self.refcell.take()
+
+    }
+
+    pub fn take_refcell(self) -> RefCell<T>
+    {
+
+        self.refcell
 
     }
 
