@@ -64,6 +64,8 @@ pub mod convert;
 
 pub mod cell;
 
+pub mod value;
+
 //DNW
 
 //mod as_copy;
