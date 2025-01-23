@@ -2,87 +2,119 @@
 //! For when you want to do stuff with values and generic type constraints.
 //! 
 
-pub trait HasValueGetter<T>
+pub trait HasValueGetter
 {
 
-    fn value(&self) -> T;
+    type HasValueType;
+
+    fn value(&self) -> Self::HasValueType;
 
 }
 
-pub trait HasOptionalValueGetter<T>
+pub trait HasOptionalValueGetter
 {
 
-    fn value(&self) -> Option<T>;
+    type HasValueType;
+
+    fn value(&self) -> Option<Self::HasValueType>;
 
 }
 
-pub trait HasValueSetter<T>
+pub trait HasValueSetter
 {
 
-    fn set_value(&self, value: T);
+    type HasValueType;
+
+    fn set_value(&self, value: Self::HasValueType);
 
 }
 
-pub trait HasValueSetReturn<T, R>
+pub trait HasValueSetReturn
 {
 
-    fn set_value(&self, value: T) -> R;
+    type HasValueType;
+
+    type HasValueReturnType;
+
+    fn set_value(&self, value: Self::HasValueType) -> Self::HasValueReturnType;
 
 }
 
-pub trait HasValueSetterMut<T>
+pub trait HasValueSetterMut
 {
 
-    fn set_value(&mut self, value: T);
+    type HasValueType;
+
+    fn set_value(&mut self, value: Self::HasValueType);
 
 }
 
-pub trait HasValueSetReturnMut<T, R>
+pub trait HasValueSetReturnMut
 {
 
-    fn set_value(&mut self, value: T) -> R;
+    type HasValueType;
+
+    type HasValueReturnType;
+
+    fn set_value(&mut self, value: Self::HasValueType) -> Self::HasValueReturnType;
 
 }
 
-pub trait HasValuePassRef<T>
+pub trait HasValuePassRef
 {
 
-    fn pass_value_ref(&self, value: &T);
+    type HasValueType;
+
+    fn pass_value_ref(&self, value: &Self::HasValueType);
 
 }
 
-pub trait HasMutValuePassRef<T>
+pub trait HasMutValuePassRef
 {
 
-    fn pass_value_ref(&mut self, value: &T);
+    type HasValueType;
+
+    fn pass_value_ref(&mut self, value: &Self::HasValueType);
 
 }
 
-pub trait HasValuePassRefReturn<T, R>
+pub trait HasValuePassRefReturn
 {
 
-    fn pass_value_ref(&self, value: &T) -> R;
+    type HasValueType;
+
+    type HasValueReturnType;
+
+    fn pass_value_ref(&self, value: &Self::HasValueType) -> Self::HasValueReturnType;
 
 }
 
-pub trait HasMutValuePassRefReturn<T, R>
+pub trait HasMutValuePassRefReturn
 {
 
-    fn pass_value_ref(&mut self, value: &T) -> R;
+    type HasValueType;
+
+    type HasValueReturnType;
+
+    fn pass_value_ref(&mut self, value: &Self::HasValueType) -> Self::HasValueReturnType;
 
 }
 
-pub trait HasValueRef<T>
+pub trait HasValueRef
 {
 
-    fn value_ref(&self) -> &T;
+    type HasValueType;
+
+    fn value_ref(&self) -> &Self::HasValueType;
 
 }
 
-pub trait HasValueMut<T>
+pub trait HasValueMut
 {
 
-    fn value_ref(&mut self) -> &mut T;
+    type HasValueType;
+
+    fn value_ref(&mut self) -> &mut Self::HasValueType;
 
 }
 
