@@ -24,8 +24,6 @@ mod base_dictionary_weak_rc_event;
 
 mod dictionary_weak_rc_args_event;
 
-mod skip_once;
-
 mod single_sub_event;
 
 pub use single_sub_event::*;

@@ -20,10 +20,6 @@ pub use gap_filling_counter::*;
 
 pub mod has_one;
 
-mod dropper;
-
-pub use dropper::*;
-
 mod getters_setters_callers;
 
 //pub use getters_setters_callers::*;
@@ -65,12 +61,6 @@ pub mod convert;
 pub mod cell;
 
 pub mod value;
-
-//DNW
-
-//mod as_copy;
-
-//pub use as_copy::*;
 
 cfg_if!
 {
