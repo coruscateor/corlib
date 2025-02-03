@@ -1,4 +1,8 @@
-use std::cell::{BorrowError, BorrowMutError, Ref, RefCell, RefMut};
+use std::{cell::{BorrowError, BorrowMutError, Ref, RefCell, RefMut}, rc::{Rc, Weak}};
+
+pub type RcRefCellStore<T> = Rc<RefCellStore<T>>;
+
+pub type WeakRefCellStore<T> = Weak<RefCellStore<T>>;
 
 /// 
 /// RefCellStore is intended to help you automatically manage RefCell references with closures.
@@ -146,8 +150,8 @@ impl<T> RefCellStore<T>
         *rfc_mut = item;
 
     }
-
-    pub fn clone_set(&self, item: &T)
+    
+    pub fn set_clone(&self, item: &T)
         where T: Clone
     {
 
@@ -420,7 +424,7 @@ impl<T> RefCellStore<T>
 
     }
 
-    pub fn try_clone_set(&self, item: &T) -> Result<(), BorrowMutError>
+    pub fn try_set_clone(&self, item: &T) -> Result<(), BorrowMutError>
         where T: Clone
     {
 
