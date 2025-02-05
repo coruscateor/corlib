@@ -1,4 +1,4 @@
-use std::ops::Deref;
+use std::{fmt::Debug, ops::Deref};
 
 ///
 /// This object makes its contained object externally immutable only.
@@ -69,5 +69,15 @@ impl<T> Default for Immut<T>
 
     }
     
+}
+
+impl<T> Debug for Immut<T>
+    where T: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Immut").field("item", &self.item).finish()
+    }
+
 }
 

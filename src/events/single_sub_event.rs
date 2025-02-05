@@ -1,4 +1,4 @@
-use std::{marker::PhantomData, rc::{Rc, Weak}};
+use std::{fmt::Debug, marker::PhantomData, rc::{Rc, Weak}};
 
 use crate::cell::RefCellStore;
 
@@ -34,6 +34,19 @@ impl<S, T> MutState<S, T> //, F>
 
     }
 
+}
+
+impl<S, T> Debug for MutState<S, T>
+    where S: Debug,
+          T: Debug
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("MutState").field("sender_parent", &self.sender_parent)
+        //.field("func", &self.func)
+        .field("func", &"Omitted")
+        .field("phantom_s", &self.phantom_s)
+        .finish()
+    }
 }
 
 pub struct SingleSubEvent<S, T> //, F>
@@ -143,6 +156,17 @@ impl<S, T> SingleSubEvent<S, T> //, F>
 
 }
 
+impl<S, T> Debug for SingleSubEvent<S, T>
+    where S: Debug,
+          T: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("SingleSubEvent").field("mut_state", &self.mut_state).field("weak_sender", &self.weak_sender).finish()
+    }
+
+}
+
 pub struct PubSingleSubEvent<'a, S, T>
 {
 
@@ -182,6 +206,17 @@ impl<'a, S, T> PubSingleSubEvent<'a, S, T>
 
     } 
 
+}
+
+impl<'a, S, T> Debug for PubSingleSubEvent<'a, S, T>
+    where S: Debug,
+          T: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("PubSingleSubEvent").field("sse", &self.sse).finish()
+    }
+    
 }
 
 //Use in the sender impl block.

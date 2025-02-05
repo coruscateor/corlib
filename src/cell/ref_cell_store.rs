@@ -1,4 +1,4 @@
-use std::{cell::{BorrowError, BorrowMutError, Ref, RefCell, RefMut}, rc::{Rc, Weak}};
+use std::{cell::{BorrowError, BorrowMutError, Ref, RefCell, RefMut}, fmt::Debug, rc::{Rc, Weak}};
 
 pub type RcRefCellStore<T> = Rc<RefCellStore<T>>;
 
@@ -467,4 +467,14 @@ impl<T> RefCellStore<T>
 
     }
 
+}
+
+impl<T> Debug for RefCellStore<T>
+    where T: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("RefCellStore").field("refcell", &self.refcell).finish()
+    }
+    
 }
