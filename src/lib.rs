@@ -62,6 +62,8 @@ pub mod cell;
 
 pub mod value;
 
+pub mod cargo_env;
+
 cfg_if!
 {
 
