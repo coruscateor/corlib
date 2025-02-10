@@ -64,7 +64,14 @@ impl<T: ?Sized> ArcByPtr<T>
 
     }
 
-    pub fn contents(&self) -> &Arc<T>
+    pub fn contents(&self) -> Arc<T>
+    {
+
+        self.contents.clone()
+
+    }
+
+    pub fn contents_ref(&self) -> &Arc<T>
     {
 
         &self.contents
@@ -100,7 +107,7 @@ impl<T: ?Sized> PartialEq for ArcByPtr<T>
     fn eq(&self, other: &Self) -> bool
     {
 
-        Arc::ptr_eq(&self.contents, other.contents())
+        Arc::ptr_eq(&self.contents, other.contents_ref())
 
     }
 
@@ -151,7 +158,7 @@ impl<T: ?Sized> PartialOrd for ArcByPtr<T>
 
         let left = Arc::as_ptr(&self.contents).cast::<()>(); //.partial_cmp(other)
 
-        let right = Arc::as_ptr(other.contents()).cast::<()>();
+        let right = Arc::as_ptr(other.contents_ref()).cast::<()>();
 
         /*
         ambiguous wide pointer comparison, the comparison includes metadata which may not be expectedrustcClick for full compiler diagnostic
@@ -172,7 +179,7 @@ impl<T: ?Sized> Ord for ArcByPtr<T>
         
         let left = Arc::as_ptr(&self.contents).cast::<()>();
 
-        let right = Arc::as_ptr(other.contents()).cast::<()>();
+        let right = Arc::as_ptr(other.contents_ref()).cast::<()>();
 
         /*
         ambiguous wide pointer comparison, the comparison includes metadata which may not be expectedrustcClick for full compiler diagnostic

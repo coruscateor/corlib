@@ -64,7 +64,14 @@ impl<T: ?Sized> RcByPtr<T>
 
     }
 
-    pub fn contents(&self) -> &Rc<T>
+    pub fn contents(&self) -> Rc<T>
+    {
+
+        self.contents.clone()
+
+    }
+
+    pub fn contents_ref(&self) -> &Rc<T>
     {
 
         &self.contents
@@ -100,7 +107,7 @@ impl<T: ?Sized> PartialEq for RcByPtr<T>
     fn eq(&self, other: &Self) -> bool
     {
 
-        Rc::ptr_eq(&self.contents, other.contents())
+        Rc::ptr_eq(&self.contents, other.contents_ref())
 
     }
 
@@ -151,7 +158,7 @@ impl<T: ?Sized> PartialOrd for RcByPtr<T>
 
         let left = Rc::as_ptr(&self.contents).cast::<()>(); //.partial_cmp(other)
 
-        let right = Rc::as_ptr(other.contents()).cast::<()>();
+        let right = Rc::as_ptr(other.contents_ref()).cast::<()>();
 
         left.partial_cmp(&right)
 
@@ -167,7 +174,7 @@ impl<T: ?Sized> Ord for RcByPtr<T>
         
         let left = Rc::as_ptr(&self.contents).cast::<()>();
 
-        let right = Rc::as_ptr(other.contents()).cast::<()>();
+        let right = Rc::as_ptr(other.contents_ref()).cast::<()>();
 
         left.cmp(&right)
         

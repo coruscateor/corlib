@@ -75,7 +75,7 @@ impl<S> ListEvent<S>
         {
 
             //if !item.get_contents_ref()(sender)
-            if !item.contents()(sender)
+            if !item.contents_ref()(sender)
             {
 
                 items_to_remove.push(index);

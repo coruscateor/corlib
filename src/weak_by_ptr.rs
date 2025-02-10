@@ -51,7 +51,14 @@ impl<T: ?Sized> WeakByPtr<T>
 
     }
 
-    pub fn contents(&self) -> &Weak<T>
+    pub fn contents(&self) -> Weak<T>
+    {
+
+        self.contents.clone()
+
+    }
+    
+    pub fn contents_ref(&self) -> &Weak<T>
     {
 
         &self.contents
@@ -112,7 +119,7 @@ impl<T: ?Sized> PartialEq for WeakByPtr<T>
     fn eq(&self, other: &Self) -> bool
     {
 
-        self.contents.ptr_eq(other.contents())
+        self.contents.ptr_eq(other.contents_ref())
 
     }
 
@@ -159,7 +166,7 @@ impl<T: ?Sized> PartialOrd for WeakByPtr<T>
 
         let left = Weak::as_ptr(&self.contents).cast::<()>();
 
-        let right = Weak::as_ptr(other.contents()).cast::<()>();
+        let right = Weak::as_ptr(other.contents_ref()).cast::<()>();
 
         left.partial_cmp(&right)
 
@@ -175,7 +182,7 @@ impl<T: ?Sized> Ord for WeakByPtr<T>
         
         let left = Weak::as_ptr(&self.contents).cast::<()>();
 
-        let right = Weak::as_ptr(other.contents()).cast::<()>();
+        let right = Weak::as_ptr(other.contents_ref()).cast::<()>();
 
         left.cmp(&right)
         
