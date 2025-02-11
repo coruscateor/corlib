@@ -5,7 +5,7 @@ use std::{any::Any, hash::{Hash, Hasher}};
 ///
 /// For all your dynamic hashing needs 
 ///
-/// Inspired by: https://users.rust-lang.org/t/workaround-for-hash-trait-not-being-object-safe/53332/4
+/// Inspired by: <https://users.rust-lang.org/t/workaround-for-hash-trait-not-being-object-safe/53332/4>
 ///
 pub trait DynHash
 {
