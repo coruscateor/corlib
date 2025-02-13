@@ -78,4 +78,6 @@ cfg_if!
 
 }
 
+pub mod weak_self;
+
 
