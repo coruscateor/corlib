@@ -4,10 +4,12 @@
 //! get_some will take one or more Option objects (up to 8) and return their taken values, panicing with GET_SOME_ERROR_MESSAGE if any of the provided Option values are None.
 //! 
 
-pub static GET_SOME_ERROR_MESSAGE: &str = "Error: Nothing here!";
+//Disabled
+
+//pub static GET_SOME_ERROR_MESSAGE: &str = "Error: Nothing here!";
 
 /// 
-/// Takes one or more Option enum objects and returns taken values from those Options, panicing with GET_SOME_ERROR_MESSAGE if any values are not found.
+/// Takes one or more Option enum objects and returns the taken objects from those Options, panicking with "Error: Nothing here!" if at least one object isn’t found.
 /// 
 #[macro_export]
 macro_rules! get_some
@@ -20,11 +22,13 @@ macro_rules! get_some
 
             //use crate::get_some;
 
-            use corlib::get_some;
+            //use corlib::get_some;
 
             let res = $option_name.take();
 
-            res.expect(get_some::GET_SOME_ERROR_MESSAGE)
+            res.expect("Error: Nothing here!")
+
+            //res.expect(get_some::GET_SOME_ERROR_MESSAGE)
 
         }
 

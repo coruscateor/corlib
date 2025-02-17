@@ -1,11 +1,7 @@
-//!
-//! The AsAny trait and impl_as_any macro, useful for when you want to convert a reference to &dyn Any.
-//! 
-
 use std::any::Any;
 
 ///
-/// A trait with a method for returning a &dyn Any instance (presumably of &self).
+/// A trait with a method for returning a &dyn Any instance (of &self presumably).
 /// 
 pub trait AsAnyRef
 {
@@ -16,8 +12,6 @@ pub trait AsAnyRef
 
 ///
 /// A macro for implementing the AsAnyRef trait.
-/// 
-/// Both AsAnyRef implementations in both match cases return &self.
 /// 
 #[macro_export]
 macro_rules! impl_as_any_ref

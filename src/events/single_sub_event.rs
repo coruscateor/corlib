@@ -49,6 +49,9 @@ impl<S, T> Debug for MutState<S, T>
     }
 }
 
+///
+/// For situations where you'll only have a single subscriber to your event.
+/// 
 pub struct SingleSubEvent<S, T> //, F>
     //where F: FnMut(&S, Rc<T>) //-> bool
 {
@@ -167,6 +170,9 @@ impl<S, T> Debug for SingleSubEvent<S, T>
 
 }
 
+///
+/// A facade that exposes selected methods of SingleSubEvent publicly.
+/// 
 pub struct PubSingleSubEvent<'a, S, T>
 {
 
@@ -221,6 +227,9 @@ impl<'a, S, T> Debug for PubSingleSubEvent<'a, S, T>
 
 //Use in the sender impl block.
 
+///
+/// Generates a method that enables convenient access to the result of a pub_this call on a SingleSubEvent.
+/// 
 #[macro_export]
 macro_rules! impl_pub_single_sub_event_method
 {

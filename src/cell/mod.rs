@@ -1,5 +1,5 @@
 //!
-//! RefCell stuff
+//! The items in this module help you work with RefCells.
 //!
 
 mod rfc;

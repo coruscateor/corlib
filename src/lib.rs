@@ -34,7 +34,9 @@ pub mod text;
 
 //pub use text::*;
 
-pub mod get_some;
+mod get_some;
+
+pub use get_some::*;
 
 pub mod inc_dec;
 
@@ -78,6 +80,6 @@ cfg_if!
 
 }
 
-pub mod weak_self;
+mod weak_self;
 
-
+pub use weak_self::*;

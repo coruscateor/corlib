@@ -59,6 +59,9 @@ impl<S, A, T> Debug for MutState<S, A, T>
 
 }
 
+///
+/// For situations where you'll only have a single subscriber to your event. Unlike SingleSubEvent you pass a reference to an argument object when you raise an event.
+/// 
 pub struct SingleSubArgsEvent<S, A, T> //, F>
     //where F: FnMut(&S, &A, Rc<T>) //-> bool
 {
@@ -174,7 +177,9 @@ impl<S, A, T> Debug for SingleSubArgsEvent<S, A, T>
 
 }
 
-
+///
+/// A facade that exposes selected methods of SingleSubArgsEvent publicly.
+/// 
 pub struct PubSingleSubArgsEvent<'a, S, A, T>
 {
 
@@ -230,6 +235,9 @@ impl<'a, S, A, T> Debug for PubSingleSubArgsEvent<'a, S, A, T>
 
 //Use in the sender impl block.
 
+///
+/// Generates a method that enables convenient access to the result of a pub_this call on a SingleSubArgsEvent.
+/// 
 #[macro_export]
 macro_rules! impl_pub_single_sub_args_event_method
 {

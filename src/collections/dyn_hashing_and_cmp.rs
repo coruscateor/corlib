@@ -1,9 +1,13 @@
+//!
+//! For when you need to dynamically hash stuff. 
+//! 
+
 use std::{any::Any, hash::{Hash, Hasher}};
 
 //Hash
 
 ///
-/// For all your dynamic hashing needs 
+/// For when you need to dynamically hash objects. 
 ///
 /// Inspired by: <https://users.rust-lang.org/t/workaround-for-hash-trait-not-being-object-safe/53332/4>
 ///
@@ -15,9 +19,9 @@ pub trait DynHash
 }
 
 ///
-/// PartialEq or Eq (May be renamed to DynPartialEq)
+/// PartialEq but dynamic
 ///
-pub trait DynPartialEqOrEq
+pub trait DynPartialEq
 {
 
     fn dyn_eq(&self, other: &dyn Any) -> bool;
@@ -25,10 +29,10 @@ pub trait DynPartialEqOrEq
 }
 
 ///
-/// A Struct for adapting objects that implement DynHash and DynPartialEqOrEq to the standard Hash and PartialEq traits.
+/// A struct for adapting objects that implement DynHash and DynPartialEq to work with the standard Hash and PartialEq traits.
 /// 
 pub struct DynHashAdapter<T>
-    where T: DynHash + DynPartialEqOrEq
+    where T: DynHash + DynPartialEq
 {
 
     dyn_hashable_object: T
@@ -36,7 +40,7 @@ pub struct DynHashAdapter<T>
 }
 
 impl<T> DynHashAdapter<T>
-    where T: DynHash + DynPartialEqOrEq
+    where T: DynHash + DynPartialEq
 {
 
     pub fn new(dyn_hashable_object: T) -> Self
@@ -51,7 +55,7 @@ impl<T> DynHashAdapter<T>
 
     }
 
-    pub fn object(&self) -> &T
+    pub fn object_ref(&self) -> &T
     {
 
         &self.dyn_hashable_object
@@ -75,7 +79,7 @@ impl<T> DynHashAdapter<T>
 }
 
 impl<T> Hash for DynHashAdapter<T>
-    where T: DynHash + DynPartialEqOrEq
+    where T: DynHash + DynPartialEq
 {
 
     fn hash<H: Hasher>(&self, state: &mut H)
@@ -88,13 +92,13 @@ impl<T> Hash for DynHashAdapter<T>
 }
 
 impl<T> PartialEq for DynHashAdapter<T>
-    where T: DynHash + DynPartialEqOrEq + 'static
+    where T: DynHash + DynPartialEq + 'static
 {
     
     fn eq(&self, other: &Self) -> bool
     {
         
-        self.dyn_hashable_object.dyn_eq(other.object())
+        self.dyn_hashable_object.dyn_eq(other.object_ref())
 
     }
     
@@ -117,63 +121,63 @@ impl<T> Eq for DynHashAdapter<T>
 //impl macro
 
 ///
-/// An adapter struct for use where only a PartialEq is needed (may be renamed to DynPartialEqAdapter).
+/// An adapter struct for use where only a PartialEq is needed.
 /// 
-pub struct DynPartialEqOrEqAdapter<T>
-    where T: DynPartialEqOrEq
+pub struct DynPartialEqAdapter<T>
+    where T: DynPartialEq
 {
 
-    dyn_partial_eq_or_eq_object: T
+    dyn_partial_eq_object: T
 
 }
 
-impl<T> DynPartialEqOrEqAdapter<T>
-    where T: DynPartialEqOrEq
+impl<T> DynPartialEqAdapter<T>
+    where T: DynPartialEq
 {
 
-    pub fn new(dyn_partial_eq_or_eq_object: T) -> Self
+    pub fn new(dyn_partial_eq_object: T) -> Self
     {
 
         Self
         {
 
-            dyn_partial_eq_or_eq_object
+            dyn_partial_eq_object
 
         }
 
     }
 
-    pub fn object(&self) -> &T
+    pub fn object_ref(&self) -> &T
     {
 
-        &self.dyn_partial_eq_or_eq_object
+        &self.dyn_partial_eq_object
 
     }
 
     pub fn object_mut(&mut self) -> &mut T
     {
 
-        &mut self.dyn_partial_eq_or_eq_object
+        &mut self.dyn_partial_eq_object
 
     }
 
     pub fn take(self) -> T
     {
 
-        self.dyn_partial_eq_or_eq_object
+        self.dyn_partial_eq_object
 
     }
 
 }
 
-impl<T> PartialEq for DynPartialEqOrEqAdapter<T>
-    where T: DynPartialEqOrEq + 'static
+impl<T> PartialEq for DynPartialEqAdapter<T>
+    where T: DynPartialEq + 'static
 {
     
     fn eq(&self, other: &Self) -> bool
     {
         
-        self.dyn_partial_eq_or_eq_object.dyn_eq(other.object())
+        self.dyn_partial_eq_object.dyn_eq(other.object_ref())
 
     }
     

@@ -1,6 +1,8 @@
 use std::rc::Weak;
 
-
+///
+/// This trait is useful when implementing the weak-self design pattern. 
+///
 pub trait WeakSelf
 {
 
@@ -10,6 +12,9 @@ pub trait WeakSelf
 
 }
 
+///
+/// This macro helps you implement the weak-self design pattern.
+/// 
 #[macro_export]
 macro_rules! impl_weak_self_trait
 {
