@@ -1,6 +1,6 @@
 [package]
 name = "corlib"
-version = "0.3.0"
+version = "0.4.0-beta"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "A various ideas library"

@@ -1,12 +1,9 @@
-//!
-//! This module enables you to do ++ and -- like operations on standard numeric primitives.
-//! 
-//! “pp” stands for “plus plus” and “mm” stands for “minus minus”, obviously.
-//! 
 
 //Incrementation
 
-/// Increments an integer by one.
+///
+/// Increments the provided integer by one.
+/// 
 #[macro_export]
 macro_rules! pp
 {
@@ -20,6 +17,9 @@ macro_rules! pp
 
 }
 
+///
+/// Increments the provided integer by one and returns it.
+/// 
 #[macro_export]
 macro_rules! pp_mut
 {
@@ -39,6 +39,11 @@ macro_rules! pp_mut
 
 }
 
+///
+/// Calls checked_add on an integer with 1 as a parameter.
+/// 
+/// Overwrites the provided integer.
+/// 
 #[macro_export]
 macro_rules! checked_pp_mut
 {
@@ -65,7 +70,9 @@ macro_rules! checked_pp_mut
 
 }
 
-/// Increments a floating point number by one.
+///
+/// Increments the provided floating point number by one.
+/// 
 #[macro_export]
 macro_rules! ppf
 {
@@ -79,6 +86,9 @@ macro_rules! ppf
 
 }
 
+///
+/// Increments the provided floating point number by one and returns it.
+/// 
 #[macro_export]
 macro_rules! ppf_mut
 {
@@ -108,7 +118,9 @@ No quick fixes available
 
 //Decrementation
 
-/// Decrements an integer by one.
+///
+/// Decrements the provided integer by one.
+/// 
 #[macro_export]
 macro_rules! mm
 {
@@ -122,6 +134,9 @@ macro_rules! mm
 
 }
 
+///
+/// Decrements the provided integer by one and returns it.
+/// 
 #[macro_export]
 macro_rules! mm_mut
 {
@@ -141,7 +156,9 @@ macro_rules! mm_mut
 
 }
 
-/// Decrements a floating point number by one.
+///
+/// Decrements the provided floating point number by one.
+/// 
 #[macro_export]
 macro_rules! mmf
 {
@@ -155,6 +172,9 @@ macro_rules! mmf
 
 }
 
+///
+/// Decrements the provided floating point number by one and returns it.
+/// 
 #[macro_export]
 macro_rules! mmf_mut
 {
@@ -174,6 +194,11 @@ macro_rules! mmf_mut
 
 }
 
+///
+/// Calls checked_sub on an integer with 1 as a parameter.
+/// 
+/// Overwrites the provided integer.
+/// 
 #[macro_export]
 macro_rules! checked_mm_mut
 {
@@ -200,6 +225,9 @@ macro_rules! checked_mm_mut
 
 }
 
+///
+/// For implementing incrementation and decrementation on Self.
+/// 
 pub trait IncDecSelf
     where Self: Sized + Copy
 {
@@ -844,6 +872,9 @@ impl IncDecSelf for usize
 
 //Integers Only
 
+///
+/// For implementing integer-only incrementation and decrementation on Self.
+/// 
 pub trait IntIncDecSelf
     where Self: Sized + Copy
 {
@@ -858,6 +889,11 @@ pub trait IntIncDecSelf
 
 }
 
+///
+/// Calls overflowing_add on an integer with 1 as a parameter.
+///
+/// Overwites the provided integer with the first value and returns the tuple.
+/// 
 #[macro_export]
 macro_rules! opp_mut
 {
@@ -879,6 +915,11 @@ macro_rules! opp_mut
 
 }
 
+///
+/// Calls overflowing_sub on an integer with 1 as a parameter.
+/// 
+/// Overwites the provided integer with the first value and returns the tuple.
+/// 
 #[macro_export]
 macro_rules! omm_mut
 {
@@ -900,6 +941,11 @@ macro_rules! omm_mut
 
 }
 
+///
+/// Calls wrapping_add on an integer with 1 as a parameter.
+///
+/// Overwites the provided integer and returns it.
+/// 
 #[macro_export]
 macro_rules! wpp_mut
 {
@@ -919,6 +965,11 @@ macro_rules! wpp_mut
 
 }
 
+///
+/// Calls wrapping_sub on an integer with 1 as a parameter.
+///
+/// Overwites the provided integer and returns it.
+/// 
 #[macro_export]
 macro_rules! wmm_mut
 {

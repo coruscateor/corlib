@@ -27,23 +27,19 @@ Like an option but not optional.
 
 ### RcByPtr and WeakByPtr
   
-Compare and hash Rc and Rc::Weak objects by pointer instead of by value.  
+Compare and hash Rc and Rc::Weak objects by pointer instead of by value.
+
+### ArcByPtr and SyncWeakByPtr
+  
+Compare and hash Arc and Sync::Weak objects by pointer instead of by value.  
 
 ### RcDefault and ArcDefault
 
 Default traits for returning reference counted types.
 
-### MovableText
+### Immut
 
-For conveniently moving owned and static strings and string slices around.
-
-### AsStr
-
-A trait with an as_str method.
-
-### Droppers
-
-Structs for calling closures on drop.
+Forces external mutability.
 
 ### GapFillingCounter
 
@@ -52,16 +48,6 @@ A counter that can recycle "gaps".
 ### Getters Setters Callers
 
 Macros for implementing getters, setters and calling methods on regular structs and RefCells.
-
-### HasOne
-
-Sometimes you just want the value 1 (or 1.0).
-
-### Lazy
-
-A struct for lazily initialising objects.
-
-Does not contain its own initialising closure.
 
 ### As Any
 

@@ -4,6 +4,9 @@ use delegate::delegate;
 
 use super::SendableText;
 
+///
+/// Maintains a Queue of SendableText objects to be copied into a provided buffer.
+/// 
 pub struct SendableTextLog
 {
 

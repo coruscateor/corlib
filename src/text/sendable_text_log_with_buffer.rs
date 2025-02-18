@@ -6,6 +6,9 @@ use super::{SendableText, SendableTextLog};
 
 static NO_STRING_ERROR_MESSAGE: &str = "Error: There has to be a String here.";
 
+///
+/// Maintains a Queue of SendableText objects to be copied into an internal buffer.
+/// 
 pub struct SendableTextLogWithBuffer
 {
 
@@ -122,7 +125,7 @@ impl SendableTextLogWithBuffer
         }
     }
 
-    pub fn buffer(&self) -> &String
+    pub fn buffer_ref(&self) -> &String
     {
 
         self.buffer.as_ref().expect(NO_STRING_ERROR_MESSAGE)
