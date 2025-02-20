@@ -5,7 +5,7 @@ use delegate::delegate;
 use std::fmt::Debug;
 
 ///
-/// For indicating when some work has been done or is in the process of being done, potentially being accompanied by a result value of some kind.
+/// For indicating when some work has been done or is in the process of being done, potentially being accompanied by a result object.
 /// 
 pub struct WorkInProgressResult<T>
 {
@@ -135,9 +135,8 @@ impl<T> Debug for WorkInProgressResult<T>
 
 }
 
-
 ///
-/// The same as WorkInProgressResult, but with an id.
+/// A WorkInProgressResult with an id.
 /// 
 pub struct IdedWorkInProgressResult<ID, T>
 {

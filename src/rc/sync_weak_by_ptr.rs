@@ -1,6 +1,6 @@
 use std::sync::{Arc, Weak};
 
-use crate::ArcByPtr;
+use super::ArcByPtr;
 
 use std::hash::{Hash, Hasher};
 

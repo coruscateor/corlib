@@ -23,23 +23,15 @@ Corlib is a various ideas library.
 
 ### NonOption
 
-Like an option but not optional.    
-
-### RcByPtr and WeakByPtr
-  
-Compare and hash Rc and Rc::Weak objects by pointer instead of by value.
-
-### ArcByPtr and SyncWeakByPtr
-  
-Compare and hash Arc and Sync::Weak objects by pointer instead of by value.  
-
-### RcDefault and ArcDefault
-
-Default traits for returning reference counted types.
+Like an option but not optional.
 
 ### Immut
 
-Forces external mutability.
+Forces external immutability.
+
+### WorkInProgressResult And IdedWorkInProgressResult
+
+Containers used for communicating results and statuses of ongoing operations.
 
 ### GapFillingCounter
 
@@ -49,42 +41,59 @@ A counter that can recycle "gaps".
 
 Macros for implementing getters, setters and calling methods on regular structs and RefCells.
 
-### As Any
-
-A trait with a method (as_any) for returning a &dyn Any instance of &self (comes with a handy implementation macro).
-
 ### Get Some
 
 Convert Options into certainty.
 
-### Inc Dec Macros
+## Sub-Modules:
 
-Miss the ++ and -- operators?
+### Cell
 
-This module can help sort you out.
+Macros, functions and the RefCellStore which help make working with RefCells easier.
 
 ### Collections
 
 Collections and collection related objects.
 
+### Convert
+
+Convert stuff into &dyn Any and &mut dyn Anys.
+
 ### Events
 
-Events and event related objects. Inspred by .NET events.
+Events and event related objects. Loosely inspred by .NET events.
 
-### Rfc
+### Has One
 
-Macros and functions that help you work with RefCells.
+Get the value of one for each numeric type.
+
+### Inc Dec
+
+Miss the ++ and -\- operators?
+
+This module can help sort you out.
+
+### Rc
+
+Reference counting related helper structs and traits.
+
+### Text
+
+Look at SendableText and AsStr.
 
 ### Upgrading
 
 Functions that help you deal with upgrading reference counted objects.
+
+### Value
+
+For when you want to move values around.
 
 ## Todo:
 
 - Add more documentation
 - Add code examples
 - Add more tests
-- Add Hashmap and Hashset based event implementations
 - Clean-up the code
 - Solidify the API for 1.0
 

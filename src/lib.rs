@@ -10,9 +10,9 @@ pub mod collections;
 
 pub mod events;
 
-mod weak_by_ptr;
+//mod weak_by_ptr;
 
-pub use weak_by_ptr::*;
+//pub use weak_by_ptr::*;
 
 mod gap_filling_counter;
 
@@ -24,11 +24,11 @@ mod getters_setters_callers;
 
 //pub use getters_setters_callers::*;
 
-mod rc_by_ptr;
+//mod rc_by_ptr;
 
-pub use rc_by_ptr::*;
+//pub use rc_by_ptr::*;
 
-pub mod rc_default;
+//pub mod rc_default;
 
 pub mod text;
 
@@ -42,13 +42,13 @@ pub mod inc_dec;
 
 pub mod upgrading;
 
-mod arc_by_ptr;
+//mod arc_by_ptr;
 
-pub use arc_by_ptr::*;
+//pub use arc_by_ptr::*;
 
-mod sync_weak_by_ptr;
+//mod sync_weak_by_ptr;
 
-pub use sync_weak_by_ptr::*;
+//pub use sync_weak_by_ptr::*;
 
 mod immut;
 
@@ -83,3 +83,5 @@ cfg_if!
 mod weak_self;
 
 pub use weak_self::*;
+
+pub mod rc;

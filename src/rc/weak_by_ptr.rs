@@ -1,6 +1,6 @@
 use std::{fmt::Debug, rc::{Rc, Weak}};
 
-use crate::rc_by_ptr::RcByPtr;
+use super::RcByPtr;
 
 use std::hash::{Hash, Hasher};
 

@@ -1,6 +1,6 @@
 use std::rc::{Rc, Weak};
 
-use crate::WeakByPtr;
+use super::WeakByPtr;
 
 use std::hash::{Hash, Hasher};
 

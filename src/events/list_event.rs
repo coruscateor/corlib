@@ -5,7 +5,7 @@ use std::ops::Fn;
 
 use crate::collections::List;
 
-use crate::weak_by_ptr::WeakByPtr;
+use crate::rc::WeakByPtr;
 
 use std::vec::Vec;
 
@@ -17,7 +17,7 @@ use super::base_list_event::{BaseListEvent, LEPubEvent};
 
 //UniqueList
 
-use crate::rc_by_ptr::RcByPtr;
+use crate::rc::RcByPtr;
 
 //type FuncType<S> = dyn Fn(&S) -> bool; //mut 
 

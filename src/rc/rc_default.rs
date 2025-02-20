@@ -6,7 +6,9 @@ use std::rc::Rc;
 
 use std::sync::Arc;
 
-///Intended to be used to return a default reference counted object containing Self.
+///
+/// A trait for giving a default value in a reference counted object.
+/// 
 pub trait RcDefault
 {
 
@@ -14,7 +16,9 @@ pub trait RcDefault
     
 }
 
-///Intended to be used to return a default atomically reference counted object containing Self.
+///
+/// A trait for giving a default value in an atomically reference counted object.
+/// 
 pub trait ArcDefault
 {
 

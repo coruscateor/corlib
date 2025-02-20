@@ -6,7 +6,7 @@ use std::ops::Fn;
 
 use crate::collections::{Dictionary};
 
-use crate::weak_by_ptr::WeakByPtr;
+use crate::rc::WeakByPtr;
 
 use std::vec::Vec;
 

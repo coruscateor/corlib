@@ -7,8 +7,9 @@ use std::slice::Iter;
 
 use crate::collections::{Dictionary, KeyValuePair};
 
-use crate::rc_by_ptr::RcByPtr;
-use crate::weak_by_ptr::WeakByPtr;
+use crate::rc::RcByPtr;
+
+use crate::rc::WeakByPtr;
 
 use std::vec::Vec;
 

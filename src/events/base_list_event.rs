@@ -6,7 +6,7 @@ use std::slice::Iter;
 
 use crate::collections::UniqueItemList;
 
-use crate::weak_by_ptr::WeakByPtr;
+use crate::rc::WeakByPtr;
 
 use std::vec::Vec;
 
@@ -16,7 +16,7 @@ use delegate::delegate;
 
 //UniqueList
 
-use crate::rc_by_ptr::RcByPtr;
+use crate::rc::RcByPtr;
 
 ///
 /// A base struct for UniqueItemList based events containing event handler functions,
