@@ -1,5 +1,128 @@
 # Changelog
 
+## Version 0.4.0 (__/02/2025)
+
+Added
+
+- Added ArcByPtr and SyncWeakByPtr structs to rc.
+
+- Added pp_mut, checked_pp_mut, ppf_mut, mm_mut, mmf_mut, checked_mm_mut macros to the inc_dec module.
+
+- Added the IncDecSelf trait to the inc_dec module.
+
+- Added IncDecSelf trait implementations for the f32, f64, i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, and usize primitive objects.
+
+- Added an ArcStr variant as well as is_arc_str and extract_string methods to MovableText and renamed it to SendableText.
+
+- Added SendableTextLog and SendableTextLogWithBuffer to the text module.
+
+- Added pp_mut, checked_pp_mut, ppf_mut, mm_mut, mmf_mut, checked_mm_mut macros to the inc_dec module.
+
+-- Added IncrementsSelf and DecrementsSelf traits to the inc_dec module.
+
+-- Added IncrementsSelf and DecrementsSelf trait implementations for the f32, f64, i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, and usize primitive objects.
+
+- Added a drop_panic feature which enables the newly added DropPanic struct.
+
+- Added the opp_mut and omm_mut macros.
+
+- Added the IntIncDecSelf trait and implementation blocks for integer primitives.
+
+- Added wpp and wmm method definitions to the IntIncDecSelf trait and implemented these methods in the IntIncDecSelf implementers in the inc_dec module.
+
+- Added serde as an optional dependency.
+
+- Added Immut
+
+
+
+Changed
+
+- Renamed the “text_enums” module to “text” and made it public.
+
+- For RcByPtr and WeakByPtr the “cmp” and “partial_cmp” implementations now cast all Rc pointers to unit to avoid ambiguous wide pointer comparison issues.
+
+- “up_rc_pt” and “up_arc_pt” have been added to the “upgrading” module.
+
+- The Dictionary, KeyValuePair, List, Queue and UniqueItemList collection objects now conditionally implement std::fmt::Debug.
+
+- The GapFillingCounter, NonOption, RcByPtr and WeakByPtr objects now conditionally implement std::fmt::Debug.
+
+- All HasOne object implementations now implement std::fmt::Debug.
+
+- MovableText now implements Debug, Clone, PartialEq and Eq.
+
+- Deprecated the trait_get, trait_get_2, trait_get_set, trait_get_2_set, i…
+…mpl_get, impl_get_2, impl_get_set and impl_get_2_set macros.
+
+- Implemented Display, Deref (Target = str), From<String>, From<&String>, From<&'static str>, From<Arc<str>> and From<&Arc<str>> for SendableText and removed its ToString trait implementation.
+
+- Made the inc_dec module public.
+
+- Renamed overflowing_pp to opp in the IntIncDecSelf trait and implementers in the inc_dec module.
+
+- Made the text module a directory oriented module with each object that was contained in the text module file getting its own module file in the new directory.
+
+- SendableText now implements the Serialize trait when serde is specified as a dependency.
+
+- Updated the delegate dependency to 0.13.1.
+
+- Implemented serde::Deserialize on SendableText.
+
+
+
+Fixed
+
+- Fixed issues with integer incrementation and decrementation.
+
+
+
+Removed
+
+- Removed the Lazy struct.
+
+
+---
+
+Added Then Removed
+
+- Added BoxOrRc, BoxOrRcWeak, BoxOrWeak, BoxOrRcs, BoxOrRcsWeaks, Weakness, BoxOrRcCow, BoxOrRcsCow and ArcCow enums.
+
+- Removed the box_or_ref module.
+
+- Started work on StackedVec.
+
+- Added a lot of great stuff to StackedVec
+
+- StackedVec is now in a usable state.
+
+- Added NonDefaultStackedVec
+
+
+Changed Then Removed
+
+- In the rfc module “borrow” and “borrow_mut” no longer take “param” parameters. All functions that do now have “_param” in their names. “borrow_only” and “borrow_mut_only” have been removed.
+
+- “up_arc_pt_async” has been added to the “upgrading” module.
+
+- BoxOrRc, BoxOrRcWeak, BoxOrWeak, BoxOrRcs, BoxOrRcsWeaks, Weakness, BoxOrRcCow, BoxOrRcsCow, ArcCow now conditionally implement std::fmt::Debug (new).
+
+- Implemented serde::Serialize on StackedVec.
+
+
+Added To/Changed On Something Added
+
+- Added push_only, clear and overwite_buffer methods to SendableTextLogWithBuffer.
+
+- When the append_to method of SendableTextLog is called its queued items are now reverse iterated.
+
+- Renamed the overflowing_pp_mut macro to opp_mut and the overflowing_mm_mut macro to omm_mut in the inc_dec module.
+
+- StackedVec now implements Copy if its item type does.
+
+- Made the type of the elements of the private array of StackedVec be T instead of Option<T> and adjusted the implementation accordingly.
+
+
 ## Version 0.3.0 (30/05/2024)
 
 - Added some module level documentation to as_any.

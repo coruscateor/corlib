@@ -37,7 +37,7 @@ Containers used for communicating results and statuses of ongoing operations.
 
 A counter that can recycle "gaps".
 
-### Getters Setters Callers
+### Getter Setter Caller Macros
 
 Macros for implementing getters, setters and calling methods on regular structs and RefCells.
 
