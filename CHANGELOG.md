@@ -4,8 +4,6 @@
 
 Added
 
-- Added ArcByPtr and SyncWeakByPtr structs to rc.
-
 - Added pp_mut, checked_pp_mut, ppf_mut, mm_mut, mmf_mut, checked_mm_mut macros to the inc_dec module.
 
 - Added the IncDecSelf trait to the inc_dec module.
@@ -33,6 +31,44 @@ Added
 - Added serde as an optional dependency.
 
 - Added Immut
+
+- Added WorkInProgressResult and IdedWorkInProgressResult.
+
+- Removed the impl_get_weak_self_ref macro.
+
+- Added the Cell module and moved the rfc module into it and publicly exposed its contents.
+
+- Added the RefCellStore struct to the Cell module.
+
+- Added the Convert module and moved the as_any module into it.
+
+- Added impl_as_any_ref_method, AsAnyMut, impl_as_any_mut and impl_as_any_mut_method to the Convert module.
+
+- Added SingleSubArgsEvent, PubSingleSubArgsEvent, SingleSubEvent and PubSingleSubEvent to the events module.
+
+- Added macros impl_pub_single_sub_event_method and impl_pub_single_sub_args_event_method.
+
+- Added the value module and its contents.
+
+- Added the cargo_env public module.
+
+- Added the impl_cargo_env_accessor macro to cargo_env.
+
+-- Added the cargo function to cargo_env (via impl_pub_env_accessor).
+
+- Added cargo, cargo_manifest_dir, cargo_manifest_path, cargo_pkg_version, cargo_pkg_version_major, cargo_pkg_version_patch, cargo_pkg_version_pre, cargo_pkg_authors, cargo_pkg_name, cargo_pkg_description, cargo_pkg_homepage, cargo_pkg_repository, cargo_pkg_license, cargo_pkg_license_file, cargo_pkg_rust_version and cargo_pkg_readme functions to the cargo_env module (via impl_cargo_env_accessor).
+
+- Added RcRefCellStore and WeakRefCellStore to the cell module.
+
+- Added impl_cargo_env_accessor_pair to cargo_env.
+
+- Added cargo_pair, cargo_manifest_dir_pair, cargo_manifest_path_pair, cargo_pkg_version_pair, cargo_pkg_version_major_pair, cargo_pkg_version_minor_pair, cargo_pkg_version_patch_pair, cargo_pkg_version_pre_pair, cargo_pkg_authors_pair, cargo_pkg_name_pair, cargo_pkg_description_pair, cargo_pkg_homepage_pair and cargo_pkg_repository_pair, cargo_pkg_license_pair, cargo_pkg_license_file_pair, cargo_pkg_rust_version_pair and cargo_pkg_readme_pair to the cargo_env module via impl_cargo_env_accessor_pair.
+
+- Added the weak_self public module containing the WeakSelf trait and the impl_weak_self_trait macro.
+
+- Added the rc directory module and moved the RcByPtr and WeakByPtr structs and the RcDefault and ArcDefault traits into it.
+
+- Added ArcByPtr and SyncWeakByPtr structs to the rc module.
 
 
 
@@ -69,6 +105,34 @@ Changed
 
 - Implemented serde::Deserialize on SendableText.
 
+- All of the methods in the upgrading module that return bool have had “try_” prepended to their names. up_rc, up_rc_pt, up_arc and try_up_arc_pt have been updated to panic on error and not return bools.
+
+- Implemented Default on SendableText.
+
+- Renamed AsAny to AsAnyRef and impl_as_any to impl_as_any_ref and removed its second rule.
+
+- In RcByPtr and WeakByPtr their contents methods now return clones of their respective contents fields. contents_ref methods have been added to each struct which returns a reference to the contents object of each struct. The relevant parts of the project have been updated accordingly.
+
+- Made the users.rust-lang.org URL a hyper-link in the DynHash trait documentation.
+
+- Updated documentation
+
+- Renamed the DynPartialEqOrEq struct to DynPartialEq and updated the relevant parts of the project to reflect this.
+
+- Renamed the object method of DynHashAdapter to object_ref and updated the relevant parts of the project to reflect this.
+
+- Renamed the DynPartialEqOrEqAdapter struct to DynPartialEqAdapter and updated the relevant parts of the project to reflect this.
+
+- Renamed the object method of DynPartialEqAdapter to object_ref and updated the relevant parts of the project to reflect this.
+
+- Made inc_dec into a directory oriented module.
+
+- Updated the readme.
+
+- rc_default was made a private module after being moved into the rc directory module.
+
+- Now using Keep a Changelog Version 1.1.0 (https://keepachangelog.com/en/1.1.0/) in producing the changelog documentation.
+
 
 
 Fixed
@@ -80,6 +144,15 @@ Fixed
 Removed
 
 - Removed the Lazy struct.
+
+- Removed the dropper module and its contents.
+
+- Removed events::SkipOnce.
+
+- Removed old code.
+
+- Removed HashsetItem and HasStrId from the collections module.
+
 
 
 ---
@@ -121,6 +194,19 @@ Added To/Changed On Something Added
 - StackedVec now implements Copy if its item type does.
 
 - Made the type of the elements of the private array of StackedVec be T instead of Option<T> and adjusted the implementation accordingly.
+
+
+
+Added Then Renamed
+
+- Added ResultFrame and IdedResultFrame.
+
+- Added MutState
+
+- Added SubUnSubArgs and SubUnSub to the events module.
+
+- Renamed SubUnSub to PubSingleSubEvent and SubUnSubArgs to PubSingleSubArgsEvent.
+
 
 
 ## Version 0.3.0 (30/05/2024)

@@ -133,9 +133,10 @@ f70b716f73ab0cba5e76dac660af483955289f83 -
 
 Some code re-arrangement.
 
-575044b9a69fbe1fadba0f51f11c28412c34e270
+575044b9a69fbe1fadba0f51f11c28412c34e270 -
 
 - Added ResultFrame and IdedResultFrame.
+
 - All of the methods in the upgrading module that return bool have had “try_” prepended to their names. up_rc, up_rc_pt, up_arc and try_up_arc_pt have been updated to panic on error and not return bools.
 
 - Other minor changes.
@@ -146,13 +147,13 @@ Some code re-arrangement.
 
 - Implemented Default on SendableText.
 
-7a293a2e21644ad4db716d4d32655af07686e34b
+7a293a2e21644ad4db716d4d32655af07686e34b -
 
 - Removed impl_get_weak_self_ref
 
 - Added MutState
 
-fd4d632aced5115e9bee6498ec0255ca5b7128ff
+fd4d632aced5115e9bee6498ec0255ca5b7128ff -
 
 - Added the Cell module and moved the rfc module into it and publicly exposed its contents.
 
@@ -164,11 +165,11 @@ fd4d632aced5115e9bee6498ec0255ca5b7128ff
 
 - Added impl_as_any_ref_method, AsAnyMut, impl_as_any_mut and impl_as_any_mut_method to the Convert module.
 
-8c957d7048d584056678a9bfbfc379f0b9a54099
+8c957d7048d584056678a9bfbfc379f0b9a54099 -
 
 Added constrained Display and Debug implementations to WorkInProgressResult and IdedWorkInProgressResult.
 
-984888bcecc571bac73490c5ba93f62c544e0dae
+984888bcecc571bac73490c5ba93f62c544e0dae -
 
 - Added from_refcell to RefCellStore and renamed ref_cell_ref to refcell_ref.
 
@@ -176,7 +177,7 @@ Added constrained Display and Debug implementations to WorkInProgressResult and 
 
 - Other minor changes.
 
-fcea22831f05649d26bc7cb684c8d199718ac773
+fcea22831f05649d26bc7cb684c8d199718ac773 -
 
 - Made SingleArgsEvent and SingleSubArgsEvent a bit more user friendly.
 
@@ -184,27 +185,27 @@ fcea22831f05649d26bc7cb684c8d199718ac773
 
 - Added macros impl_pub_single_sub_event_method and impl_pub_single_sub_args_event_method.
 
-361cf255d3e4b316f68282d39ca65eac78678cc8
+361cf255d3e4b316f68282d39ca65eac78678cc8 -
 
 Added get, set, clone_set, try_get, try_set, try_clone_set, take and take_refcell to RefCellStore.
 
-b73bb126137d4059d1bca55d4f5a677c7da508d4
+b73bb126137d4059d1bca55d4f5a677c7da508d4 -
 
 Tried to implement AsCopy.
 
-f627955651a8366b059b26320e106a65776c481c
+f627955651a8366b059b26320e106a65776c481c -
 
 - Added TakeItCell to the Cell sub-module.
 
-07fe211e5151a6d5edccb19978a9148ff5db3b24
+07fe211e5151a6d5edccb19978a9148ff5db3b24 -
 
 - Added the value module and its contents.
 
-77b43753eb9b287a479d2bf654b560a3fa70f22f
+77b43753eb9b287a479d2bf654b560a3fa70f22f -
 
 - Updated all the traits in the value module to use associated types instead of generics
 
-a0fffb563ff6cbd5ad3af2de1c6b2b693ecbb32a
+a0fffb563ff6cbd5ad3af2de1c6b2b693ecbb32a -
 
 - Removed AsCopy.
 
@@ -216,21 +217,21 @@ a0fffb563ff6cbd5ad3af2de1c6b2b693ecbb32a
 
 - Removed some other old code.
 
-cb6b33ab14b150e00a68b79174df765bc1c5e93a
+cb6b33ab14b150e00a68b79174df765bc1c5e93a -
 
 - Removed cell::TakeItCell
 
-e7c8dcca2f67ab758f35867517491a0e26e9ba0f
+e7c8dcca2f67ab758f35867517491a0e26e9ba0f -
 
 - Added RcRefCellStore and WeakRefCellStore to the cell module.
 
 - Renamed clone_set to set_clone and try_clone_set to try_set_clone in RefCellStore.
 
-c9ae90ba4b527902709fc9225edb0e54149c7233
+c9ae90ba4b527902709fc9225edb0e54149c7233 -
 
 - Conditionally implemented std::fmt::Debug on RefCellStore, SingleSubEvent and related structs, SingleSubArgsEvent and related structs and Immut.
 
-5d4215aba8127f9ef2139f31ce49ff2ecf341c56
+5d4215aba8127f9ef2139f31ce49ff2ecf341c56 -
 
 - Added the cargo_env public module.
 
@@ -238,7 +239,7 @@ c9ae90ba4b527902709fc9225edb0e54149c7233
 
 - Added the cargo function to cargo_env (via impl_pub_env_accessor).
 
-87a4fb39ceee8299888146dd3a05a5d060564f86
+87a4fb39ceee8299888146dd3a05a5d060564f86 -
 
 - In ArcByPtr, RcByPtr, SyncWeakByPtr and WeakByPtr their contents methods now return clones of their respective contents fields. contents_ref methods have been added to each struct which returns a reference to the contents object of each struct. The relevant parts of the project have been updated accordingly.
 
@@ -246,7 +247,7 @@ c9ae90ba4b527902709fc9225edb0e54149c7233
 
 - Added cargo_manifest_dir, cargo_manifest_path, cargo_pkg_version, cargo_pkg_version_major, cargo_pkg_version_patch, cargo_pkg_version_pre, cargo_pkg_authors, cargo_pkg_name, cargo_pkg_description, cargo_pkg_homepage, cargo_pkg_repository, cargo_pkg_license, cargo_pkg_license_file, cargo_pkg_rust_version and cargo_pkg_readme functions to the cargo_env module.
 
-c1f68f4ad3c1a0572063321a3a9ccc08240666cf
+c1f68f4ad3c1a0572063321a3a9ccc08240666cf -
 
 - Documented cargo_env at the module level.
 
@@ -258,11 +259,11 @@ c1f68f4ad3c1a0572063321a3a9ccc08240666cf
 
 - Made the users.rust-lang.org URL a hyper-link in the DynHash trait documentation.
 
-8e88673b336424b0fa5cf84c32a5f1e376eacb7e
+8e88673b336424b0fa5cf84c32a5f1e376eacb7e -
 
 - Added the weak_self public module, the WeakSelf trait and the impl_weak_self_trait macro both defined within this module.
 
-faa135eec2ae6c0ac3a59faa5532c985865c2a01
+faa135eec2ae6c0ac3a59faa5532c985865c2a01 -
 
 - Updated documentation
 
@@ -276,7 +277,7 @@ faa135eec2ae6c0ac3a59faa5532c985865c2a01
 
 - Removed HashsetItem and HasStrId from the collections module.
 
-0f010768d5e006c54528a00f42ce81131adc982a
+0f010768d5e006c54528a00f42ce81131adc982a -
 
 - Updated the version string to 0.4.0-beta.
 
@@ -288,7 +289,7 @@ faa135eec2ae6c0ac3a59faa5532c985865c2a01
 
 - Renamed the buffer method to buffer_ref in SendableTextLogWithBuffer.
 
-74578ff4d8c44eb6620665f3ca4e419d9e5a8ca9
+74578ff4d8c44eb6620665f3ca4e419d9e5a8ca9 -
 
 - Updated the readme.
 
