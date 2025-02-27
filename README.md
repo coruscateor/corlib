@@ -31,7 +31,7 @@ Forces external immutability.
 
 ### WorkInProgressResult And IdedWorkInProgressResult
 
-Containers used for communicating results and statuses of ongoing operations.
+Containers used for communicating the results and statuses of ongoing operations.
 
 ### GapFillingCounter
 
@@ -57,11 +57,13 @@ Collections and collection related objects.
 
 ### Convert
 
-Convert stuff into &dyn Any and &mut dyn Anys.
+Convert stuff into &dyn Any and &mut dyn Any.
 
 ### Events
 
-Events and event related objects. Loosely inspred by .NET events.
+Events and event related objects.
+
+Loosely inspred by .NET events.
 
 ### Has One
 
@@ -88,6 +90,10 @@ Functions that help you deal with upgrading reference counted objects.
 ### Value
 
 For when you want to move values around.
+
+## Compiler:
+
+Build with the latest stable compiler.
 
 ## Todo:
 

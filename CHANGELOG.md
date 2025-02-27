@@ -16,25 +16,15 @@ Added
 
 - Added pp_mut, checked_pp_mut, ppf_mut, mm_mut, mmf_mut, checked_mm_mut macros to the inc_dec module.
 
--- Added IncrementsSelf and DecrementsSelf traits to the inc_dec module.
-
--- Added IncrementsSelf and DecrementsSelf trait implementations for the f32, f64, i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, and usize primitive objects.
-
 - Added a drop_panic feature which enables the newly added DropPanic struct.
 
 - Added the opp_mut and omm_mut macros.
 
-- Added the IntIncDecSelf trait and implementation blocks for integer primitives.
-
-- Added wpp and wmm method definitions to the IntIncDecSelf trait and implemented these methods in the IntIncDecSelf implementers in the inc_dec module.
-
 - Added serde as an optional dependency.
 
-- Added Immut
+- Added the Immut struct.
 
-- Added WorkInProgressResult and IdedWorkInProgressResult.
-
-- Removed the impl_get_weak_self_ref macro.
+- Added the WorkInProgressResult and IdedWorkInProgressResult structs.
 
 - Added the Cell module and moved the rfc module into it and publicly exposed its contents.
 
@@ -53,8 +43,6 @@ Added
 - Added the cargo_env public module.
 
 - Added the impl_cargo_env_accessor macro to cargo_env.
-
--- Added the cargo function to cargo_env (via impl_pub_env_accessor).
 
 - Added cargo, cargo_manifest_dir, cargo_manifest_path, cargo_pkg_version, cargo_pkg_version_major, cargo_pkg_version_patch, cargo_pkg_version_pre, cargo_pkg_authors, cargo_pkg_name, cargo_pkg_description, cargo_pkg_homepage, cargo_pkg_repository, cargo_pkg_license, cargo_pkg_license_file, cargo_pkg_rust_version and cargo_pkg_readme functions to the cargo_env module (via impl_cargo_env_accessor).
 
@@ -88,8 +76,7 @@ Changed
 
 - MovableText now implements Debug, Clone, PartialEq and Eq.
 
-- Deprecated the trait_get, trait_get_2, trait_get_set, trait_get_2_set, i…
-…mpl_get, impl_get_2, impl_get_set and impl_get_2_set macros.
+- Deprecated the trait_get, trait_get_2, trait_get_set, trait_get_2_set, impl_get, impl_get_2, impl_get_set and impl_get_2_set macros.
 
 - Implemented Display, Deref (Target = str), From<String>, From<&String>, From<&'static str>, From<Arc<str>> and From<&Arc<str>> for SendableText and removed its ToString trait implementation.
 
@@ -153,59 +140,7 @@ Removed
 
 - Removed HashsetItem and HasStrId from the collections module.
 
-
-
----
-
-Added Then Removed
-
-- Added BoxOrRc, BoxOrRcWeak, BoxOrWeak, BoxOrRcs, BoxOrRcsWeaks, Weakness, BoxOrRcCow, BoxOrRcsCow and ArcCow enums.
-
-- Removed the box_or_ref module.
-
-- Started work on StackedVec.
-
-- Added a lot of great stuff to StackedVec
-
-- StackedVec is now in a usable state.
-
-- Added NonDefaultStackedVec
-
-
-Changed Then Removed
-
-- In the rfc module “borrow” and “borrow_mut” no longer take “param” parameters. All functions that do now have “_param” in their names. “borrow_only” and “borrow_mut_only” have been removed.
-
-- “up_arc_pt_async” has been added to the “upgrading” module.
-
-- BoxOrRc, BoxOrRcWeak, BoxOrWeak, BoxOrRcs, BoxOrRcsWeaks, Weakness, BoxOrRcCow, BoxOrRcsCow, ArcCow now conditionally implement std::fmt::Debug (new).
-
-- Implemented serde::Serialize on StackedVec.
-
-
-Added To/Changed On Something Added
-
-- Added push_only, clear and overwite_buffer methods to SendableTextLogWithBuffer.
-
-- When the append_to method of SendableTextLog is called its queued items are now reverse iterated.
-
-- Renamed the overflowing_pp_mut macro to opp_mut and the overflowing_mm_mut macro to omm_mut in the inc_dec module.
-
-- StackedVec now implements Copy if its item type does.
-
-- Made the type of the elements of the private array of StackedVec be T instead of Option<T> and adjusted the implementation accordingly.
-
-
-
-Added Then Renamed
-
-- Added ResultFrame and IdedResultFrame.
-
-- Added MutState
-
-- Added SubUnSubArgs and SubUnSub to the events module.
-
-- Renamed SubUnSub to PubSingleSubEvent and SubUnSubArgs to PubSingleSubArgsEvent.
+- Removed the impl_get_weak_self_ref macro.
 
 
 

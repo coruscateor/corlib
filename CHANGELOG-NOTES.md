@@ -298,3 +298,69 @@ faa135eec2ae6c0ac3a59faa5532c985865c2a01 -
 - rc_default was made a private module after being moved.
 
 - Updated the documentation of various objects.
+
+
+
+---
+
+Added Then Removed
+
+- Added BoxOrRc, BoxOrRcWeak, BoxOrWeak, BoxOrRcs, BoxOrRcsWeaks, Weakness, BoxOrRcCow, BoxOrRcsCow and ArcCow enums.
+
+- Removed the box_or_ref module.
+
+- Started work on StackedVec.
+
+- Added a lot of great stuff to StackedVec
+
+- StackedVec is now in a usable state.
+
+- Added NonDefaultStackedVec
+
+
+
+Changed Then Removed
+
+- In the rfc module “borrow” and “borrow_mut” no longer take “param” parameters. All functions that do now have “_param” in their names. “borrow_only” and “borrow_mut_only” have been removed.
+
+- “up_arc_pt_async” has been added to the “upgrading” module.
+
+- BoxOrRc, BoxOrRcWeak, BoxOrWeak, BoxOrRcs, BoxOrRcsWeaks, Weakness, BoxOrRcCow, BoxOrRcsCow, ArcCow now conditionally implement std::fmt::Debug (new).
+
+- Implemented serde::Serialize on StackedVec.
+
+
+
+Added To/Changed On Something Added
+
+- Added push_only, clear and overwite_buffer methods to SendableTextLogWithBuffer.
+
+- When the append_to method of SendableTextLog is called its queued items are now reverse iterated.
+
+- Renamed the overflowing_pp_mut macro to opp_mut and the overflowing_mm_mut macro to omm_mut in the inc_dec module.
+
+- StackedVec now implements Copy if its item type does.
+
+- Made the type of the elements of the private array of StackedVec be T instead of Option<T> and adjusted the implementation accordingly.
+
+
+
+Added Then Renamed
+
+- Added ResultFrame and IdedResultFrame.
+
+- Added MutState
+
+- Added SubUnSubArgs and SubUnSub to the events module.
+
+- Renamed SubUnSub to PubSingleSubEvent and SubUnSubArgs to PubSingleSubArgsEvent.
+
+
+
+Etc
+
+- Added the IntIncDecSelf trait and implementation blocks for integer primitives.
+
+- Added wpp and wmm method definitions to the IntIncDecSelf trait and implemented these methods in the IntIncDecSelf implementers in the inc_dec module.
+
+
