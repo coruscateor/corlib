@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 0.4.0 (__/02/2025)
+## Version 0.4.0 (28/02/2025)
 
 Added
 
