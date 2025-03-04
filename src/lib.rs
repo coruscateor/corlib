@@ -1,5 +1,7 @@
 #![doc = include_str!("../README.md")] 
 
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+
 use cfg_if::cfg_if;
 
 mod non_option;

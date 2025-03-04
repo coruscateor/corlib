@@ -59,6 +59,10 @@ Collections and collection related objects.
 
 Convert stuff into &dyn Any and &mut dyn Any.
 
+### Drop Panic
+
+A fun way to crash your programme.
+
 ### Events
 
 Events and event related objects.
