@@ -1,6 +1,16 @@
 # Changelog
 
-## Version 0.4.1 (__/03/2025)
+## Version 0.4.1 (05/03/2025)
+
+Added
+
+- Added the necessary details to the Cargo.toml and the lib.rs files for docs.rs to build all the crates features and label their constituents.
+
+
+
+Changed
+
+- Updated the readme with a brief description of the Drop Panic module.
 
 
 
