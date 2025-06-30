@@ -2,7 +2,9 @@
 
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
-use cfg_if::cfg_if;
+//Disabled - To be removed:
+
+//use cfg_if::cfg_if;
 
 mod non_option;
 
@@ -22,7 +24,9 @@ pub use gap_filling_counter::*;
 
 pub mod has_one;
 
-mod getters_setters_callers;
+//To be removed - use accessorise:
+
+//mod getters_setters_callers;
 
 //pub use getters_setters_callers::*;
 
@@ -38,9 +42,11 @@ pub mod text;
 
 mod get_some;
 
-pub use get_some::*;
+//pub use get_some::*;
 
-pub mod inc_dec;
+//To be removed - moved to inc_dec:
+
+//pub mod inc_dec;
 
 pub mod upgrading;
 
@@ -56,9 +62,11 @@ mod immut;
 
 pub use immut::*;
 
-mod work_in_progress_result;
+//Disabled - to be removed - moved to highly_sendable:
 
-pub use work_in_progress_result::*;
+//mod work_in_progress_result;
+
+//pub use work_in_progress_result::*;
 
 pub mod convert;
 
@@ -66,8 +74,19 @@ pub mod cell;
 
 pub mod value;
 
-pub mod cargo_env;
+//Disabled - to be removed - moved to env_var_helpers:
 
+//pub mod cargo_env;
+
+#[cfg(feature = "drop_panic")]
+mod drop_panic;
+
+#[cfg(feature = "drop_panic")]
+pub use drop_panic::*;
+
+//Disabled - to be removed:
+
+/*
 cfg_if!
 {
 
@@ -81,9 +100,30 @@ cfg_if!
     }
 
 }
+*/
 
 mod weak_self;
 
 pub use weak_self::*;
 
 pub mod rc;
+
+mod enums;
+
+pub use enums::*;
+
+#[cfg(feature = "highly_sendable")]
+pub extern crate highly_sendable;
+
+#[cfg(feature = "env_var_helpers")]
+pub extern crate env_var_helpers;
+
+#[cfg(feature = "inc_dec")]
+pub extern crate inc_dec;
+
+#[cfg(feature = "capped_collections")]
+pub extern crate capped_collections;
+
+#[cfg(feature = "accessorise")]
+pub extern crate accessorise;
+

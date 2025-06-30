@@ -33,6 +33,7 @@ macro_rules! impl_as_any_ref
         }
 
     };
+    
     /*
     ($for_type:ty, $($generic_param:ty),+) =>
     {

@@ -1,6 +1,6 @@
 
 ///
-///Provides as_str as a trait method.
+/// Provides an as_str as a trait method.
 /// 
 pub trait AsStr
 {
