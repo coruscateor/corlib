@@ -112,6 +112,13 @@ mod enums;
 
 pub use enums::*;
 
+mod may_retry;
+
+pub use may_retry::*;
+
+#[cfg(test)]
+mod may_retry_tests;
+
 #[cfg(feature = "highly_sendable")]
 pub extern crate highly_sendable;
 
