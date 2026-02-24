@@ -119,6 +119,10 @@ pub use may_retry::*;
 #[cfg(test)]
 mod may_retry_tests;
 
+mod control_flow;
+
+pub use control_flow::*;
+
 #[cfg(feature = "highly_sendable")]
 pub extern crate highly_sendable;
 
