@@ -160,3 +160,15 @@ impl Deref for ControlFlow
     }
 
 }
+
+impl From<ControlFlow> for bool
+{
+
+    fn from(value: ControlFlow) -> Self
+    {
+        
+        value.is_continue()
+        
+    }
+
+}

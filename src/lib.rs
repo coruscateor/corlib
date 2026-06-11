@@ -138,3 +138,15 @@ pub extern crate capped_collections;
 #[cfg(feature = "accessorise")]
 pub extern crate accessorise;
 
+cfg_if::cfg_if!(
+
+
+    if #[cfg(feature = "serde")]
+    {
+
+        pub mod serde;
+
+    }
+
+);
+
