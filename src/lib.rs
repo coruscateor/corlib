@@ -1,6 +1,6 @@
 #![doc = include_str!("../README.md")] 
 
-#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 
 //Disabled - To be removed:
 
@@ -24,11 +24,7 @@ pub use gap_filling_counter::*;
 
 pub mod has_one;
 
-//To be removed - use accessorise:
-
-//mod getters_setters_callers;
-
-//pub use getters_setters_callers::*;
+//getters_setters_callers - use accessorise
 
 //mod rc_by_ptr;
 
@@ -44,9 +40,7 @@ mod get_some;
 
 //pub use get_some::*;
 
-//To be removed - moved to inc_dec:
-
-//pub mod inc_dec;
+//inc_dec - moved to inc_dec
 
 pub mod upgrading;
 
@@ -62,11 +56,7 @@ mod immut;
 
 pub use immut::*;
 
-//Disabled - to be removed - moved to highly_sendable:
-
-//mod work_in_progress_result;
-
-//pub use work_in_progress_result::*;
+//work_in_progress_result - moved to highly_sendable:
 
 pub mod convert;
 
@@ -74,20 +64,9 @@ pub mod cell;
 
 pub mod value;
 
-//Disabled - to be removed - moved to env_var_helpers:
+//cargo_env - moved to env_var_helpers
 
-//pub mod cargo_env;
-
-#[cfg(feature = "drop_panic")]
-mod drop_panic;
-
-#[cfg(feature = "drop_panic")]
-pub use drop_panic::*;
-
-//Disabled - to be removed:
-
-/*
-cfg_if!
+cfg_if::cfg_if!
 {
 
     if #[cfg(feature = "drop_panic")]
@@ -95,12 +74,11 @@ cfg_if!
         
         pub mod drop_panic;
 
-        //pub use drop_panic::*;
+        pub use drop_panic::*;
 
     }
 
 }
-*/
 
 mod weak_self;
 
@@ -108,9 +86,7 @@ pub use weak_self::*;
 
 pub mod rc;
 
-mod enums;
-
-pub use enums::*;
+//enums.rs contents: ThisOrThat, ThisThatOther and DefaultOrValue - see Some More Options
 
 mod may_retry;
 
@@ -138,7 +114,8 @@ pub extern crate capped_collections;
 #[cfg(feature = "accessorise")]
 pub extern crate accessorise;
 
-cfg_if::cfg_if!(
+cfg_if::cfg_if!
+{
 
 
     if #[cfg(feature = "serde")]
@@ -148,5 +125,5 @@ cfg_if::cfg_if!(
 
     }
 
-);
+}
 

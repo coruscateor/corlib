@@ -9,4 +9,10 @@ pub trait AsStr
 
 }
 
+pub trait AsMutStr : AsStr
+{
+
+    fn as_mut_str(&self) -> &mut str;
+
+}
 
