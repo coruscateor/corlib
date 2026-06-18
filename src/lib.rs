@@ -74,8 +74,6 @@ cfg_if::cfg_if!
         
         pub mod drop_panic;
 
-        pub use drop_panic::*;
-
     }
 
 }

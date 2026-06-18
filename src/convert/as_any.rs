@@ -13,6 +13,7 @@ pub trait AsAnyRef
 ///
 /// A macro for implementing the AsAnyRef trait.
 /// 
+#[deprecated(since = "0.5.0")]
 #[macro_export]
 macro_rules! impl_as_any_ref
 {
@@ -75,13 +76,14 @@ macro_rules! impl_as_any_ref_method
 ///
 /// Like AsAnyRef but the reference returned is mutable.
 /// 
-pub trait AsAnyMut
+pub trait AsAnyMut : AsAnyRef
 {
 
-    fn as_any_mut(&self) -> &mut dyn Any;
+    fn as_any_mut(&mut self) -> &mut dyn Any;
 
 }
 
+#[deprecated(since = "0.5.0")]
 #[macro_export]
 macro_rules! impl_as_any_mut
 {
