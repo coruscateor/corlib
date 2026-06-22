@@ -1,3 +1,7 @@
+//!
+//! Panicking made convenient.
+//! 
+
 ///
 /// You can use this to simulate an unexpected programme termination.
 /// 

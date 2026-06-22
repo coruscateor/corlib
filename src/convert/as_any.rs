@@ -55,24 +55,6 @@ macro_rules! impl_as_any_ref
     */
 }
 
-#[macro_export]
-macro_rules! impl_as_any_ref_method
-{
-
-    () =>
-    {
-
-        fn as_any_ref(&self) -> &dyn Any
-        {
-
-            self
-            
-        }
-
-    }
-
-}
-
 ///
 /// Like AsAnyRef but the reference returned is mutable.
 /// 
@@ -104,23 +86,5 @@ macro_rules! impl_as_any_mut
         }
 
     };
-
-}
-
-#[macro_export]
-macro_rules! impl_as_any_mut_method
-{
-
-    () =>
-    {
-
-        fn as_any_mut(&self) -> &mut dyn Any
-        {
-
-            self
-            
-        }
-
-    }
 
 }

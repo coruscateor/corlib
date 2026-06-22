@@ -3,7 +3,7 @@
 //! 
 
 ///
-///Can the type have a representation of one?
+/// For helping you get the number 1 or 1.0 values of numeric types in situations that require it.
 /// 
 pub trait HasOne<T>
 {
@@ -14,6 +14,9 @@ pub trait HasOne<T>
 
 //f32
 
+///
+/// A HasOne\<T\> implementation for the f32 type.
+/// 
 #[derive(Default, Debug)]
 pub struct F32HasOne();
 
@@ -30,6 +33,9 @@ impl HasOne<f32> for F32HasOne {
 
 //f64
 
+///
+/// A HasOne\<T\> implementation for the f64 type.
+/// 
 #[derive(Default, Debug)]
 pub struct F64HasOne();
 
@@ -46,6 +52,9 @@ impl HasOne<f64> for F64HasOne {
 
 //i8
 
+///
+/// A HasOne\<T\> implementation for the i8 type.
+/// 
 #[derive(Default, Debug)]
 pub struct I8HasOne();
 
@@ -62,6 +71,9 @@ impl HasOne<i8> for I8HasOne {
 
 //i16
 
+///
+/// A HasOne\<T\> implementation for the i16 type.
+/// 
 #[derive(Default, Debug)]
 pub struct I16HasOne();
 
@@ -78,6 +90,9 @@ impl HasOne<i16> for I16HasOne {
 
 //i32
 
+///
+/// A HasOne\<T\> implementation for the i32 type.
+/// 
 #[derive(Default, Debug)]
 pub struct I32HasOne();
 
@@ -95,6 +110,9 @@ impl HasOne<i32> for I32HasOne {
 
 //i64
 
+///
+/// A HasOne\<T\> implementation for the i64 type.
+/// 
 #[derive(Default, Debug)]
 pub struct I64HasOne();
 
@@ -111,6 +129,9 @@ impl HasOne<i64> for I64HasOne {
 
 //i128
 
+///
+/// A HasOne\<T\> implementation for the i128 type.
+/// 
 #[derive(Default, Debug)]
 pub struct I128HasOne();
 
@@ -127,6 +148,9 @@ impl HasOne<i128> for I128HasOne {
 
 //isize
 
+///
+/// A HasOne\<T\> implementation for the isize type.
+/// 
 #[derive(Default, Debug)]
 pub struct ISizeHasOne();
 

@@ -1,7 +1,13 @@
 use std::{cell::{BorrowError, BorrowMutError, Ref, RefCell, RefMut}, fmt::Debug, rc::{Rc, Weak}};
 
-pub type RcRefCellStore<T> = Rc<RefCellStore<T>>;
+///
+/// The std::rc::Rc<RefCellStore<T>> type
+/// 
+pub type RcRefCellStore<T> = std::rc::Rc<RefCellStore<T>>;
 
+///
+/// The std::rc::Weak<RefCellStore<T>> type
+/// 
 pub type WeakRefCellStore<T> = Weak<RefCellStore<T>>;
 
 /// 
