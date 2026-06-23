@@ -165,8 +165,9 @@ impl HasOne<isize> for ISizeHasOne {
 
 }
 
-//u8
-
+///
+/// A HasOne\<T\> implementation for the u8 type.
+/// 
 #[derive(Default, Debug)]
 pub struct U8HasOne();
 
@@ -181,8 +182,9 @@ impl HasOne<u8> for U8HasOne {
 
 }
 
-//u16
-
+///
+/// A HasOne\<T\> implementation for the u16 type.
+/// 
 #[derive(Default, Debug)]
 pub struct U16HasOne();
 
@@ -197,8 +199,9 @@ impl HasOne<u16> for U16HasOne {
 
 }
 
-//u32
-
+///
+/// A HasOne\<T\> implementation for the u32 type.
+/// 
 #[derive(Default, Debug)]
 pub struct U32HasOne();
 
@@ -213,8 +216,9 @@ impl HasOne<u32> for U32HasOne {
 
 }
 
-//u64
-
+///
+/// A HasOne\<T\> implementation for the u64 type.
+/// 
 #[derive(Default, Debug)]
 pub struct U64HasOne();
 
@@ -229,8 +233,9 @@ impl HasOne<u64> for U64HasOne {
 
 }
 
-//u128
-
+///
+/// A HasOne\<T\> implementation for the u128 type.
+/// 
 #[derive(Default, Debug)]
 pub struct U128HasOne();
 
@@ -245,8 +250,9 @@ impl HasOne<u128> for U128HasOne {
 
 }
 
-//usize
-
+///
+/// A HasOne\<T\> implementation for the usize type.
+/// 
 #[derive(Default, Debug)]
 pub struct USizeHasOne();
 

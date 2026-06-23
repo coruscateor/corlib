@@ -1,3 +1,6 @@
+//!
+//! Serde objects
+//! 
 
 mod skip;
 

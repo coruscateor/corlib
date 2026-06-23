@@ -1,6 +1,6 @@
 
 ///
-/// Provides an as_str as a trait method.
+/// Requires that an as_str method be implemented.
 /// 
 pub trait AsStr
 {
@@ -9,10 +9,12 @@ pub trait AsStr
 
 }
 
+///
+/// Requires that as_str and as_mut_str methods be implemented.
+/// 
 pub trait AsMutStr : AsStr
 {
 
     fn as_mut_str(&self) -> &mut str;
 
 }
-

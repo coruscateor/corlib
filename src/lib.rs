@@ -88,8 +88,6 @@ pub mod rc;
 
 mod may_retry;
 
-pub use may_retry::*;
-
 #[cfg(test)]
 mod may_retry_tests;
 
@@ -112,16 +110,6 @@ pub extern crate capped_collections;
 #[cfg(feature = "accessorise")]
 pub extern crate accessorise;
 
-cfg_if::cfg_if!
-{
-
-
-    if #[cfg(feature = "serde")]
-    {
-
-        pub mod serde;
-
-    }
-
-}
+#[cfg(feature = "serde")]
+pub mod serde;
 
