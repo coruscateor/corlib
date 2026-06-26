@@ -56,6 +56,9 @@ mod immut;
 
 pub use immut::*;
 
+#[cfg(all(test, feature = "serde"))]
+mod immut_tests;
+
 //work_in_progress_result - moved to highly_sendable:
 
 pub mod convert;
@@ -94,21 +97,6 @@ mod may_retry_tests;
 mod control_flow;
 
 pub use control_flow::*;
-
-#[cfg(feature = "highly_sendable")]
-pub extern crate highly_sendable;
-
-#[cfg(feature = "env_var_helpers")]
-pub extern crate env_var_helpers;
-
-#[cfg(feature = "inc_dec")]
-pub extern crate inc_dec;
-
-#[cfg(feature = "capped_collections")]
-pub extern crate capped_collections;
-
-#[cfg(feature = "accessorise")]
-pub extern crate accessorise;
 
 #[cfg(feature = "serde")]
 pub mod serde;
