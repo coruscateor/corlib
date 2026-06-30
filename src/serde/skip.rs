@@ -1,28 +1,33 @@
+use core::fmt;
+
 use std::ops::{Deref, DerefMut};
 
-use std::fmt::Debug;
+use std::fmt::{Debug, Display};
 
 use serde::{Serialize, Deserialize};
 
+///
+/// Prevents serialisation of its contained object instance. 
+/// 
 #[derive(Serialize, Deserialize)]
 pub struct Skip<T>
 {
 
     #[serde(skip)]
-    item: T
+    object: T
 
 }
 
 impl<T> Skip<T>
 {
 
-    pub fn new(item: T) -> Self
+    pub fn new(object: T) -> Self
     {
 
         Self
         {
 
-            item
+            object
 
         }
 
@@ -31,7 +36,7 @@ impl<T> Skip<T>
     pub fn take(self) -> T
     {
 
-        self.item
+        self.object
 
     }
 
@@ -45,7 +50,7 @@ impl<T> Deref for Skip<T>
     fn deref(&self) -> &Self::Target
     {
 
-        &self.item
+        &self.object
 
     }
 
@@ -57,7 +62,7 @@ impl<T> DerefMut for Skip<T>
     fn deref_mut(&mut self) -> &mut Self::Target
     {
 
-        &mut self.item
+        &mut self.object
 
     }
 
@@ -69,7 +74,7 @@ impl<T> AsRef<T> for Skip<T>
     fn as_ref(&self) -> &T
     {
 
-        &self.item
+        &self.object
     
     }
 
@@ -81,7 +86,7 @@ impl<T> AsMut<T> for Skip<T>
     fn as_mut(&mut self) -> &mut T
     {
 
-        &mut self.item
+        &mut self.object
     
     }
 
@@ -97,9 +102,40 @@ impl<T> Default for Skip<T>
         Self
         {
             
-            item: Default::default()
+            object: Default::default()
         
         }
+
+    }
+    
+}
+
+impl<T> Clone for Skip<T>
+    where T: Clone
+{
+
+    fn clone(&self) -> Self
+    {
+
+        Self
+        {
+            
+            object: self.object.clone()
+        
+        }
+
+    }
+
+}
+
+impl<T> Display for Skip<T>
+    where T: Display
+{
+
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result
+    {
+
+        write!(f, "{}", self.object)
 
     }
     
@@ -110,7 +146,7 @@ impl<T> Debug for Skip<T>
 {
 
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("Skip").field("item", &self.item).finish()
+        f.debug_struct("Skip").field("object", &self.object).finish()
     }
 
 }

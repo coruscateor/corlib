@@ -1,7 +1,7 @@
 use std::{fmt::Display, ops::Deref};
 
 ///
-/// Similar to the standard ControlFlow struct, with-out the baggage.
+/// Like the standard ControlFlow struct, without the type requirements.
 /// 
 #[derive(Clone, Debug, Hash, PartialEq, Eq, Copy)]
 pub enum ControlFlow
