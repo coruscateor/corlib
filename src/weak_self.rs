@@ -47,5 +47,3 @@ macro_rules! impl_weak_self_trait
     }
 
 }
-
-

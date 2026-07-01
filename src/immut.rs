@@ -106,7 +106,7 @@ impl<T> Display for Immut<T>
     where T: Display
 {
 
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
     {
 
         write!(f, "{}", self.object)

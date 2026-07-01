@@ -101,3 +101,5 @@ pub use control_flow::*;
 #[cfg(feature = "serde")]
 pub mod serde;
 
+#[cfg(feature = "macros")]
+pub use corlib_macros::WeakSelf;

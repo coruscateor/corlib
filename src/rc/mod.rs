@@ -21,3 +21,17 @@ pub use weak_by_ptr::*;
 mod rc_default;
 
 pub use rc_default::*;
+
+cfg_if::cfg_if!
+{
+
+    if #[cfg(feature = "macros")]
+    {
+
+        pub use corlib_macros::RcDefault;
+
+        pub use corlib_macros::ArcDefault;
+
+    }
+
+}
