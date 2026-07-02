@@ -1,9 +1,9 @@
 //!
-//! Trait implenenations for getting the value of one for each numeric type.
+//! A Trait and trait implementations for helping you get the value of one for each standard numeric type.
 //! 
 
 ///
-/// For helping you get the number 1 or 1.0 values of numeric types in situations that require it.
+/// For helping you get the number 1 or 1.0 values of numeric types.
 /// 
 pub trait HasOne<T>
 {
@@ -266,4 +266,3 @@ impl HasOne<usize> for USizeHasOne {
     }
 
 }
-

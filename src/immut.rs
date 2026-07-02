@@ -1,15 +1,7 @@
-use std::fmt::Display;
+use core::{fmt::{Debug, Display}, ops::Deref, hash::Hash};
 
-#[cfg(feature="serde")]
-use std::fmt;
-
-use std::{fmt::Debug, ops::Deref};
-
-#[cfg(feature="serde")]
-use serde::Deserializer;
-
-#[cfg(feature = "serde")]
-use serde::{Serialize, Deserialize, Serializer};
+#[cfg(any(feature = "serde", feature = "immut_serde"))]
+use serde::{Serialize, Deserialize, Serializer, Deserializer};
 
 ///
 /// Guarantees external immutability for its contained object.
@@ -102,6 +94,11 @@ impl<T> Clone for Immut<T>
 
 }
 
+impl<T> Copy for Immut<T>
+    where T: Copy
+{
+}
+
 impl<T> Display for Immut<T>
     where T: Display
 {
@@ -115,12 +112,72 @@ impl<T> Display for Immut<T>
     
 }
 
+impl<T> PartialEq for Immut<T>
+    where T: PartialEq
+{
+
+    fn eq(&self, other: &Self) -> bool
+    {
+
+        self.object == other.object
+
+    }
+
+}
+
+impl<T> Eq for Immut<T>
+    where T: Eq
+{
+}
+
+impl<T> PartialOrd for Immut<T>
+    where T: PartialOrd
+{
+
+    fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering>
+    {
+
+        self.object.partial_cmp(&other.object)
+
+    }
+
+}
+
+impl<T> Ord for Immut<T>
+    where T: Ord
+{
+
+    fn cmp(&self, other: &Self) -> core::cmp::Ordering
+    {
+        
+        self.object.cmp(other)
+
+    }
+
+}
+
+impl<T> Hash for Immut<T>
+    where T: Hash
+{
+
+    fn hash<H: core::hash::Hasher>(&self, state: &mut H)
+    {
+
+        self.object.hash(state);
+
+    }
+
+}
+
 impl<T> Debug for Immut<T>
     where T: Debug
 {
 
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result
+    {
+
         f.debug_struct("Immut").field("object", &self.object).finish()
+
     }
 
 }

@@ -565,6 +565,26 @@ impl<T> AddAssign for GapFillingCounter<T>
 }
 */
 
+impl<T, HO> Default for GapFillingCounter<T, HO>
+    where T: PartialEq + Default, HO: Default + HasOne<T>
+{
+
+    fn default() -> Self
+    {
+
+        Self
+        {
+            
+            value: Default::default(),
+            gaps: Default::default(),
+            has_one: Default::default()
+        
+        }
+        
+    }
+
+}
+
 impl<T, HO> Debug for GapFillingCounter<T, HO>
     where T: PartialEq + Debug, HO: Debug + HasOne<T>
 {

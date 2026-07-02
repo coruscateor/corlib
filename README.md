@@ -29,17 +29,13 @@ Like an option but not optional.
 
 Forces external immutability.
 
-### WorkInProgressResult And IdedWorkInProgressResult
-
-Containers used for communicating the results and statuses of ongoing operations.
-
 ### GapFillingCounter
 
 A counter that can recycle "gaps".
 
-### Getter Setter Caller Macros
+### ControlFlow
 
-Macros for implementing getters, setters and calling methods on regular structs and RefCells.
+Like the standard ControlFlow struct, without the type requirements.
 
 ### Get Some
 
@@ -49,11 +45,11 @@ Convert Options into certainty.
 
 ### Cell
 
-Macros, functions and the RefCellStore which help make working with RefCells easier.
+The items in this module help you work with RefCells.
 
 ### Collections
 
-Collections and collection related objects.
+Collection related stucts and traits, some of which are inspired by .NET.
 
 ### Convert
 
@@ -61,17 +57,15 @@ Convert stuff into &dyn Any and &mut dyn Any.
 
 ### Drop Panic
 
-A fun way to crash your programme.
+Panicking made convenient.
 
 ### Events
 
-Events and event related objects.
-
-Loosely inspred by .NET events.
+Event structs loosely inspired by .NET events.
 
 ### Has One
 
-Get the value of one for each numeric type.
+Trait implementations for getting the value of one for each numeric type.
 
 ### Inc Dec
 

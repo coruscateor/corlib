@@ -3,7 +3,7 @@
 //! 
 
 ///
-/// You can use this to simulate an unexpected programme termination.
+/// Use this when you want the programme to panic at the end of a scope.
 /// 
 pub struct DropPanic();
 

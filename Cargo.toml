@@ -19,6 +19,8 @@ corlib_macros = { version = "0.1.0", optional = true }
 [features]
 drop_panic = []
 macros = ["dep:corlib_macros"]
+#serde = ["dep:serde"]
+#immut_serde = ["dep:serde"]
 #highly_sendable = ["dep:highly_sendable"]
 #env_var_helpers = ["dep:env_var_helpers"]
 #inc_dec = ["dep:inc_dec"]

@@ -1,10 +1,12 @@
 use core::fmt;
 
-use std::ops::{Deref, DerefMut};
+use core::ops::{Deref, DerefMut};
 
-use std::fmt::{Debug, Display};
+use core::fmt::{Debug, Display};
 
 use serde::{Serialize, Deserialize};
+
+use core::hash::Hash;
 
 ///
 /// Prevents serialisation of its contained object instance. 
@@ -128,6 +130,11 @@ impl<T> Clone for Skip<T>
 
 }
 
+impl<T> Copy for Skip<T>
+    where T: Copy
+{
+}
+
 impl<T> Display for Skip<T>
     where T: Display
 {
@@ -139,6 +146,63 @@ impl<T> Display for Skip<T>
 
     }
     
+}
+
+impl<T> PartialEq for Skip<T>
+    where T: PartialEq
+{
+
+    fn eq(&self, other: &Self) -> bool
+    {
+
+        self.object == other.object
+
+    }
+
+}
+
+impl<T> Eq for Skip<T>
+    where T: Eq
+{
+}
+
+impl<T> PartialOrd for Skip<T>
+    where T: PartialOrd
+{
+
+    fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering>
+    {
+
+        self.object.partial_cmp(&other.object)
+
+    }
+
+}
+
+impl<T> Ord for Skip<T>
+    where T: Ord
+{
+
+    fn cmp(&self, other: &Self) -> core::cmp::Ordering
+    {
+        
+        self.object.cmp(other)
+
+    }
+
+}
+
+impl<T> Hash for Skip<T>
+    where T: Hash
+{
+
+    fn hash<H: core::hash::Hasher>(&self, state: &mut H)
+    {
+
+        self.object.hash(state);
+
+    }
+
 }
 
 impl<T> Debug for Skip<T>
