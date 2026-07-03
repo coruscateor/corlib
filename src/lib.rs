@@ -42,8 +42,6 @@ mod get_some;
 
 //inc_dec - moved to inc_dec
 
-pub mod upgrading;
-
 //mod arc_by_ptr;
 
 //pub use arc_by_ptr::*;
@@ -61,7 +59,7 @@ mod immut_tests;
 
 //work_in_progress_result - moved to highly_sendable:
 
-pub mod convert;
+pub mod any;
 
 pub mod cell;
 

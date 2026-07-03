@@ -1,6 +1,6 @@
 use core::{fmt::{Debug, Display}, ops::Deref, hash::Hash};
 
-#[cfg(any(feature = "serde", feature = "immut_serde"))]
+#[cfg(feature = "serde")]
 use serde::{Serialize, Deserialize, Serializer, Deserializer};
 
 ///
@@ -25,6 +25,19 @@ impl<T> Immut<T>
         {
 
             object
+
+        }
+
+    }
+
+    pub fn from(object_ref: &T) -> Self
+        where T: Clone
+    {
+
+        Self
+        {
+
+            object: object_ref.clone()
 
         }
 

@@ -27,21 +27,35 @@ Like an option but not optional.
 
 ### Immut
 
-Forces external immutability.
+Guarantees external immutability for its contained object.
 
 ### GapFillingCounter
 
-A counter that can recycle "gaps".
+Increments a number returning "gap" mumbers, numbers that are reported to be no longer "be in use", first.
+
+### Getter Setter Caller Macros
+
+Removed, look at [Accessorise](https://crates.io/crates/accessorise).
 
 ### ControlFlow
 
-Like the standard ControlFlow struct, without the type requirements.
+Like the standard ControlFlow enum, without the type requirements.
 
-### Get Some
+### GetSome
 
-Convert Options into certainty.
+Convert Options into certainty with the get_some declarative macro.
+
+### WeakSelf
+
+Tait and derive macro used to implement the weak-self design pattern.
+
+<br/>
 
 ## Sub-Modules:
+
+### Any
+
+Cast stuff into &dyn Any and &mut dyn Any.
 
 ### Cell
 
@@ -49,13 +63,9 @@ The items in this module help you work with RefCells.
 
 ### Collections
 
-Collection related stucts and traits, some of which are inspired by .NET.
+Collection related stucts and traits, some of which are inspired by .NET collections.
 
-### Convert
-
-Convert stuff into &dyn Any and &mut dyn Any.
-
-### Drop Panic
+### DropPanic
 
 Panicking made convenient.
 
@@ -63,35 +73,47 @@ Panicking made convenient.
 
 Event structs loosely inspired by .NET events.
 
-### Has One
+### HasOne
 
-Trait implementations for getting the value of one for each numeric type.
+A Trait and trait implementations for helping you get the value of one for each standard numeric type.
 
-### Inc Dec
+### IncDec
 
-Miss the ++ and -\- operators?
-
-This module can help sort you out.
+Moved to: [IncDec](https://crates.io/crates/inc_dec)
 
 ### Rc
 
-Reference counting related helper structs and traits.
+Reference counting related helpers.
 
 ### Text
 
-Look at SendableText and AsStr.
+Look at AsStr and AsMutStr, SendableText and related structs moved to [Highly Sendable](https://crates.io/crates/highly_sendable).
 
 ### Upgrading
 
-Functions that help you deal with upgrading reference counted objects.
+Now in the Rc module.
 
 ### Value
 
-For when you want to move values around.
+For when you want to do stuff with values and generic type constraints.
+
+<br/>
 
 ## Compiler:
 
 Build with the latest stable compiler.
+
+<br />
+
+## Features
+
+| Feature     | Description                              |
+| ----------- | -----------------------------------------|
+| serde       | Enable serde related features.           |
+| drop_panic  | Enable the drop_panic module.            |
+| macros      | Enable the declarative macros.           |
+
+<br />
 
 ## Todo:
 
@@ -99,7 +121,6 @@ Build with the latest stable compiler.
 - Add code examples
 - Add more tests
 - Clean-up the code
-- Solidify the API for 1.0
 
 ## Coding Style
 

@@ -4,7 +4,7 @@ use std::{fmt::Display, ops::Deref};
 use serde::{Serialize, Deserialize};
 
 ///
-/// Like the standard ControlFlow struct, without the type requirements.
+/// Like the standard ControlFlow enum, without the type requirements.
 /// 
 #[derive(Clone, Debug, Hash, PartialEq, Eq, Copy)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]

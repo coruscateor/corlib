@@ -1,7 +1,7 @@
 use std::rc::Weak;
 
 ///
-/// This trait is useful when implementing the weak-self design pattern. 
+/// This trait is useful for implementing the weak-self design pattern. 
 ///
 /// The weak-self design pattern basically involves a reference counted struct holding a weak reference to itself.
 /// 

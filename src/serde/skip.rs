@@ -35,6 +35,19 @@ impl<T> Skip<T>
 
     }
 
+    pub fn from(object_ref: &T) -> Self
+        where T: Clone
+    {
+
+        Self
+        {
+
+            object: object_ref.clone()
+
+        }
+
+    }
+
     pub fn take(self) -> T
     {
 

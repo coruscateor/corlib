@@ -1,10 +1,10 @@
 //!
-//! Convert stuff into &dyn Any and &mut dyn Anys.
+//! Cast stuff into &dyn Any and &mut dyn Anys.
 //! 
 
-mod as_any;
+mod any;
 
-pub use as_any::*;
+pub use any::*;
 
 cfg_if::cfg_if!
 {

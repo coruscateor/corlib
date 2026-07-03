@@ -1,5 +1,5 @@
 //! 
-//! Collection related stucts and traits, some of which are inspired by .NET.
+//! Collection related stucts and traits, some of which are inspired by .NET collections.
 //! 
 
 mod list;

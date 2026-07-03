@@ -1,5 +1,5 @@
 //!
-//! Reference counting related helper structs and traits.
+//! Reference counting related helpers.
 //! 
 
 mod arc_by_ptr;
@@ -21,6 +21,8 @@ pub use weak_by_ptr::*;
 mod rc_default;
 
 pub use rc_default::*;
+
+pub mod upgrading;
 
 cfg_if::cfg_if!
 {
