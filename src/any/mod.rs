@@ -2,9 +2,13 @@
 //! Cast stuff into &dyn Any and &mut dyn Anys.
 //! 
 
-mod any;
+mod any_traits;
 
-pub use any::*;
+pub use any_traits::*;
+
+mod any_functions;
+
+pub use any_functions::*;
 
 cfg_if::cfg_if!
 {

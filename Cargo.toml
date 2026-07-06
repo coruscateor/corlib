@@ -1,6 +1,6 @@
 [package]
 name = "corlib"
-version = "0.5.0-alpha"
+version = "0.5.0-beta"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "A various ideas library"
@@ -13,8 +13,8 @@ authors = ["Paul Saunders"]
 delegate = "0.13.5"
 serde = { version = "1.0.228", features = ["derive"], optional = true }
 cfg-if = "1.0.4"
-#corlib_macros = { version = "0.1.0", optional = true }
-corlib_macros = { path="../corlib_macros" } #Do not remove
+corlib_macros = { version = "=0.1.1", optional = true }
+#corlib_macros = { path="../corlib_macros", optional = true } #Do not remove
 
 [features]
 drop_panic = []

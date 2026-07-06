@@ -9,7 +9,7 @@ use serde::{Serialize, Deserialize};
 use core::hash::Hash;
 
 ///
-/// Prevents serialisation of its contained object instance. 
+/// Prevents serialisation of its contained object. 
 /// 
 #[derive(Serialize, Deserialize)]
 pub struct Skip<T>
