@@ -1,10 +1,10 @@
 use core::fmt;
+
 use std::fmt::Display;
 
 use crate::Immut;
 
 use serde::{Deserialize, Serialize};
-use serde_json::Result;
 
 #[test]
 fn serialize_deserialize_test()

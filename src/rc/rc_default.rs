@@ -13,7 +13,12 @@ pub trait RcDefault
     where Self: Default
 {
 
-    fn rc_default() -> Rc<Self>;
+    fn rc_default() -> Rc<Self>
+    {
+
+        Rc::new(Self::default())
+
+    }
     
 }
 
@@ -24,6 +29,11 @@ pub trait ArcDefault
     where Self: Default
 {
 
-    fn arc_default() -> Arc<Self>;
+    fn arc_default() -> Arc<Self>
+    {
+
+        Arc::new(Self::default())
+
+    }
     
 }
