@@ -21,9 +21,9 @@ dependencies = [
 
 [[package]]
 name = "corlib_macros"
-version = "0.1.1"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aa119d7ce5808dce25f4857389f16da6e3742de592c81b8e1ac1f6630d7fa9d9"
+checksum = "0fe427cf891fe8380f5823badff91322361a2201b8e4b808d478434c59928c05"
 dependencies = [
  "proc-macro2",
  "quote",

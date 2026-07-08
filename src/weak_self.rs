@@ -13,37 +13,3 @@ pub trait WeakSelf
     fn weak_self_ref(&self) -> &Weak<Self>;
 
 }
-
-///
-/// This macro helps you implement the weak-self design pattern.
-/// 
-#[deprecated(since = "0.5.0")]
-#[macro_export]
-macro_rules! impl_weak_self_trait
-{
-
-    ($object_type:ty) =>
-    {
-
-        impl WeakSelf for $object_type
-        {
-
-            fn weak_self(&self) -> Weak<Self>
-            {
-
-                self.weak_self.clone()
-                
-            }
-
-            fn weak_self_ref(&self) -> &Weak<Self>
-            {
-
-                &self.weak_self
-                
-            }
-
-        }
-
-    }
-
-}

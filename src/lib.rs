@@ -2,10 +2,6 @@
 
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-//Disabled - To be removed:
-
-//use cfg_if::cfg_if;
-
 mod non_option;
 
 pub use non_option::*;
@@ -37,8 +33,6 @@ pub mod text;
 //pub use text::*;
 
 mod get_some;
-
-//pub use get_some::*;
 
 //inc_dec - moved to inc_dec
 

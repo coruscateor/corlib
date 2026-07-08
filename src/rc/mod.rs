@@ -23,17 +23,3 @@ mod rc_default;
 pub use rc_default::*;
 
 pub mod upgrading;
-
-cfg_if::cfg_if!
-{
-
-    if #[cfg(feature = "macros")]
-    {
-
-        pub use corlib_macros::RcDefault;
-
-        pub use corlib_macros::ArcDefault;
-
-    }
-
-}

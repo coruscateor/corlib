@@ -186,7 +186,7 @@ Date:   Fri Jun 12 16:54:07 2026 +1200
     
     - Other minor changes
 
-commit 16e822708e98d47520cfcdd2c44caa923a6c37dc
+commit 16e822708e98d47520cfcdd2c44caa923a6c37dc -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Thu Jun 11 19:57:23 2026 +1200
 
@@ -204,7 +204,7 @@ Date:   Thu Jun 11 19:57:23 2026 +1200
     
     - Added the Skip struct to the serde module.
 
-commit 68431609b8b811f542fc7af7dd07fd70edff56be
+commit 68431609b8b811f542fc7af7dd07fd70edff56be -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Tue Feb 24 14:44:49 2026 +1300
 
@@ -212,19 +212,19 @@ Date:   Tue Feb 24 14:44:49 2026 +1300
     
     - Updated the package version string to "0.5.0-alpha".
 
-commit d66a746fc283cc6f9d0e1024b7207bb608e37bd4
+commit d66a746fc283cc6f9d0e1024b7207bb608e37bd4 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Sat Jul 19 16:53:23 2025 +1200
 
     Added may_retry_count and may_retry_count_return macros.
 
-commit 90253766ff1b7af6e7d1791b5e7b60f752536dbc
+commit 90253766ff1b7af6e7d1791b5e7b60f752536dbc -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Fri Jul 18 18:22:21 2025 +1200
 
     - Added the may_retry and may_retry_return public macros as well as the once_twice and once_twice_return test functions for these macros.
 
-commit 9635a41cfdc1199c65e87c9cf8ef43fb4e89ed63
+commit 9635a41cfdc1199c65e87c9cf8ef43fb4e89ed63 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Mon Jun 30 17:39:01 2025 +1200
 

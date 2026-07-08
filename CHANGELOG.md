@@ -75,6 +75,38 @@ commit e7a758dea083950b98aad840f2bda2ba9a57dec7
 
 - Added the AsMutStr trait to the text module.
 
+commit 16e822708e98d47520cfcdd2c44caa923a6c37dc
+
+- Added a From<ControlFlow> implementation for the bool type.
+
+- Added the serde public module.
+
+- Added the Skip struct to the serde module.
+
+commit 68431609b8b811f542fc7af7dd07fd70edff56be
+
+-- Added a ControlFlow struct.
+
+- Added a ControlFlow enum.
+
+commit d66a746fc283cc6f9d0e1024b7207bb608e37bd4
+
+- Added may_retry_count and may_retry_count_return macros.
+
+commit 90253766ff1b7af6e7d1791b5e7b60f752536dbc
+
+- Added the may_retry and may_retry_return public macros as well as the once_twice and once_twice_return test functions for these macros.
+
+commit 9635a41cfdc1199c65e87c9cf8ef43fb4e89ed63
+
+-- Added highly_sendable, env_var_helpers, inc_dec, capped_collections and accessorise crates as optional dependencies and exposed them as extern crates in the lib file.
+
+Removed
+
+-- Added the ThisOrThat, ThisThatOther and DefaultOrValue enums.
+
+Removed
+
 
 
 ### Changed
@@ -193,6 +225,40 @@ commit e7a758dea083950b98aad840f2bda2ba9a57dec7
 
 -- Other minor changes
 
+commit 16e822708e98d47520cfcdd2c44caa923a6c37dc
+
+- Updated the serde dependency to version 1.0.228.
+
+- Updated the serde dependency to now use the “derive” feature.
+
+-- Updated the cfg-if dependency to 1.0.4.
+
+- Updated the cfg-if dependency to version 1.0.4.
+
+-- The Immut struct now conditionally derives the serde Serialize and Deserialize traits.
+
+Not anymore
+
+commit 68431609b8b811f542fc7af7dd07fd70edff56be
+
+-- Updated the package version string to "0.5.0-alpha".
+
+commit 9635a41cfdc1199c65e87c9cf8ef43fb4e89ed63
+
+-- Updated the documentation of the DropPanic struct.
+
+-- Disabled the cfg_if and get_some use statements in the lib file.
+
+-- Disabled the getters_setters_callers, inc_dec, work_in_progress_result (WorkInProgressResult and IdedWorkInProgressResult structs) and cargo_env modules in the lib file.
+
+-- Disabled the drop_panic cfg_if block and replaced it with conditional mod and use statements.
+    
+-- Updated the AsStr trait documentation in the text module.
+
+-- Disabled the sendable_text, sendable_text_log and sendable_text_log_with_buffer sub-modules in the text module.
+
+Removed
+
 
 
 ### Deprecated
@@ -276,6 +342,8 @@ commit e7a758dea083950b98aad840f2bda2ba9a57dec7
 - Removed the SendableText enum and the SendableTextLog and SendableTextLogWithBuffer structs from the text module.
 
 - Removed the WorkInProgressResult and IdedWorkInProgressResult structs.
+
+
 
 
 
