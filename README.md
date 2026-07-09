@@ -15,8 +15,6 @@
 [GitHub](https://github.com/coruscateor) | 
 [GitHub Sponsors](https://github.com/sponsors/coruscateor)
 
-Corlib is a various ideas library.  
-
 </div>
 
 ## Library Contents:    
@@ -31,7 +29,7 @@ Guarantees external immutability for its contained object.
 
 ### GapFillingCounter
 
-Increments a number returning "gap" mumbers, numbers that are reported to be no longer "be in use", first.
+Increments a number returning "gap" numbers, numbers that are reported to be no longer "be in use", first.
 
 ### Getter Setter Caller Macros
 
@@ -87,7 +85,7 @@ Reference counting related helpers.
 
 ### Text
 
-Look at AsStr and AsMutStr, SendableText and related structs moved to [Highly Sendable](https://crates.io/crates/highly_sendable).
+Look at AsStr and AsMutStr, SendableText and related structs have been moved to [Highly Sendable](https://crates.io/crates/highly_sendable).
 
 ### Upgrading
 

@@ -107,6 +107,10 @@ Removed
 
 Removed
 
+commit c7e3b0ed030a929cec35dd61f7f780769df50e84
+
+- Added method bodies to the rc::RcDefault::rc_default, and the rc::ArcDefault::arc_default trait methods.
+
 
 
 ### Changed
@@ -141,9 +145,9 @@ commit bac10f71f9a6a6e119146db6d055a34cce647971
 
 - Moved the “upgrading” module under the “rc” module.
 
--> - Other minor changes.
+-- Other minor changes.
 
-Put Last
+Put Last -
 
 commit a434603cd4c4252d2e0a7f7b4c720e32c0408795
 
@@ -177,9 +181,11 @@ Renamed
 
 -- Conditionally exposed the corlib_macros::RcDefault and corlib_macros::ArcDefault derive macros in the convert module.
 
-- Conditionally exposed the corlib_macros::RcDefault and corlib_macros::ArcDefault derive macros in the rc module.
+-- Conditionally exposed the corlib_macros::RcDefault and corlib_macros::ArcDefault derive macros in the rc module.
 
-Incorrect module name provided.
+Incorrect module name provided. -
+
+Derive macros removed from corlib_macros.
 
 commit d987e51dfc6aa6af63dc3888a31067b323457543
 
@@ -259,7 +265,21 @@ commit 9635a41cfdc1199c65e87c9cf8ef43fb4e89ed63
 
 Removed
 
+commit f319044ae5aa5ee12eeb78708dc7d22728d65f60
 
+-- Updated the corlib_macros dependency to version 0.2.0.
+
+Added in this version.
+
+-- Worked on the changelog.
+
+-- Other minor changes.
+
+commit c7e3b0ed030a929cec35dd61f7f780769df50e84
+
+-- Worked on the changelog.
+
+- Other minor changes.
 
 ### Deprecated
 
@@ -301,9 +321,9 @@ commit bb6555730085e3654b5e13881d6823a0d7621941
 
 - Updated the package edition to “2024”.
 
-- Decorated the impl_weak_self_trait macro with the deprecated attribute.
+-- Decorated the impl_weak_self_trait macro with the deprecated attribute.
 
-REMOVE
+Removed
 
 -- Other minor changes.
 
@@ -343,7 +363,13 @@ commit e7a758dea083950b98aad840f2bda2ba9a57dec7
 
 - Removed the WorkInProgressResult and IdedWorkInProgressResult structs.
 
+commit f319044ae5aa5ee12eeb78708dc7d22728d65f60
 
+-- Removed the corlib_macros::RcDefault and corlib_macros::ArcDefault re-exposures from the rc module.
+
+Added in this version.
+
+- Removed the impl_weak_self_trait macro.
 
 
 
