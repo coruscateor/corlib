@@ -2,50 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) (post version 0.4.0),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) (post version 0.3.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 0.5.0 (__/07/2026)
+## Version 0.5.0 (09/07/2026)
 
 ### Added
 
-commit bbdee0733665cb3d36dbf606ef32a57ecae9f124
-
 - Added the type_id, is, downcast_ref, downcast_mut, as_any_ref and as_any_mut functions to the “any” module.
-
-commit bac10f71f9a6a6e119146db6d055a34cce647971
 
 - Added a package authors field with "Paul Saunders" as an element.
 
 - Added a “from” method to the Immut implementation.
 
--- Added a “from” method to the serde::Skip implementation.
-
-Added in this version.
-
-commit e993a9ce5e471ace8d35a74457ee946f7d835ed8
-
 - Added the corlib_macros dependency.
 
 - Added a macros feature.
 
-commit d987e51dfc6aa6af63dc3888a31067b323457543
-
 - Added the Cargo.lock file.
 
 - Added a better_skip_test test function to the serde::skip_tests test module.
-
-commit 499c2cb6c1a9924ef5a85709153abbe3c2775023
-
--- Added a GenericVisitor struct to the serde sub module.
-
-Removed
-
--- Added a GenericVisitorExpected structto the serde sub module.
-
-Removed
-
-commit 59347d2790eeda5a4e06c50c99c824f002939b6f
 
 - Added a Display implementation of the Immut struct.
 
@@ -53,29 +29,13 @@ commit 59347d2790eeda5a4e06c50c99c824f002939b6f
 
 - Added the immut_tests test module with serialize_deserialize_test and serialize_deserialize_test_2 test functions.
 
-commit bb6555730085e3654b5e13881d6823a0d7621941
-
--- Added documentation
-
-commit 52345a564ae53f5706d22b56559a8acf09a4f150
-
 - Added serde_json as a dev-dependency.
-
--- Added documentation
 
 - Added a skip_tests test module with a skip_test test function to the serde sub-module.
 
-commit a823ec46f712ea4d9586553a38afc735d35f525e
-
--- Added RcRefCell<T> and WeakRefCell<T> type aliases to the cell module.
-
 - Added RcRefCell and WeakRefCell type aliases to the cell module.
 
-commit e7a758dea083950b98aad840f2bda2ba9a57dec7
-
 - Added the AsMutStr trait to the text module.
-
-commit 16e822708e98d47520cfcdd2c44caa923a6c37dc
 
 - Added a From\<ControlFlow\> implementation for the bool type.
 
@@ -83,31 +43,11 @@ commit 16e822708e98d47520cfcdd2c44caa923a6c37dc
 
 - Added the Skip struct to the serde module.
 
-commit 68431609b8b811f542fc7af7dd07fd70edff56be
-
--- Added a ControlFlow struct.
-
 - Added a ControlFlow enum.
-
-commit d66a746fc283cc6f9d0e1024b7207bb608e37bd4
 
 - Added may_retry_count and may_retry_count_return macros.
 
-commit 90253766ff1b7af6e7d1791b5e7b60f752536dbc
-
 - Added the may_retry and may_retry_return public macros as well as the once_twice and once_twice_return test functions for these macros.
-
-commit 9635a41cfdc1199c65e87c9cf8ef43fb4e89ed63
-
--- Added highly_sendable, env_var_helpers, inc_dec, capped_collections and accessorise crates as optional dependencies and exposed them as extern crates in the lib file.
-
-Removed
-
--- Added the ThisOrThat, ThisThatOther and DefaultOrValue enums.
-
-Removed
-
-commit c7e3b0ed030a929cec35dd61f7f780769df50e84
 
 - Added method bodies to the rc::RcDefault::rc_default, and the rc::ArcDefault::arc_default trait methods.
 
@@ -115,287 +55,75 @@ commit c7e3b0ed030a929cec35dd61f7f780769df50e84
 
 ### Changed
 
-commit bbdee0733665cb3d36dbf606ef32a57ecae9f124
-
 - Updated the unicode-ident dependency via the “cargo update” command.
-
--- Updated the package version to 0.5.0-beta.
-
-- Updated the corlib_macros dependency to version 0.1.1.
 
 - Updated the readme.
 
-- Renamed the any::any module to any::any_traits.
-
-- Updated documentation
-
-commit bac10f71f9a6a6e119146db6d055a34cce647971
-
--- The corlib_macros dependency now points to a local repository.
+- Updated the documentation.
 
 - Cleaned up the Cargo.toml file.
 
--- Prepared the changelog.
-
--- Updated the readme.
-
 - Renamed the “convert” module to “any”.
 
--- Updated documentation
-
-- Moved the “upgrading” module under the “rc” module.
-
--- Other minor changes.
-
-Put Last -
-
-commit a434603cd4c4252d2e0a7f7b4c720e32c0408795
-
--- Updated the readme.
-
--- ControlFlow now conditionally derives the serde Serialize and Deserialize macros.
-
-Added in this version.
-
--- Updated documentation
+- Moved the “upgrading” module into the “rc” module.
 
 - Conditionally implemented the Default trait for the GapFillingCounter struct.
 
 - Immut now conditionally implements the Copy, PartialEq, Eq, PartialOrd, Ord and Hash traits.
 
--- Skip now conditionally implements the Copy, PartialEq, Eq, PartialOrd, Ord and Hash traits.
-
-Added in this version.
-
--- Other minor changes.
-
-commit e993a9ce5e471ace8d35a74457ee946f7d835ed8
-
--- Conditionally exposed the corlib_macros::AsAnyRef and corlib_macros::AsAnyMut derive macros in the convert module.
-
 - Conditionally exposed the corlib_macros::AsAnyRef and corlib_macros::AsAnyMut derive macros in the any module.
 
-Renamed
-
 - Conditionally exposed the corlib_macros::WeakSelf derive macro.
-
--- Conditionally exposed the corlib_macros::RcDefault and corlib_macros::ArcDefault derive macros in the convert module.
-
--- Conditionally exposed the corlib_macros::RcDefault and corlib_macros::ArcDefault derive macros in the rc module.
-
-Incorrect module name provided. -
-
-Derive macros removed from corlib_macros.
-
-commit d987e51dfc6aa6af63dc3888a31067b323457543
-
--- Updated documentation
 
 - Implemented the Clone trait for the Immut struct.
 
 - Implemented the Display trait for the Immut struct.
 
--- Implemented the Clone trait for the serde::Skip struct.
-
-Added in this version.
-
-- Implemented the Display trait for the serde::Skip struct.
-
-Added in this version.
-
--- Other minor changes.
-
-commit 59347d2790eeda5a4e06c50c99c824f002939b6f
-
--- Disabled the serde cfg_attr on the Immut struct.
-
-Added in this version.
-
--- Renamed the “item” field to “object” in the Immut struct definition.
-
 - Renamed the “item” field to “object” in the Immut struct declaration.
 
-commit a823ec46f712ea4d9586553a38afc735d35f525e
-
- -- Made the AsAnyMut trait, in the convert module, require the implementation of the AsAnyRef trait.
-
-  - Made the AsAnyMut trait, in the any module, require the implementation of the AsAnyRef trait.
-
-Renamed
+- Made the AsAnyMut trait, in the any module, require the implementation of the AsAnyRef trait.
 
 - Made the Self type aliases of the RcDefault and ArcDefault traits, of the rc module, require that the Default trait be implemented for them.
 
-commit e7a758dea083950b98aad840f2bda2ba9a57dec7
-
 - Changed “doc_auto_cfg” to “doc_cfg” in the docsrs package level cfg_attr statement.
-
--- Other minor changes
-
-commit 16e822708e98d47520cfcdd2c44caa923a6c37dc
 
 - Updated the serde dependency to version 1.0.228.
 
-- Updated the serde dependency to now use the “derive” feature.
-
--- Updated the cfg-if dependency to 1.0.4.
+- Updated the serde dependency to now use its “derive” feature.
 
 - Updated the cfg-if dependency to version 1.0.4.
-
--- The Immut struct now conditionally derives the serde Serialize and Deserialize traits.
-
-Not anymore
-
-commit 68431609b8b811f542fc7af7dd07fd70edff56be
-
--- Updated the package version string to "0.5.0-alpha".
-
-commit 9635a41cfdc1199c65e87c9cf8ef43fb4e89ed63
-
--- Updated the documentation of the DropPanic struct.
-
--- Disabled the cfg_if and get_some use statements in the lib file.
-
--- Disabled the getters_setters_callers, inc_dec, work_in_progress_result (WorkInProgressResult and IdedWorkInProgressResult structs) and cargo_env modules in the lib file.
-
--- Disabled the drop_panic cfg_if block and replaced it with conditional mod and use statements.
-    
--- Updated the AsStr trait documentation in the text module.
-
--- Disabled the sendable_text, sendable_text_log and sendable_text_log_with_buffer sub-modules in the text module.
-
-Removed
-
-commit f319044ae5aa5ee12eeb78708dc7d22728d65f60
-
--- Updated the corlib_macros dependency to version 0.2.0.
-
-Added in this version.
-
--- Worked on the changelog.
-
--- Other minor changes.
-
-commit c7e3b0ed030a929cec35dd61f7f780769df50e84
-
--- Worked on the changelog.
-
-- Other minor changes.
-
-b20ddf15aeaccb73109b6de35eb0039456ebd4fc
 
 - Updated the package description.
 
 - Updated the MIT Licence copyright year.
 
-16e822708e98d47520cfcdd2c44caa923a6c37dc
-
 - Updated the delegate dependency to 0.13.5.
 
+- Updated the package edition to “2024”.
 
-
-### Deprecated
-
-commit a823ec46f712ea4d9586553a38afc735d35f525e
-
--- Deprecated the impl_as_any_ref macro.
-
-Removed
-
--- Deprecated the impl_as_any_mut macro.
-
-Removed
+- Other minor changes.
 
 
 
 ### Removed
 
-commit d987e51dfc6aa6af63dc3888a31067b323457543
-
--- Removed the derive attribute with the Serialize and Deserialize macro declarations from the Immut struct.
-
-Added in this version.
-
--- Removed the serde::GenericVisitor struct.
-
-Added in this version.
-
--- Removed the serde::GenericVisitorExpected struct.
-
-Added in this version.
-
-commit 59347d2790eeda5a4e06c50c99c824f002939b6f
-
--- Removed the highly_sendable, env_var_helpers, inc_dec, capped_collections and accessorise optional dependencies.
-
-Added in this version.
-
-commit bb6555730085e3654b5e13881d6823a0d7621941
-
-- Updated the package edition to “2024”.
-
--- Decorated the impl_weak_self_trait macro with the deprecated attribute.
-
-Removed
-
--- Other minor changes.
-
-commit 52345a564ae53f5706d22b56559a8acf09a4f150
-
--- Removed the impl_as_any_ref_method and impl_as_any_mut_method macros from the convert module.
-
-- Removed the impl_as_any_ref_method and impl_as_any_mut_method macros from the any module.
-
-Renamed
-
-commit a823ec46f712ea4d9586553a38afc735d35f525e
+- Removed the impl_as_any_ref_method and impl_as_any_mut_method macros.
 
 - Removed the impl_as_any_ref macro.
 
-Not Deprecated
-
 - Removed the impl_as_any_mut macro.
 
-Not Deprecated
-
-commit e7a758dea083950b98aad840f2bda2ba9a57dec7
-
 - Removed the cargo_env module and its contents.
-
--- Removed ThisOrThat, ThisThatOther and DefaultOrValue enums.
-
-- Removed the ThisOrThat, ThisThatOther and DefaultOrValue enums.
 
 - Removed the getters_setters_callers module and its contents.
 
 - Removed the inc_dec module and its contents.
 
-commit e7a758dea083950b98aad840f2bda2ba9a57dec7
-
 - Removed the SendableText enum and the SendableTextLog and SendableTextLogWithBuffer structs from the text module.
 
 - Removed the WorkInProgressResult and IdedWorkInProgressResult structs.
 
-commit f319044ae5aa5ee12eeb78708dc7d22728d65f60
-
--- Removed the corlib_macros::RcDefault and corlib_macros::ArcDefault re-exposures from the rc module.
-
-Added in this version.
-
 - Removed the impl_weak_self_trait macro.
-
-
-
-### Fixed
-
-commit e993a9ce5e471ace8d35a74457ee946f7d835ed8
-
--- Fixed a couple of errors with the Immut struct implementation.
-
-Relates to functionality added in this version.
-
-
-
-### Security
 
 
 

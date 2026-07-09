@@ -109,7 +109,7 @@ Build with the latest stable compiler.
 | ----------- | -----------------------------------------|
 | serde       | Enable serde related features.           |
 | drop_panic  | Enable the drop_panic module.            |
-| macros      | Enable the declarative macros.           |
+| macros      | Enable the procedural macros.            |
 
 <br />
 
