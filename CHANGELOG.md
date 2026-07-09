@@ -77,7 +77,7 @@ commit e7a758dea083950b98aad840f2bda2ba9a57dec7
 
 commit 16e822708e98d47520cfcdd2c44caa923a6c37dc
 
-- Added a From<ControlFlow> implementation for the bool type.
+- Added a From\<ControlFlow\> implementation for the bool type.
 
 - Added the serde public module.
 
@@ -280,6 +280,18 @@ commit c7e3b0ed030a929cec35dd61f7f780769df50e84
 -- Worked on the changelog.
 
 - Other minor changes.
+
+b20ddf15aeaccb73109b6de35eb0039456ebd4fc
+
+- Updated the package description.
+
+- Updated the MIT Licence copyright year.
+
+16e822708e98d47520cfcdd2c44caa923a6c37dc
+
+- Updated the delegate dependency to 0.13.5.
+
+
 
 ### Deprecated
 
